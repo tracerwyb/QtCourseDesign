@@ -7,7 +7,7 @@ import QtTest 1.15
 // EMPTY SCENE
 
 Scene {
-
+    visible: false
     property alias seledPlantVis: selectedPlant.visible
     property alias choseVis: seedChooser.visible
     property alias startAnimation: pathAnim
