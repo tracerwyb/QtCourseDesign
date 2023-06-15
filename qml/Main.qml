@@ -12,6 +12,7 @@ GameWindow{
 
     screenWidth: 1180
     screenHeight: 800
+
     Welcome{
         id:welcome
 
@@ -51,6 +52,9 @@ GameWindow{
         }
     }
 }
+
+
+
 
 
 

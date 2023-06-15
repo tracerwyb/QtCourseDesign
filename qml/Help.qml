@@ -20,10 +20,9 @@ Scene {
             x:300
             y:33
             text: qsTr("this is a help")
-
         }
         color: "red"
         background: img
-    }
 
+        }
 }

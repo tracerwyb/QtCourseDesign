@@ -7,6 +7,7 @@ import QtQuick.Controls 2.0
 
  **/
 
+
 Item{
     id:start
     width: parent.width
@@ -14,11 +15,23 @@ Item{
 //    width: 1400
 //    height: 600
 
-        MultiResolutionImage{
-            anchors.fill: parent
-            //anchors.centerIn: parent
-            source: "../assets/background.png"
-        }
+
+
+Scene{
+    MultiResolutionImage{
+        anchors.fill: parent
+        //anchors.centerIn: parent
+        source: "../assets/background.png"
+    }
+    id:startscene
+    width: 1400
+    height: 600
+    MultiResolutionImage{
+        anchors.fill: parent
+        //anchors.centerIn: parent
+        source: "../assets/background.png"
+    }
+
 
     /**
       A button is used to start game
@@ -27,7 +40,6 @@ Item{
         x:400
         y:450
         id:startgameImage
-
         //source: "../assets/Button.png"
         source: "../assets/SelectorScreen_Adventure_button.png"
         states:  [
@@ -44,7 +56,9 @@ Item{
                     carAni.start()
                 }
             }
-        }
+                
+                   }
+    
     Audio{
         id:audio
     }
@@ -65,6 +79,7 @@ Item{
             height: 39
             source: "../assets/audio.jpeg"
         }
+
         source:"../assets/options_checkbox1.png"
         states:  [
              State{
@@ -88,6 +103,12 @@ Item{
 
     }
 
+
+
+    /**
+      This is a help,help you to know about the game
+     **/
+
     ButtonImage{
         id:helpButton
         x:1100; y:450
@@ -105,8 +126,6 @@ Item{
             }
         }
     }
-
-
 
     /**
       This is a exit button
@@ -132,34 +151,35 @@ Item{
         }
     }
 
-    Help{
-        opacity: 1
-        id:helpscene
-        visible: false
-        width: parent.width
-        height: parent.height
-        anchors.fill: parent
-       // anchors.centerIn: parent
-        //visible: false
-        Button{
-            id:but
-            x:500
-            y:450
-            text: "OK"
-            flat:true
-            MultiResolutionImage{
-                source: "../assets/Button.png"
-            }
+ }
 
-            TapHandler{
-                onTapped: {
-                    but.visible=helpscene.visible
-                    //but.destroy()
-                    //lhelp.visible=false
-                    start.state = "startstate"
-            }
-      }
-    }
+    Help{
+       id:helpscene
+       visible: false
+       width: parent.width
+       height: parent.height
+      // anchors.fill: parent
+      // anchors.centerIn: parent
+       //visible: false
+       Button{
+           id:but
+           x:500
+           y:450
+           text: "OK"
+           flat:true
+           MultiResolutionImage{
+              source: "../assets/Button.png"
+          }
+
+           TapHandler{
+              onTapped: {
+              but.visible=helpscene.visible
+              //but.destroy()
+               //lhelp.visible=false
+              start.state = "startstate"
+               }
+             }
+        }
     }
     states: [
         State {
@@ -184,8 +204,6 @@ Item{
     ]
 
 }
-
-
 
 //import QtQuick 2.15
 //import Felgo 3.0
@@ -333,3 +351,5 @@ Item{
 //    }
 
 //}
+
+
