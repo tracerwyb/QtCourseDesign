@@ -14,6 +14,13 @@ Scene {
     property alias carAnimation: carHAnim
     property alias grass: backGround
 
+    property alias selSun: selectedPlant.sun
+    property alias selPea: selectedPlant.pea
+    property alias selPtt: selectedPlant.ptt
+    property alias selRepeater: selectedPlant.repeater
+
+    property alias seedChooser: seedChooser
+
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
@@ -29,7 +36,7 @@ Scene {
         id:pathAnim
 
         target:backGround
-        duration:8000
+        duration:1000
 
         easing.type:Easing.OutInQuad
         path: Path {
@@ -62,25 +69,24 @@ Scene {
             height: backGround.height
             source: "../assets/interface/Background.jpg"
             clip:true
-            x: -250
+            x: -270
         }
 
 
         ColumnLayout{
 
             SelectedPlantsList{
-
                 id:selectedPlant
                 visible: false
 
-                width: singlePlantWidth*7
+                width: singlePlantWidth*8
                 height: singlePlantHeight*1.2
             }
             SeedChooser{
                 id: seedChooser
                 visible: false
 
-                height: backGround.height-selectedPlant.height
+                height: selectedPlant.height*5
                 width: height
 
 
@@ -103,13 +109,15 @@ Scene {
                 delegate: MyType{}
                 component MyType: Image{
                     id: car
-                    width: height
+                    width: height;
                     height: carH.height/10
 
                     source: "../assets/interface/LawnMower.gif"
                 }
             }
         }
+
+
     }
 }
 
