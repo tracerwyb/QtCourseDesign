@@ -25,6 +25,7 @@ GameWindow{
     Scne{
         id:scene
         anchors.fill: parent
+        visible: false
     }
 
     Welcome{
@@ -32,18 +33,10 @@ GameWindow{
 
     }
 
-     TapHandler{
-         onTapped: {
-             scene.startAnimation.start();
-             timer.start()
-             carAni.start()
-         }
-     }
-
     Timer{
         id:timer
         triggeredOnStart: false
-        interval: 0
+        interval: 8000
         onTriggered: {
             scene.setCarHVisble();
             scene.carAnimation.start();
@@ -53,7 +46,7 @@ GameWindow{
     Timer{
         id:carAni
         triggeredOnStart: false
-        interval: 0
+        interval: 9000
         onTriggered: {
             scene.setCarHDisable();
             scene.seledPlantVis = true;

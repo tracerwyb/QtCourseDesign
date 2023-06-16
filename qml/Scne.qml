@@ -36,7 +36,7 @@ Scene {
         id:pathAnim
 
         target:backGround
-        duration:1000
+        duration:8000
 
         easing.type:Easing.OutInQuad
         path: Path {

@@ -54,6 +54,7 @@ Scene{
                     scene.startAnimation.start();
                     timer.start()
                     carAni.start()
+                    scene.visible = true
                 }
             }
                 
