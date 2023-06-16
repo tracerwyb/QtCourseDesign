@@ -23,6 +23,8 @@ DEPLOYMENTFOLDERS += qmlFolder # comment for publishing
 assetsFolder.source = assets
 DEPLOYMENTFOLDERS += assetsFolder
 
+QT += multimedia
+
 # Add more folders to ship with the application here
 
 # RESOURCES += resources.qrc # uncomment for publishing
