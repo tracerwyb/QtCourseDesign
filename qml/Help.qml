@@ -7,6 +7,7 @@ Scene {
     anchors.bottomMargin: 150
     anchors.topMargin: 100
     anchors.leftMargin: 150
+    anchors.fill:gameWindowAnchorItem
     id:scene
     MultiResolutionImage{
        id:img
