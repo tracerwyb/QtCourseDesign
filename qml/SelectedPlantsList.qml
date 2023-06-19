@@ -49,8 +49,30 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             SunFlower{
+                id:ts
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragsunflower.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragsunflower
+                    //when play game ,turn enable to true
+                    enabled: true
+                    anchors.fill: ts
+                    drag.target: ts
+                    onPressed:{
+                        plant="Sunflower.qml"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/SunFlower.png"
+                                 })
+                    }
+                    function c(){
+                        enabled=true
+                    }
+                }
             }
         }
         Rectangle{

@@ -53,6 +53,10 @@ GameWindow{
             scene.choseVis = true;
         }
     }
+    EntityManager{
+        id:entityManager
+        entityContainer: scene
+    }
 }
 
 

@@ -24,6 +24,10 @@ Scene {
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
+    property real i: 0
+    property real realx:0
+    property real realy:0
+    property string plant
     function setCarHVisble(){
         carH.visible=true;
     }
@@ -55,8 +59,6 @@ Scene {
         from:600
         to:0
         duration: 800
-//        easing.type: Easing.InOutQuad
-
     }
 
     Rectangle{
@@ -74,7 +76,6 @@ Scene {
 
 
         ColumnLayout{
-
             SelectedPlantsList{
                 id:selectedPlant
                 visible: false
@@ -88,8 +89,6 @@ Scene {
 
                 height: selectedPlant.height*5
                 width: height
-
-
             }
         }
 
@@ -116,8 +115,58 @@ Scene {
                 }
             }
         }
-
-
+    }
+    DropArea {
+        id: dropContainer1
+        anchors.fill: parent;
+        onEntered: {
+            entityManager.createEntityFromUrl(Qt.resolvedUrl(plant))
+            entityManager.getEntityById("sunflower_"+i.toString()).visible=false
+        }
+        onDropped: {
+            console.log(55555)
+            if (drop.supportedActions == Qt.CopyAction){
+                //console.log(drop.x)
+               realx=locationx(drop.x)
+               realy=locationy(drop.y)
+               entityManager.getEntityById("sunflower_"+i.toString()).changexy(realx,realy)
+               entityManager.getEntityById("sunflower_"+i.toString()).visible=true
+                i++
+            }
+        }
+    }
+    function locationx(x){
+        console.log(x)
+        if(0<x && x<scene.width/11)
+            return scene.width/12
+        if(scene.width/11<x && x<scene.width/11*2)
+            return scene.width/12*2
+        if(scene.width/11*2<x && x<scene.width/11*3)
+            return scene.width/12*3+10
+        if(scene.width/11*3<x && x<scene.width/11*4)
+            return scene.width/12*4+20
+        if(scene.width/11*4<x && x<scene.width/11*5)
+            return scene.width/12*5+20
+        if(scene.width/11*5<x && x<scene.width/11*6)
+            return scene.width/12*6+50
+        if(scene.width/11*6<x && x<scene.width/11*7)
+            return scene.width/12*7+50
+        if(scene.width/11*7<x && x<scene.width/11*8)
+            return scene.width/12*8+50
+        if(scene.width/11*8<x && x<scene.width/11*10)
+            return scene.width/12*9+70
+    }
+    function locationy(y){
+        if(scene.height/10<y && y<scene.height/3.75)
+            return scene.height/5.2
+        if(scene.height/3.75<y && y<scene.height/2.3)
+            return scene.height/2.9
+        if(scene.height/2.3<y && y<scene.height/1.6)
+            return scene.height/1.95
+        if(scene.height/1.6<y && y<scene.height/1.3)
+            return scene.height/1.48
+        if(scene.height/1.3<y)
+            return scene.height/1.19
     }
 }
 

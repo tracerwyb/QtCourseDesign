@@ -60,3 +60,6 @@ win32 {
 macx {
     ICON = macx/app_icon.icns
 }
+
+RESOURCES += \
+    source.qrc

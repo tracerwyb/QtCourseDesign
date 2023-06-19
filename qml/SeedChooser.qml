@@ -7,7 +7,9 @@ import QtQuick.Controls 2.0
 
 MultiResolutionImage{
     property real plantHeight: 85
-
+//    property bool dragp: false
+   // property alias changedragsunflower: changedragsunflower
+   // property bool changedragsunflower: false
     height: 480
     width: height
 
@@ -30,6 +32,8 @@ MultiResolutionImage{
         color: "transparent"
     }
 
+    MoveToPointHelper{
+    }
     // SeedChoosers' grid background
     GridView{
         id: plantItem
@@ -52,9 +56,36 @@ MultiResolutionImage{
                         if(sun.visible === false)
                             sun.visible = true;
                         else sun.visible = false;
+                        timer.start()
                 }
             }
+
+//            Timer{
+//                id:timer
+//                onTriggered: dragsunflower.enabled = true;
+//                interval: 1000
+//            }
+
+//            Drag.active: dragsunflower.drag.active;
+//            Drag.supportedActions: Qt.CopyAction;
+//            Drag.dragType: Drag.Automatic;
+//            Drag.mimeData: {"opt": source}
+
+//            MouseArea {
+//                id: dragsunflower
+//                //when play game ,turn enable to true
+//                enabled: false
+//                anchors.fill: sunFlower
+//                drag.target: sunFlower
+//                onPressed: parent.grabToImage(function() {
+//                                 parent.Drag.imageSource = "../assets/SunFlower.png"
+//                             })
+//                function c(){
+//                    enabled=true
+//                }
+//            }
         }
+
         PeaShooter{
             id:peapea;
             x:sunFlower.x+sunFlower.width+5;
@@ -123,6 +154,7 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
+//                dragp=true
             }
         }
 
