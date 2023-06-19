@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import Felgo 3.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
@@ -45,7 +45,6 @@ Scene {
             PathCurve { x: 0;}    //last element is empty with no end point specified
         }
     }
-
 
     NumberAnimation {
         id:carHAnim
@@ -116,9 +115,28 @@ Scene {
                 }
             }
         }
-
-
     }
+
+//    EntityManager{
+//        id:entityManager
+//    }
+
+//    Timer {
+//      interval: 3000;
+
+//      onTriggered: {
+//          // translate from the center of the opponent to a specified direction for the starting point
+//          var startX = 100
+//          var startY = 100
+//          // create the bullet entity with the calculated parameters
+//          entityManager.createEntityFromComponent/*WithProperties*/(
+//                pea_shooter/*, {
+////                  start: Qt.point(startX, startY),
+////                  rotation : angle + 90,
+////                  velocity: Qt.point(xDirection, yDirection)
+//                }*/);
+//        }
+//      }
 }
 
 

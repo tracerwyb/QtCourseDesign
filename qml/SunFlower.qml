@@ -4,7 +4,7 @@ import Felgo 3.0
 AnimatedImage {
     id: sunFlower
 
-    visible: false
+    visible: true
     source: "../assets/interface/Card.png"
     width: 67; height: 100
 

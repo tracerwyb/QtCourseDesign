@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import Felgo 3.0
 import QtQuick.Layouts 1.0
 
@@ -40,6 +40,13 @@ Rectangle{
             radius: 6
         }
     }
+    EntityManager{
+        id: entityManager
+
+        entityContainer: scene
+    }
+
+    /*selected plants list*/
 
     RowLayout{
 //        width:listBack.width;   height:listBack.height-10
@@ -49,10 +56,21 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             SunFlower{
+                id:sunCopy
                 visible: true
                 anchors.fill: parent
+                TapHandler{
+                    onTapped: {
+                        entityManager.createEntityFromUrl(Qt.resolvedUrl("SunFlower.qml"));
+                    }
+                }
+
+
             }
+
         }
+
+
         Rectangle{
             id:pea
             visible: false
