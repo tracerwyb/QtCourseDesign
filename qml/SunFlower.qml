@@ -3,9 +3,8 @@ import Felgo 3.0
 
 AnimatedImage {
     id: sunFlower
-    //property alias dragsunflower: dragsunflower
-    //property var tx: te
-    visible: false
+
+    visible: true
     source: "../assets/interface/Card.png"
     width: 67; height: 100
 
@@ -23,21 +22,6 @@ AnimatedImage {
         text: qsTr("25")
     }
 
-//    Drag.active: dragsunflower.drag.active;
-//    Drag.supportedActions: Qt.CopyAction;
-//    Drag.dragType: Drag.Automatic;
-//    Drag.mimeData: {"opt": source}
-
-//    MouseArea {
-//        id: dragsunflower
-//        //when play game ,turn enable to true
-//        enabled: false
-//        anchors.fill: sunFlower
-//        drag.target: sunFlower
-//        onPressed: parent.grabToImage(function() {
-//                         parent.Drag.imageSource = "../assets/SunFlower.png"
-//                     })
-//    }
 
     ChangeBlack{id:blak; anchors.fill: parent}
     TapHandler{
@@ -47,7 +31,5 @@ AnimatedImage {
            else blak.visible = false
        }
     }
-//    function changedrag(){
-//        dragsunflower.enabled=true
-//    }
+
 }

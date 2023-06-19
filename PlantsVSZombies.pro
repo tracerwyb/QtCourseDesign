@@ -63,3 +63,7 @@ macx {
 
 RESOURCES += \
     source.qrc
+
+DISTFILES += \
+    qml/SunFlower.qml
+

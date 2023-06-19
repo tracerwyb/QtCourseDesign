@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import Felgo 3.0
 import QtQuick.Layouts 1.0
 
@@ -40,6 +40,13 @@ Rectangle{
             radius: 6
         }
     }
+    EntityManager{
+        id: entityManager
+
+        entityContainer: scene
+    }
+
+    /*selected plants list*/
 
     RowLayout{
 //        width:listBack.width;   height:listBack.height-10
@@ -60,7 +67,7 @@ Rectangle{
                 MouseArea {
                     id: dragsunflower
                     //when play game ,turn enable to true
-                    enabled: true
+                    enabled: dragtf
                     anchors.fill: ts
                     drag.target: ts
                     onPressed:{
@@ -71,8 +78,11 @@ Rectangle{
                                  })
                     }
                 }
+
             }
         }
+
+
         Rectangle{
             id:pea
             visible: false
@@ -89,7 +99,7 @@ Rectangle{
                 MouseArea {
                     id: dragpea
                     //when play game ,turn enable to true
-                    enabled: true
+                    enabled: dragtf
                     anchors.fill: pe
                     drag.target: pe
                     onPressed:{
@@ -118,7 +128,7 @@ Rectangle{
                 MouseArea {
                     id: dragppt
                     //when play game ,turn enable to true
-                    enabled: true
+                    enabled: dragtf
                     anchors.fill: pptid
                     drag.target: pptid
                     onPressed:{
@@ -147,7 +157,7 @@ Rectangle{
                 MouseArea {
                     id: dragrepeater
                     //when play game ,turn enable to true
-                    enabled: true
+                    enabled: dragtf
                     anchors.fill: rep
                     drag.target: rep
                     onPressed:{

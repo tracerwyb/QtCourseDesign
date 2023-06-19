@@ -131,7 +131,7 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
-//                dragp=true
+                dragtf=true
             }
         }
 

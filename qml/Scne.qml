@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import Felgo 3.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
@@ -30,6 +30,15 @@ Scene {
     property string createplant        //use create plant to make sure use what kind of .qml to create plant
     property string planttype          //use this string to know entityType so that we can get the entityID to fix the position
 
+    property real flagx1: 1;property real flagx2: 1
+    property real flagx3: 1;property real flagx4: 1
+    property real flagx6: 1;property real flagx7: 1
+    property real flagx8: 1;property real flagx9: 1
+    property real flagy1: 1;property real flagy2: 1
+    property real flagy3: 1;property real flagy4: 1
+    property real flagy5: 1
+
+    property bool dragtf: false
     function setCarHVisble(){
         carH.visible=true;
     }
@@ -51,7 +60,6 @@ Scene {
             PathCurve { x: 0;}    //last element is empty with no end point specified
         }
     }
-
 
     NumberAnimation {
         id:carHAnim
@@ -125,10 +133,12 @@ Scene {
             entityManager.createEntityFromUrl(Qt.resolvedUrl(createplant))
             entityManager.getEntityById(planttype+"_"+i.toString()).visible=false
         }
+        property point dro
         onDropped: {
             console.log(55555)
             if (drop.supportedActions == Qt.CopyAction){
                 //console.log(drop.x)
+                dro.x=drop.x;dro.y=drop.y
                realx=locationx(drop.x)
                realy=locationy(drop.y)
                entityManager.getEntityById(planttype+"_"+i.toString()).changexy(realx,realy)
@@ -171,7 +181,29 @@ Scene {
             return scene.height/1.48
         if(scene.height/1.3<y)
             return scene.height/1.19
+
     }
+
+//    EntityManager{
+//        id:entityManager
+//    }
+
+//    Timer {
+//      interval: 3000;
+
+//      onTriggered: {
+//          // translate from the center of the opponent to a specified direction for the starting point
+//          var startX = 100
+//          var startY = 100
+//          // create the bullet entity with the calculated parameters
+//          entityManager.createEntityFromComponent/*WithProperties*/(
+//                pea_shooter/*, {
+////                  start: Qt.point(startX, startY),
+////                  rotation : angle + 90,
+////                  velocity: Qt.point(xDirection, yDirection)
+//                }*/);
+//        }
+//      }
 }
 
 
