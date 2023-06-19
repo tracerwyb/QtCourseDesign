@@ -64,13 +64,11 @@ Rectangle{
                     anchors.fill: ts
                     drag.target: ts
                     onPressed:{
-                        plant="Sunflower.qml"
+                        createplant="Sunflower.qml"
+                        planttype="sunflower"
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/SunFlower.png"
                                  })
-                    }
-                    function c(){
-                        enabled=true
                     }
                 }
             }
@@ -80,8 +78,28 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             PeaShooter{
+                id:pe
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragpea.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragpea
+                    //when play game ,turn enable to true
+                    enabled: true
+                    anchors.fill: pe
+                    drag.target: pe
+                    onPressed:{
+                        createplant="Peashooter.qml"
+                        planttype="peashooter"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/PeaShooter.png"
+                                 })
+                    }
+                }
             }
         }
         Rectangle{
@@ -89,8 +107,28 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             Potato{
+                id:pptid
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragppt.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragppt
+                    //when play game ,turn enable to true
+                    enabled: true
+                    anchors.fill: pptid
+                    drag.target: pptid
+                    onPressed:{
+                        createplant="Potatoer.qml"
+                        planttype="potatoer"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
+                                 })
+                    }
+                }
             }
         }
         Rectangle{
@@ -98,8 +136,28 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             Repeat{
+                id:rep
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragrepeater.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragrepeater
+                    //when play game ,turn enable to true
+                    enabled: true
+                    anchors.fill: rep
+                    drag.target: rep
+                    onPressed:{
+                        createplant="Repeater.qml"
+                        planttype="repeater"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/Repeater.png"
+                                 })
+                    }
+                }
             }
         }
     }

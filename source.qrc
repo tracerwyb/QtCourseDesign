@@ -2,21 +2,18 @@
     <qresource prefix="/">
         <file>qml/Audio.qml</file>
         <file>qml/ButtonImage.qml</file>
-        <file>qml/Card.qml</file>
         <file>qml/ChangeBlack.qml</file>
         <file>qml/config.json</file>
         <file>qml/Help.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/Pea.qml</file>
         <file>qml/PeaShooter.qml</file>
-        <file>qml/PlayMusic.qml</file>
         <file>qml/Potato.qml</file>
         <file>qml/Repeat.qml</file>
         <file>qml/Repeater.qml</file>
         <file>qml/Scne.qml</file>
         <file>qml/SeedChooser.qml</file>
         <file>qml/SelectedPlantsList.qml</file>
-        <file>qml/SinglePlant.qml</file>
         <file>qml/SunFlower.qml</file>
         <file>qml/Sunflower.qml</file>
         <file>qml/Welcome.qml</file>

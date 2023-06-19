@@ -60,30 +60,7 @@ MultiResolutionImage{
                 }
             }
 
-//            Timer{
-//                id:timer
-//                onTriggered: dragsunflower.enabled = true;
-//                interval: 1000
-//            }
 
-//            Drag.active: dragsunflower.drag.active;
-//            Drag.supportedActions: Qt.CopyAction;
-//            Drag.dragType: Drag.Automatic;
-//            Drag.mimeData: {"opt": source}
-
-//            MouseArea {
-//                id: dragsunflower
-//                //when play game ,turn enable to true
-//                enabled: false
-//                anchors.fill: sunFlower
-//                drag.target: sunFlower
-//                onPressed: parent.grabToImage(function() {
-//                                 parent.Drag.imageSource = "../assets/SunFlower.png"
-//                             })
-//                function c(){
-//                    enabled=true
-//                }
-//            }
         }
 
         PeaShooter{

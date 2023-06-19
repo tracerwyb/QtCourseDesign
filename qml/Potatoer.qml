@@ -3,31 +3,29 @@ import Felgo 3.0
 
 EntityBase {
 
-    entityType: "repeater"
+    entityType: "potatoer"
     anchors.fill: parent
-    id:rept
+    id:po
     visible: true
     width: pea.width
     height: pea.height
-    x:repeater.x;y:repeater.y
+    x:pea.x;y:pea.y
 
     AnimatedImage{
-        id:repeater
+        id:potatoer
         width:70;height: 70
         //x:parent.x;y:parent.y
         x:200; y:200
-        source: "../assets/plants/Repeater.gif"
+        source: "../assets/plants/PotatoMineNotReady.gif"
         TapHandler{
             id:hander
             onTapped:{
                 console.log(hander.position)
-                console.log(rept.entityId)}
+                console.log(po.entityId)}
         }
     }
     function changexy(x,y){
-        repeater.x=x
-        repeater.y=y
+        potatoer.x=x
+        potatoer.y=y
     }
-
 }
-

@@ -24,10 +24,12 @@ Scene {
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
-    property real i: 0
-    property real realx:0
-    property real realy:0
-    property string plant
+    property real i: 0                 //count the plants
+    property real realx:0              //fix the plant x when drag it to grass
+    property real realy:0              //fix the plant y when drag it to grass
+    property string createplant        //use create plant to make sure use what kind of .qml to create plant
+    property string planttype          //use this string to know entityType so that we can get the entityID to fix the position
+
     function setCarHVisble(){
         carH.visible=true;
     }
@@ -120,8 +122,8 @@ Scene {
         id: dropContainer1
         anchors.fill: parent;
         onEntered: {
-            entityManager.createEntityFromUrl(Qt.resolvedUrl(plant))
-            entityManager.getEntityById("sunflower_"+i.toString()).visible=false
+            entityManager.createEntityFromUrl(Qt.resolvedUrl(createplant))
+            entityManager.getEntityById(planttype+"_"+i.toString()).visible=false
         }
         onDropped: {
             console.log(55555)
@@ -129,12 +131,14 @@ Scene {
                 //console.log(drop.x)
                realx=locationx(drop.x)
                realy=locationy(drop.y)
-               entityManager.getEntityById("sunflower_"+i.toString()).changexy(realx,realy)
-               entityManager.getEntityById("sunflower_"+i.toString()).visible=true
+               entityManager.getEntityById(planttype+"_"+i.toString()).changexy(realx,realy)
+               entityManager.getEntityById(planttype+"_"+i.toString()).visible=true
                 i++
             }
         }
     }
+
+    //fix the plants when you drag it into the grass
     function locationx(x){
         console.log(x)
         if(0<x && x<scene.width/11)
