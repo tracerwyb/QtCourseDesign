@@ -109,9 +109,14 @@
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadAttack.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadWalk.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif</file>
-        <file>qml/Zombies.qml</file>
         <file>qml/Peashooter.qml</file>
         <file>qml/Potatoer.qml</file>
         <file>qml/Snownpeashooter.qml</file>
+        <file>qml/BucketTheadZombie.qml</file>
+        <file>qml/Cherrybomb.qml</file>
+        <file>qml/ConeheadZombie.qml</file>
+        <file>qml/FlagZombie.qml</file>
+        <file>qml/NormalZombie.qml</file>
+        <file>qml/Wallnuter.qml</file>
     </qresource>
 </RCC>

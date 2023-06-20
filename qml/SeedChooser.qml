@@ -59,8 +59,6 @@ MultiResolutionImage{
                         timer.start()
                 }
             }
-
-
         }
 
         PeaShooter{
@@ -131,7 +129,10 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
+                setCarHVisble()
+                zombie_timer.start()
                 dragtf=true
+                skysunfall=true
             }
         }
 
@@ -142,5 +143,8 @@ MultiResolutionImage{
             font.pointSize: 15
             anchors.centerIn: parent
         }
+
+
     }
+
 }

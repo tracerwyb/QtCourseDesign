@@ -5,6 +5,8 @@ EntityBase{
     id:pea_bullet
     width:50;  height: 50;
 
+    Component.onCompleted: {i++;console.log(i)}
+
     Rectangle{
         color: "#00ffffff"
         anchors.fill: parent
@@ -22,7 +24,7 @@ EntityBase{
         running: true
     }
 
-    EntityManager{id:entityManager}
+//    EntityManager{id:entityManage;  entityContainer: scene}
 
     BoxCollider {
         id:collider

@@ -40,6 +40,7 @@ Rectangle{
             radius: 6
         }
     }
+
     EntityManager{
         id: entityManager
 
@@ -49,7 +50,6 @@ Rectangle{
     /*selected plants list*/
 
     RowLayout{
-//        width:listBack.width;   height:listBack.height-10
         x: listBack.x;  y: 15
         Rectangle{
             id:sun
@@ -71,18 +71,15 @@ Rectangle{
                     anchors.fill: ts
                     drag.target: ts
                     onPressed:{
-                        createplant="Sunflower.qml"
-                        planttype="sunflower"
+                        //createplant="Sunflower.qml"
+                        model = sunflower_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/SunFlower.png"
                                  })
                     }
                 }
-
             }
         }
-
-
         Rectangle{
             id:pea
             visible: false
@@ -103,8 +100,8 @@ Rectangle{
                     anchors.fill: pe
                     drag.target: pe
                     onPressed:{
-                        createplant="Peashooter.qml"
-                        planttype="peashooter"
+                        //createplant="Peashooter.qml"
+                        model = peashooter_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/PeaShooter.png"
                                  })
@@ -132,8 +129,8 @@ Rectangle{
                     anchors.fill: pptid
                     drag.target: pptid
                     onPressed:{
-                        createplant="Potatoer.qml"
-                        planttype="potatoer"
+                        //createplant="Potatoer.qml"
+                        model = potato_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
                                  })
@@ -161,8 +158,8 @@ Rectangle{
                     anchors.fill: rep
                     drag.target: rep
                     onPressed:{
-                        createplant="Repeater.qml"
-                        planttype="repeater"
+                        //createplant="Repeater.qml"
+                        model = repeater_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/Repeater.png"
                                  })

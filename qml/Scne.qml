@@ -3,7 +3,7 @@ import Felgo 3.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import QtTest 1.15
-
+import QtQml 2.15
 // EMPTY SCENE
 
 Scene {
@@ -21,32 +21,42 @@ Scene {
 
     property alias seedChooser: seedChooser
 
+    property alias zombie_ani_0: zombie_ani_0
+    property alias zombie_ani_1: zombie_ani_1
+    property alias zombie_ani_2: zombie_ani_2
+    property alias zombie_ani_3: zombie_ani_3
+    property alias zombie_ani_4: zombie_ani_4
+    property alias zombie_ani_5: zombie_ani_5
+    property alias zombie_ani_6: zombie_ani_6
+    property alias zombie_ani_7: zombie_ani_7
+    property alias zombie_ani_8: zombie_ani_8
+
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
-    property real i: 0                 //count the plants
+    property real i: 0                 //count entities
     property real realx:0              //fix the plant x when drag it to grass
     property real realy:0              //fix the plant y when drag it to grass
-    property string createplant        //use create plant to make sure use what kind of .qml to create plant
-    property string planttype          //use this string to know entityType so that we can get the entityID to fix the position
+    //property string createplant        //use create plant to make sure use what kind of .qml to create plant
+    property var model
 
-    property real flagx1: 1;property real flagx2: 1
-    property real flagx3: 1;property real flagx4: 1
-    property real flagx6: 1;property real flagx7: 1
-    property real flagx8: 1;property real flagx9: 1
-    property real flagy1: 1;property real flagy2: 1
-    property real flagy3: 1;property real flagy4: 1
-    property real flagy5: 1
+//    property real flagx1: 1;property real flagx2: 1
+//    property real flagx3: 1;property real flagx4: 1
+//    property real flagx6: 1;property real flagx7: 1
+//    property real flagx8: 1;property real flagx9: 1
+//    property real flagy1: 1;property real flagy2: 1
+//    property real flagy3: 1;property real flagy4: 1
+//    property real flagy5: 1
 
     property bool dragtf: false
-    function setCarHVisble(){
-        carH.visible=true;
-    }
 
-    function setCarHDisable(){
-        carH.visible=false;
-    }
+    /* set cars' visible as true */
+    function setCarHVisble(){ carH.visible=true;}
 
+    /* set cars' visible as false */
+    function setCarHDisable(){ carH.visible=false;}
+
+    /* start animation */
     PathAnimation {
         id:pathAnim
 
@@ -61,6 +71,7 @@ Scene {
         }
     }
 
+    /* car animation*/
     NumberAnimation {
         id:carHAnim
         target: carH
@@ -71,10 +82,13 @@ Scene {
         duration: 800
     }
 
+    /* select plant */
     Rectangle{
         id:backGround
         width: parent.width * 1.6
         height: parent.height
+
+        // background Image
         BackgroundImage{
             id: selScene
             width: backGround.width
@@ -86,6 +100,7 @@ Scene {
 
 
         ColumnLayout{
+            /* this is a List of selected plants on the top of game screen */
             SelectedPlantsList{
                 id:selectedPlant
                 visible: false
@@ -93,6 +108,7 @@ Scene {
                 width: singlePlantWidth*8
                 height: singlePlantHeight*1.2
             }
+            /* this is a box that shows all of alternative plants and allowed player to choose plants */
             SeedChooser{
                 id: seedChooser
                 visible: false
@@ -102,6 +118,7 @@ Scene {
             }
         }
 
+        /* initial cars on grass left */
         ColumnLayout{
             id: carBox
 
@@ -125,25 +142,83 @@ Scene {
                 }
             }
         }
+
+        /*initial zombies*/
+        BucketTheadZombie{ id: zombie_bucket_0;  x:1240;     y:100; }
+        NormalZombie{ id: zombie_normal_1;    x: 1300;    y: 190; }
+        NormalZombie{ id: zombie_normal_0;    x: 1370;    y: 200; }
+        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300; }
+        ConeheadZombie{ id: zombie_cone_0;    x:1280;   y:400; }
+        FlagZombie{ id:zombie_flag_0;   x:1300;     y:420; }
+        ConeheadZombie{ id: zombie_cone_1;    x:1350;   y:470; }
+        FlagZombie{ id:zombie_flag_1;   x:1350;     y:480; }
+        NormalZombie{ id: zombie_normal_2;    x: 1300;    y: 500; }
+
+
+        /* move zombies */
+        NumberAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; to:0; duration: 52000; }
+        NumberAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; to:0; duration: 52000; }
+    }
+
+    Component{
+        id:sunflower_model;
+        EntityBase{
+            entityId: "sunflower"
+            visible: false
+            Sunflower{  }
+        }
+    }
+    Component{
+        id:repeater_model;
+        EntityBase{
+            entityId: "repeater"
+            visible: false
+            Rp{  }
+        }
+    }
+    Component{
+        id:peashooter_model;
+        EntityBase{
+            entityId: "peashooter"
+            visible: false
+            Peashooter{  }
+        }
+    }
+    Component{
+        id:potato_model;
+        EntityBase{
+            entityId: "potato"
+            visible: false
+            Potatoer{  }
+        }
     }
     DropArea {
         id: dropContainer1
         anchors.fill: parent;
-        onEntered: {
-            entityManager.createEntityFromUrl(Qt.resolvedUrl(createplant))
-            entityManager.getEntityById(planttype+"_"+i.toString()).visible=false
-        }
-        property point dro
+//        onEntered: {
+//        }
         onDropped: {
             console.log(55555)
             if (drop.supportedActions == Qt.MoveAction){
                 //console.log(drop.x)
-                dro.x=drop.x;dro.y=drop.y
-               realx=locationx(drop.x)
-               realy=locationy(drop.y)
-               entityManager.getEntityById(planttype+"_"+i.toString()).changexy(realx,realy)
-               entityManager.getEntityById(planttype+"_"+i.toString()).visible=true
+                realx=locationx(drop.x)
+                realy=locationy(drop.y)
                 i++
+                var newEntityProperties = {
+                                     x: realx,
+                                     y: realy,
+                                     visible: true
+                                 }
+                entityManager.createEntityFromComponentWithProperties(
+                            model,
+                            newEntityProperties);
             }
         }
     }
@@ -151,23 +226,23 @@ Scene {
     //fix the plants when you drag it into the grass
     function locationx(x){
         console.log(x)
-        if(0<x && x<scene.width/11)
+        if(0<x && x<scene.width/11+20)
             return scene.width/12
-        if(scene.width/11<x && x<scene.width/11*2)
+        if(scene.width/11<x && x<scene.width/11*2+20)
             return scene.width/12*2
-        if(scene.width/11*2<x && x<scene.width/11*3)
+        if(scene.width/11*2<x && x<scene.width/11*3+20)
             return scene.width/12*3+10
-        if(scene.width/11*3<x && x<scene.width/11*4)
+        if(scene.width/11*3<x && x<scene.width/11*4+20)
             return scene.width/12*4+20
-        if(scene.width/11*4<x && x<scene.width/11*5)
+        if(scene.width/11*4<x && x<scene.width/11*5+20)
             return scene.width/12*5+20
-        if(scene.width/11*5<x && x<scene.width/11*6)
+        if(scene.width/11*5<x && x<scene.width/11*6+20)
             return scene.width/12*6+50
-        if(scene.width/11*6<x && x<scene.width/11*7)
+        if(scene.width/11*6<x && x<scene.width/11*7+20)
             return scene.width/12*7+50
-        if(scene.width/11*7<x && x<scene.width/11*8)
+        if(scene.width/11*7<x && x<scene.width/11*8+20)
             return scene.width/12*8+50
-        if(scene.width/11*8<x && x<scene.width/11*10)
+        if(scene.width/11*8<x && x<scene.width/11*10+20)
             return scene.width/12*9+70
     }
     function locationy(y){

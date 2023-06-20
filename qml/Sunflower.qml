@@ -9,9 +9,7 @@ EntityBase{
    visible: true
    width: sunflower.width
    height: sunflower.height
-   //x:0;y:0
-   //x:sunflower.x;y:sunflower.y
-   toStoreProperties: ["lx", "ly"]
+
 /**
   This is a flower with sun,
   you can tap sun to collect it
@@ -20,7 +18,7 @@ EntityBase{
        id:sunflower
        width:70;height: 70
        //x:parent.x;y:parent.y
-       x:200; y:200
+//       x:200; y:200
        source: "../assets/SunFlower.gif"
 
        AnimatedImage{
@@ -116,7 +114,7 @@ EntityBase{
        }
 
    }
-
+/*
    BoxCollider{
        enabled: true
        x: 0; y: 0
@@ -140,14 +138,8 @@ EntityBase{
            collidedEntity.removeEntity()
          }
        }
-   }
-//    NumberAnimation{
-//        target: x
-//        duration: 1000
-//    }
-   function changexy(x,y){
-       sunflower.x=x
-       sunflower.y=y
-   }
+   }*/
+
+
 }
 

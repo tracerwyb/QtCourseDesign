@@ -65,5 +65,8 @@ RESOURCES += \
     source.qrc
 
 DISTFILES += \
+    qml/BucketTheadZombie.qml \
+    qml/ConeheadZombie.qml \
+    qml/FlagZombie.qml \
     qml/SunFlower.qml
 

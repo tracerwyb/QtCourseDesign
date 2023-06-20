@@ -15,8 +15,6 @@ Item{
 //    width: 1400
 //    height: 600
 
-
-
 Scene{
     MultiResolutionImage{
         anchors.fill: parent
@@ -26,12 +24,6 @@ Scene{
     id:startscene
     width: 1400
     height: 600
-    MultiResolutionImage{
-        anchors.fill: parent
-        //anchors.centerIn: parent
-        source: "../assets/background.png"
-    }
-
 
     /**
       A button is used to start game
@@ -40,7 +32,6 @@ Scene{
         x:400
         y:450
         id:startgameImage
-        //source: "../assets/Button.png"
         source: "../assets/SelectorScreen_Adventure_button.png"
         states:  [
                   State {
