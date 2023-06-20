@@ -7,7 +7,9 @@ import QtQuick.Controls 2.0
 
 MultiResolutionImage{
     property real plantHeight: 85
-
+//    property bool dragp: false
+   // property alias changedragsunflower: changedragsunflower
+   // property bool changedragsunflower: false
     height: 480
     width: height
 
@@ -30,6 +32,8 @@ MultiResolutionImage{
         color: "transparent"
     }
 
+    MoveToPointHelper{
+    }
     // SeedChoosers' grid background
     GridView{
         id: plantItem
@@ -52,9 +56,11 @@ MultiResolutionImage{
                         if(sun.visible === false)
                             sun.visible = true;
                         else sun.visible = false;
+                        timer.start()
                 }
             }
         }
+
         PeaShooter{
             id:peapea;
             x:sunFlower.x+sunFlower.width+5;
@@ -81,7 +87,7 @@ MultiResolutionImage{
                 }
             }
         }
-        Repeater{
+        Repeat{
             id:repeater;
             x:potato.x+potato.width+5;
             visible: true;
@@ -123,7 +129,9 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
+                setCarHVisble()
                 zombie_timer.start()
+                dragtf=true
             }
         }
 

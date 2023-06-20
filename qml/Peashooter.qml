@@ -1,31 +1,37 @@
 import QtQuick 2.15
 import Felgo 3.0
 
-EntityBase{
-    id:pea_bullet
-    width:50;  height: 50;
+EntityBase {
+
+    entityType: "peashooter"
+    anchors.fill: parent
+    id:peid
+    visible: true
+    width: pea.width
+    height: pea.height
+    x:pea.x;    y:pea.y
+    property real blood: 3
 
     Component.onCompleted: {i++;console.log(i)}
 
-    Rectangle{
-        color: "#00ffffff"
-        anchors.fill: parent
-        Image{
-            source: "../assets/plants/Pea.gif"
-            anchors.fill: parent
+    AnimatedImage{
+        id:pea
+        width:70;height: 70
+        x:200; y:200
+        source: "../assets/PeaShooter.gif"
+        TapHandler{
+            id:hander
+            onTapped:{
+                console.log(hander.position)
+                console.log(peid.entityId)}
         }
     }
-
-    MovementAnimation{
-        id:move
-        target: pea_bullet
-        property: "x"
-        velocity: 60
-        running: true
+    function changexy(x,y){
+        pea.x=x
+        pea.y=y
     }
 
-//    EntityManager{id:entityManage;  entityContainer: scene}
-
+//    EntityManager{ id:entityManager;    entityContainer: scene }
     BoxCollider {
         id:collider
 
@@ -43,15 +49,11 @@ EntityBase{
             var otherEntityId = collidedEntity.entityId;
             var otherEntityParent = collidedEntity.parent;
 
-            console.log("boom")
-            console.log("Pea",pea_bullet.x, pea_bullet.y )
-            if(otherEntityId.substring(0,6) === "zombie")
-            {
-                pea_bullet.destroy()
+            if(otherEntityId.substring(0,6) === "zombie"){
 
 //                otherEntityParent.onDamageWithBulletType(pea_bullet);
 
-//             // show a PeaHit image for a certain amount of time after removing the pea
+             // show a PeaHit image for a certain amount of time after removing the pea
 //                entityManager.createEntityFromUrlWithProperties(
 //                      Qt.resolvedUrl("PeaHit.qml"), {
 //                        "z": 1,

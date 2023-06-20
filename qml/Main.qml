@@ -10,6 +10,7 @@ GameWindow{
     property alias timer: timer         // timer that let cars animation start
     property alias carAni: carAni       // cars animation
     property alias scene: scene         // game scene
+    property alias entityManager: entityManager
 
     property alias sun: scene.selSun    // selected plant: sunflower
     property alias pea: scene.selPea    // selected plant: peashooter
@@ -17,6 +18,7 @@ GameWindow{
     property alias repeate: scene.selRepeater   // selected plant: repeate peashooter
     property alias seedChooser: scene.seedChooser
 
+//    property alias i: 0
     activeScene: welcome
 
     screenWidth: 1180
@@ -26,6 +28,7 @@ GameWindow{
         id:scene
         anchors.fill: parent
         visible: false
+        PhysicsWorld{}
     }
 
     Welcome{
@@ -74,7 +77,14 @@ GameWindow{
             console.log("timer triggered")
         }
     }
+    EntityManager{
+        id:entityManager
+        entityContainer: scene
+    }
+
+
 }
+
 
 
 

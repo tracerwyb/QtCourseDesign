@@ -40,6 +40,7 @@ Rectangle{
             radius: 6
         }
     }
+
     EntityManager{
         id: entityManager
 
@@ -55,25 +56,56 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             SunFlower{
-                id:sunCopy
+                id:ts
                 visible: true
                 anchors.fill: parent
-                TapHandler{
-                    onTapped: {
-                        entityManager.createEntityFromUrl(Qt.resolvedUrl("SunFlower.qml"));
+                Drag.active: dragsunflower.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragsunflower
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: ts
+                    drag.target: ts
+                    onPressed:{
+                        createplant="Sunflower.qml"
+                        model = sunflower_model
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/SunFlower.png"
+                                 })
                     }
                 }
             }
         }
-
-
         Rectangle{
             id:pea
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             PeaShooter{
+                id:pe
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragpea.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragpea
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: pe
+                    drag.target: pe
+                    onPressed:{
+                        createplant="Peashooter.qml"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/PeaShooter.png"
+                                 })
+                    }
+                }
             }
         }
         Rectangle{
@@ -81,17 +113,55 @@ Rectangle{
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
             Potato{
+                id:pptid
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragppt.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragppt
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: pptid
+                    drag.target: pptid
+                    onPressed:{
+                        createplant="Potatoer.qml"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
+                                 })
+                    }
+                }
             }
         }
         Rectangle{
             id:repeater
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
-            Repeater{
+            Repeat{
+                id:rep
                 visible: true
                 anchors.fill: parent
+                Drag.active: dragrepeater.drag.active;
+                Drag.supportedActions: Qt.CopyAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragrepeater
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: rep
+                    drag.target: rep
+                    onPressed:{
+                        createplant="Repeater.qml"
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/Repeater.png"
+                                 })
+                    }
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ EntityBase{
     property real blood: 4
 
 //    property alias zombie_ani: zombie_ani
+    Component.onCompleted: i++
 
     Rectangle{
         color: "#00ffffff"

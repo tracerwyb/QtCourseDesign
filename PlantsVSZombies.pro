@@ -61,8 +61,12 @@ macx {
     ICON = macx/app_icon.icns
 }
 
+RESOURCES += \
+    source.qrc
+
 DISTFILES += \
     qml/BucketTheadZombie.qml \
     qml/ConeheadZombie.qml \
     qml/FlagZombie.qml \
     qml/SunFlower.qml
+

@@ -7,6 +7,7 @@ Item{
     MediaPlayer{
         id:backaudio
         autoPlay: true
+        loops: 5
         source: "../assets/audio.mp3"
 
     }

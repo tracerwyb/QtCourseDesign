@@ -4,7 +4,6 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import QtTest 1.15
 import QtQml 2.15
-
 // EMPTY SCENE
 
 Scene {
@@ -34,6 +33,22 @@ Scene {
 
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
+
+    property real i: 0                 //count entities
+    property real realx:0              //fix the plant x when drag it to grass
+    property real realy:0              //fix the plant y when drag it to grass
+    property string createplant        //use create plant to make sure use what kind of .qml to create plant
+    property var model
+
+//    property real flagx1: 1;property real flagx2: 1
+//    property real flagx3: 1;property real flagx4: 1
+//    property real flagx6: 1;property real flagx7: 1
+//    property real flagx8: 1;property real flagx9: 1
+//    property real flagy1: 1;property real flagy2: 1
+//    property real flagy3: 1;property real flagy4: 1
+//    property real flagy5: 1
+
+    property bool dragtf: false
 
     /* set cars' visible as true */
     function setCarHVisble(){ carH.visible=true;}
@@ -65,8 +80,6 @@ Scene {
         from:600
         to:0
         duration: 800
-//        easing.type: Easing.InOutQuad
-
     }
 
     /* select plant */
@@ -102,8 +115,6 @@ Scene {
 
                 height: selectedPlant.height*5
                 width: height
-
-
             }
         }
 
@@ -154,6 +165,75 @@ Scene {
         NumberAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; to:0; duration: 52000; }
         NumberAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; to:0; duration: 52000; }
         NumberAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; to:0; duration: 52000; }
+    }
+
+    Component{
+        id:sunflower_model;
+        EntityBase{
+            entityId: "sunflower"
+            visible: false
+            Sunflower{  }
+        }
+    }
+
+    DropArea {
+        id: dropContainer1
+        anchors.fill: parent;
+//        onEntered: {
+//        }
+        onDropped: {
+            console.log(55555)
+            if (drop.supportedActions == Qt.CopyAction){
+                //console.log(drop.x)
+                realx=locationx(drop.x)
+                realy=locationy(drop.y)
+                i++
+                var newEntityProperties = {
+                                     x: realx,
+                                     y: realy,
+                                     visible: true
+                                 }
+                entityManager.createEntityFromComponentWithProperties(
+                            model,
+                            newEntityProperties);
+            }
+        }
+    }
+
+    //fix the plants when you drag it into the grass
+    function locationx(x){
+        console.log(x)
+        if(0<x && x<scene.width/11)
+            return scene.width/12
+        if(scene.width/11<x && x<scene.width/11*2)
+            return scene.width/12*2
+        if(scene.width/11*2<x && x<scene.width/11*3)
+            return scene.width/12*3+10
+        if(scene.width/11*3<x && x<scene.width/11*4)
+            return scene.width/12*4+20
+        if(scene.width/11*4<x && x<scene.width/11*5)
+            return scene.width/12*5+20
+        if(scene.width/11*5<x && x<scene.width/11*6)
+            return scene.width/12*6+50
+        if(scene.width/11*6<x && x<scene.width/11*7)
+            return scene.width/12*7+50
+        if(scene.width/11*7<x && x<scene.width/11*8)
+            return scene.width/12*8+50
+        if(scene.width/11*8<x && x<scene.width/11*10)
+            return scene.width/12*9+70
+    }
+    function locationy(y){
+        if(scene.height/10<y && y<scene.height/3.75)
+            return scene.height/5.2
+        if(scene.height/3.75<y && y<scene.height/2.3)
+            return scene.height/2.9
+        if(scene.height/2.3<y && y<scene.height/1.6)
+            return scene.height/1.95
+        if(scene.height/1.6<y && y<scene.height/1.3)
+            return scene.height/1.48
+        if(scene.height/1.3<y)
+            return scene.height/1.19
+
     }
 
 //    EntityManager{
