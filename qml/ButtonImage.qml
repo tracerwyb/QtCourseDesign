@@ -14,6 +14,5 @@ Item {
     }
     TapHandler{
             id:taphandler
-        }
-
+    }
 }

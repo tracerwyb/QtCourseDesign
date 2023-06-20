@@ -81,7 +81,7 @@ MultiResolutionImage{
                 }
             }
         }
-        Repeat{
+        Repeater{
             id:repeater;
             x:potato.x+potato.width+5;
             visible: true;
@@ -123,6 +123,7 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
+                zombie_timer.start()
             }
         }
 
@@ -133,5 +134,8 @@ MultiResolutionImage{
             font.pointSize: 15
             anchors.centerIn: parent
         }
+
+
     }
+
 }

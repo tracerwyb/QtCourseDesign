@@ -49,7 +49,6 @@ Rectangle{
     /*selected plants list*/
 
     RowLayout{
-//        width:listBack.width;   height:listBack.height-10
         x: listBack.x;  y: 15
         Rectangle{
             id:sun
@@ -64,10 +63,7 @@ Rectangle{
                         entityManager.createEntityFromUrl(Qt.resolvedUrl("SunFlower.qml"));
                     }
                 }
-
-
             }
-
         }
 
 
@@ -93,7 +89,7 @@ Rectangle{
             id:repeater
             visible: false
             width:listBack.width/7.5;    height:listBack.height-10
-            Repeat{
+            Repeater{
                 visible: true
                 anchors.fill: parent
             }
