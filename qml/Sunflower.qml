@@ -10,9 +10,6 @@ EntityBase{
    width: sunflower.width
    height: sunflower.height
    x:sunflower.x;y:sunflower.y
-//   toStoreProperties: ["lx", "ly"]
-
-   Component.onCompleted: {i++;console.log(i)}
 
 /**
   This is a flower with sun,
@@ -21,8 +18,6 @@ EntityBase{
    AnimatedImage{
        id:sunflower
        width:70;height: 70
-       //x:parent.x;y:parent.y
-//       x:200; y:200
        source: "../assets/SunFlower.gif"
 
        AnimatedImage{

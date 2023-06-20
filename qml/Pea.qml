@@ -2,10 +2,9 @@ import QtQuick 2.15
 import Felgo 3.0
 
 EntityBase{
-    id:pea_bullet
+    id: pea_bullet
+    entityType: "pea_bullet"
     width:50;  height: 50;
-
-    Component.onCompleted: {i++;console.log(i)}
 
     Rectangle{
         color: "#00ffffff"
@@ -36,6 +35,8 @@ EntityBase{
         linearDamping: 100
         fixture.restitution: 0.5
         collisionTestingOnlyMode: true
+        categories: Box.Category1
+        collidesWith: Box.Category2
 
         anchors.fill: parent
         fixture.onBeginContact: {
@@ -44,7 +45,7 @@ EntityBase{
             var otherEntityParent = collidedEntity.parent;
 
             console.log("boom")
-            console.log("Pea",pea_bullet.x, pea_bullet.y )
+//            console.log("Pea",pea_bullet.x, pea_bullet.y )
             if(otherEntityId.substring(0,6) === "zombie")
             {
                 pea_bullet.destroy()

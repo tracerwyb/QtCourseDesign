@@ -10,7 +10,6 @@ EntityBase{
 
 //    property alias zombie_ani: zombie_ani
 
-    Component.onCompleted: i++
 
     Rectangle{
         color: "#00ffffff"
@@ -32,6 +31,8 @@ EntityBase{
       linearDamping: 100
       fixture.restitution: 0.5
       anchors.fill: parent
+      categories: Box.Category2
+      collidesWith: Box.Category1
 
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;
@@ -41,7 +42,7 @@ EntityBase{
           console.log("zombie",zombie_bucket.x,zombie_bucket.y)
           blood--;
           if(blood === 0){
-              zombie_bucket.destroy()
+              zombie_cone.destroy()
               blood = 4
           }
 
@@ -49,9 +50,6 @@ EntityBase{
              change zombies' action while detecting collider event,
              if the detected collider entity is a plant, blood reduce one
           */
-          if(otherEntityId.substring(0,7) !== "zombie_"){
-              normal_zombie.destroy()
-          }
       }
     }
 

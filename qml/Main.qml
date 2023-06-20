@@ -16,8 +16,11 @@ GameWindow{
     property alias pea: scene.selPea    // selected plant: peashooter
     property alias ptt: scene.selPtt    // selected plant: potato
     property alias repeate: scene.selRepeater   // selected plant: repeate peashooter
-    property alias seedChooser: scene.seedChooser
+    property alias wallnut: scene.selWallNut
+    property alias cherryBomb: scene.selcherryBomb
+    property alias snowpeashooter: scene.selsnowpeashooter
 
+    property alias seedChooser: scene.seedChooser
 //    property alias i: 0
     activeScene: welcome
 

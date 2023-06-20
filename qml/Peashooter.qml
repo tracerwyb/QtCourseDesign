@@ -2,22 +2,19 @@ import QtQuick 2.15
 import Felgo 3.0
 
 EntityBase {
+    id:peid
 
     entityType: "peashooter"
     anchors.fill: parent
-    id:peid
     visible: true
     width: pea.width
     height: pea.height
-    x:pea.x;    y:pea.y
     property real blood: 3
-
-    Component.onCompleted: {i++;console.log(i)}
+    property var newEntityProperty
 
     AnimatedImage{
         id:pea
         width:70;height: 70
-        x:200; y:200
         source: "../assets/PeaShooter.gif"
         TapHandler{
             id:hander
@@ -26,12 +23,7 @@ EntityBase {
                 console.log(peid.entityId)}
         }
     }
-    function changexy(x,y){
-        pea.x=x
-        pea.y=y
-    }
 
-//    EntityManager{ id:entityManager;    entityContainer: scene }
     BoxCollider {
         id:collider
 
@@ -42,6 +34,8 @@ EntityBase {
         linearDamping: 100
         fixture.restitution: 0.5
         collisionTestingOnlyMode: true
+//        categories: Box.Category1
+//        collidesWith: Box.Category2
 
         anchors.fill: parent
         fixture.onBeginContact: {
@@ -62,6 +56,20 @@ EntityBase {
 //                      }
 //               );
             }
+        }
+    }
+
+    Component.onCompleted: {
+        newEntityProperty = { x = peid.parent.x,    y = peid.parent.y,     visible = true }
+    }
+    Component{ id:pea_model; EntityBase{ visible:false; Pea{} } }
+
+    Timer{
+        repeat: true;
+        running: true;
+        interval: 2000
+        onTriggered: {
+            entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
         }
     }
 }

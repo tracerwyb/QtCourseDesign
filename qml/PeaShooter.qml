@@ -12,6 +12,12 @@ AnimatedImage {
         height: parent.height/2
         source: "../assets/plants/PeaShooter.png"
     }
+    Text {
+        id:te
+        y: parent.height-20
+        x: 22
+        text: qsTr("100")
+    }
     ChangeBlack{id:blak;    anchors.fill: parent}
     TapHandler{
        onTapped: {

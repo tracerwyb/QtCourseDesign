@@ -32,6 +32,8 @@ EntityBase{
       linearDamping: 100
       fixture.restitution: 0.5
       anchors.fill: parent
+      categories: Box.Category2
+      collidesWith: Box.Category1
 
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;

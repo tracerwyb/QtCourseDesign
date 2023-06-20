@@ -18,6 +18,9 @@ Scene {
     property alias selPea: selectedPlant.pea
     property alias selPtt: selectedPlant.ptt
     property alias selRepeater: selectedPlant.repeater
+    property alias selWallNut: selectedPlant.wallnut
+    property alias selcherryBomb: selectedPlant.cherryBomb
+    property alias selsnowpeashooter:selectedPlant.snowpeashooter
 
     property alias seedChooser: seedChooser
 
@@ -169,25 +172,28 @@ Scene {
 
     Component{
         id:sunflower_model;
-        EntityBase{
-            entityId: "sunflower"
-            visible: false
-            Sunflower{  }
-        }
+        EntityBase{ visible: false; Sunflower{  }}
+    }
+    Component{
+        id:peashooter_model;
+        EntityBase{ visible: false; Peashooter{  }}
+    }
+    Component{
+        id:repeater_model;
+        EntityBase{ visible: false; Rp{  }}
+    }
+    Component{
+        id:potato_model;
+        EntityBase{ visible: false; Potatoer{  }}
     }
 
     DropArea {
         id: dropContainer1
         anchors.fill: parent;
-//        onEntered: {
-//        }
         onDropped: {
-            console.log(55555)
             if (drop.supportedActions == Qt.CopyAction){
-                //console.log(drop.x)
                 realx=locationx(drop.x)
                 realy=locationy(drop.y)
-                i++
                 var newEntityProperties = {
                                      x: realx,
                                      y: realy,

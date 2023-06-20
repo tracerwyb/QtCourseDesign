@@ -10,7 +10,6 @@
         <file>qml/PeaShooter.qml</file>
         <file>qml/Potato.qml</file>
         <file>qml/Repeat.qml</file>
-        <file>qml/Repeater.qml</file>
         <file>qml/Scne.qml</file>
         <file>qml/SeedChooser.qml</file>
         <file>qml/SelectedPlantsList.qml</file>
@@ -109,5 +108,6 @@
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadAttack.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadWalk.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif</file>
+        <file>qml/Rp.qml</file>
     </qresource>
 </RCC>
