@@ -109,5 +109,9 @@
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadAttack.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieLostHeadWalk.gif</file>
         <file>assets/Zombies/PoleVaultingZombie/PoleVaultingZombieWalk.gif</file>
+        <file>qml/Zombies.qml</file>
+        <file>qml/Peashooter.qml</file>
+        <file>qml/Potatoer.qml</file>
+        <file>qml/Snownpeashooter.qml</file>
     </qresource>
 </RCC>

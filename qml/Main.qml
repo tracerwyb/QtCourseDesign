@@ -26,6 +26,9 @@ GameWindow{
         id:scene
         anchors.fill: parent
         visible: false
+        PhysicsWorld{
+
+        }
     }
 
     Welcome{

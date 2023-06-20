@@ -9,7 +9,8 @@ EntityBase{
    visible: true
    width: sunflower.width
    height: sunflower.height
-   x:sunflower.x;y:sunflower.y
+   //x:0;y:0
+   //x:sunflower.x;y:sunflower.y
    toStoreProperties: ["lx", "ly"]
 /**
   This is a flower with sun,
@@ -116,6 +117,34 @@ EntityBase{
 
    }
 
+   BoxCollider{
+       enabled: true
+       x: 0; y: 0
+       density: 0
+       friction: 0.4
+       restitution: 0.4
+       linearDamping: 100
+       fixture.restitution: 0.5
+       anchors.fill: parent
+        width: 70;height: 70
+       //bodyType: Body.Static
+
+       // handle the collision
+       fixture.onBeginContact: {
+         var collidedEntity = other.getBody().target;
+        console.log("this is flower was crashed")
+         // check if it hit a player
+         if (collidedEntity.isOfType("repeater")) {
+             console.log("this is if repeater")
+           // call damage method on playerRed or playerBlue
+           collidedEntity.removeEntity()
+         }
+       }
+   }
+//    NumberAnimation{
+//        target: x
+//        duration: 1000
+//    }
    function changexy(x,y){
        sunflower.x=x
        sunflower.y=y

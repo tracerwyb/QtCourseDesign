@@ -1,32 +1,33 @@
 import QtQuick 2.15
 import Felgo 3.0
-//peashooter in grass
+
+//WallNut in grass
 EntityBase {
 
-    entityType: "peashooter"
+    entityType: "wallnuter"
     anchors.fill: parent
-    id:peid
+    id:walln
     visible: true
-    width: pea.width
-    height: pea.height
-    x:pea.x;y:pea.y
+    width: wallnuter.width
+    height: wallnuter.height
+    x:wallnuter.x;y:wallnuter.y
 
     AnimatedImage{
-        id:pea
+        id:wallnuter
         width:70;height: 70
         //x:parent.x;y:parent.y
         x:200; y:200
-        source: "../assets/PeaShooter.gif"
+        source: "../assets/plants/WallNut.gif"
         TapHandler{
             id:hander
             onTapped:{
                 console.log(hander.position)
-                console.log(peid.entityId)}
+                console.log(walln.entityId)}
         }
     }
     function changexy(x,y){
-        pea.x=x
-        pea.y=y
+        wallnuter.x=x
+        wallnuter.y=y
     }
 
 

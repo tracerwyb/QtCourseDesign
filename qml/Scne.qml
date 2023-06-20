@@ -136,7 +136,7 @@ Scene {
         property point dro
         onDropped: {
             console.log(55555)
-            if (drop.supportedActions == Qt.CopyAction){
+            if (drop.supportedActions == Qt.MoveAction){
                 //console.log(drop.x)
                 dro.x=drop.x;dro.y=drop.y
                realx=locationx(drop.x)
@@ -204,6 +204,7 @@ Scene {
 //                }*/);
 //        }
 //      }
+
 }
 
 

@@ -1,33 +1,32 @@
 import QtQuick 2.15
 import Felgo 3.0
-//peashooter in grass
+
 EntityBase {
 
-    entityType: "peashooter"
+    entityType: "cherrybomb"
     anchors.fill: parent
-    id:peid
+    id:cher
     visible: true
-    width: pea.width
-    height: pea.height
-    x:pea.x;y:pea.y
+    width: cherrybomb.width
+    height: cherrybomb.height
+    x:cherrybomb.x;y:cherrybomb.y
 
     AnimatedImage{
-        id:pea
+        id:cherrybomb
         width:70;height: 70
         //x:parent.x;y:parent.y
         x:200; y:200
-        source: "../assets/PeaShooter.gif"
+        source: "../assets/plants/CherryBomb.gif"
         TapHandler{
             id:hander
             onTapped:{
                 console.log(hander.position)
-                console.log(peid.entityId)}
+                console.log(cher.entityId)}
         }
     }
     function changexy(x,y){
-        pea.x=x
-        pea.y=y
+        cherrybomb.x=x
+        cherrybomb.y=y
     }
-
 
 }

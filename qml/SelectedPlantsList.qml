@@ -60,7 +60,7 @@ Rectangle{
                 visible: true
                 anchors.fill: parent
                 Drag.active: dragsunflower.drag.active;
-                Drag.supportedActions: Qt.CopyAction;
+                Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
 
@@ -92,7 +92,7 @@ Rectangle{
                 visible: true
                 anchors.fill: parent
                 Drag.active: dragpea.drag.active;
-                Drag.supportedActions: Qt.CopyAction;
+                Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
 
@@ -121,7 +121,7 @@ Rectangle{
                 visible: true
                 anchors.fill: parent
                 Drag.active: dragppt.drag.active;
-                Drag.supportedActions: Qt.CopyAction;
+                Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
 
@@ -150,7 +150,7 @@ Rectangle{
                 visible: true
                 anchors.fill: parent
                 Drag.active: dragrepeater.drag.active;
-                Drag.supportedActions: Qt.CopyAction;
+                Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
 
