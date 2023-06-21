@@ -18,6 +18,9 @@ Scene {
     property alias selPea: selectedPlant.pea
     property alias selPtt: selectedPlant.ptt
     property alias selRepeater: selectedPlant.repeater
+    property alias selWallNut: selectedPlant.wallnut
+    property alias selcherryBomb: selectedPlant.cherryBomb
+    property alias selsnowpeashooter:selectedPlant.snowpeashooter
 
     property alias seedChooser: seedChooser
 
@@ -169,53 +172,71 @@ Scene {
 
     Component{
         id:sunflower_model;
-        EntityBase{
-            entityId: "sunflower"
-            visible: false
-            Sunflower{  }
-        }
-    }
-    Component{
-        id:repeater_model;
-        EntityBase{
-            entityId: "repeater"
-            visible: false
-            Rp{  }
+        EntityBase{ entityType: "sunflower";
+            property real number
+            visible: false;
+            Sunflower{id:sunf  }
+            BoxCollider {
+              enabled: true
+              x: 0
+              y: 0
+              density: 0
+              friction: 0.4
+              restitution: 0.4
+              linearDamping: 100
+              fixture.restitution: 0.5
+              anchors.fill: parent
+              categories: Box.Category1
+
+              //collidesWith: Box.Category2
+
+              fixture.onBeginContact: {"sunflowers was crashed"
+                    if(number===plantnumber)
+                          removeEntity()
+              }
+            }
+            Component.onCompleted: number=plantnumber
         }
     }
     Component{
         id:peashooter_model;
-        EntityBase{
-            entityId: "peashooter"
-            visible: false
-            Peashooter{  }
-        }
+        EntityBase{ visible: false; Peashooter{  }}
+    }
+    Component{
+        id:repeater_model;
+        EntityBase{ visible: false; Rp{  }}
     }
     Component{
         id:potato_model;
-        EntityBase{
-            entityId: "potato"
-            visible: false
-            Potatoer{  }
-        }
+        EntityBase{ visible: false; Potatoer{  }}
     }
+    Component{
+        id:wallnut_model;
+        EntityBase{ visible: false; Wallnuter{  }}
+    }
+    Component{
+        id:snownpeashooter_model;
+        EntityBase{ visible: false; Snownpeashooter{  }}
+    }
+    Component{
+        id:cherrybomb_model;
+        EntityBase{ visible: false; Cherrybomb{  }}
+    }
+
     DropArea {
         id: dropContainer1
         anchors.fill: parent;
-//        onEntered: {
-//        }
         onDropped: {
-            console.log(55555)
             if (drop.supportedActions == Qt.MoveAction){
                 //console.log(drop.x)
                 realx=locationx(drop.x)
                 realy=locationy(drop.y)
-                i++
                 var newEntityProperties = {
                                      x: realx,
                                      y: realy,
                                      visible: true
                                  }
+                plantnumber++
                 entityManager.createEntityFromComponentWithProperties(
                             model,
                             newEntityProperties);
@@ -226,36 +247,36 @@ Scene {
     //fix the plants when you drag it into the grass
     function locationx(x){
         console.log(x)
-        if(0<x && x<scene.width/11+20)
-            return scene.width/12
-        if(scene.width/11<x && x<scene.width/11*2+20)
-            return scene.width/12*2
-        if(scene.width/11*2<x && x<scene.width/11*3+20)
-            return scene.width/12*3+10
-        if(scene.width/11*3<x && x<scene.width/11*4+20)
-            return scene.width/12*4+20
-        if(scene.width/11*4<x && x<scene.width/11*5+20)
-            return scene.width/12*5+20
-        if(scene.width/11*5<x && x<scene.width/11*6+20)
-            return scene.width/12*6+50
-        if(scene.width/11*6<x && x<scene.width/11*7+20)
-            return scene.width/12*7+50
-        if(scene.width/11*7<x && x<scene.width/11*8+20)
-            return scene.width/12*8+50
-        if(scene.width/11*8<x && x<scene.width/11*10+20)
-            return scene.width/12*9+70
+        if(0<x && x<screenWidth/11+20)
+            return screenWidth/12
+        if(screenWidth/11<x && x<screenWidth/11*2+20)
+            return screenWidth/12*2
+        if(screenWidth/11*2<x && x<screenWidth/11*3+20)
+            return screenWidth/12*3+10
+        if(screenWidth/11*3<x && x<screenWidth/11*4+20)
+            return screenWidth/12*4+20
+        if(screenWidth/11*4<x && x<screenWidth/11*5+20)
+            return screenWidth/12*5+20
+        if(screenWidth/11*5<x && x<screenWidth/11*6+20)
+            return screenWidth/12*6+50
+        if(screenWidth/11*6<x && x<screenWidth/11*7+20)
+            return screenWidth/12*7+50
+        if(screenWidth/11*7<x && x<screenWidth/11*8+20)
+            return screenWidth/12*8+50
+        if(screenWidth/11*8<x && x<screenWidth/11*10+20)
+            return screenWidth/12*9+70
     }
     function locationy(y){
-        if(scene.height/10<y && y<scene.height/3.75)
-            return scene.height/5.2
-        if(scene.height/3.75<y && y<scene.height/2.3)
-            return scene.height/2.9
-        if(scene.height/2.3<y && y<scene.height/1.6)
-            return scene.height/1.95
-        if(scene.height/1.6<y && y<scene.height/1.3)
-            return scene.height/1.48
-        if(scene.height/1.3<y)
-            return scene.height/1.19
+        if(screenHeight/10<y && y<screenHeight/3.75)
+            return screenHeight/5.2
+        if(screenHeight/3.75<y && y<screenHeight/2.3)
+            return screenHeight/2.9
+        if(screenHeight/2.3<y && y<screenHeight/1.6)
+            return screenHeight/1.95
+        if(screenHeight/1.6<y && y<screenHeight/1.3)
+            return screenHeight/1.48
+        if(screenHeight/1.3<y)
+            return screenHeight/1.19
 
     }
 

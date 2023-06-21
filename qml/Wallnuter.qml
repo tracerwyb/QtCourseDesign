@@ -10,13 +10,11 @@ EntityBase {
     visible: true
     width: wallnuter.width
     height: wallnuter.height
-    x:wallnuter.x;y:wallnuter.y
+//    x:parent.x;y:parent.y
 
     AnimatedImage{
         id:wallnuter
         width:70;height: 70
-        //x:parent.x;y:parent.y
-        x:200; y:200
         source: "../assets/plants/WallNut.gif"
         TapHandler{
             id:hander
@@ -24,10 +22,6 @@ EntityBase {
                 console.log(hander.position)
                 console.log(walln.entityId)}
         }
-    }
-    function changexy(x,y){
-        wallnuter.x=x
-        wallnuter.y=y
     }
 
 

@@ -18,6 +18,11 @@ GameWindow{
     property alias repeate: scene.selRepeater   // selected plant: repeate peashooter
     property alias seedChooser: scene.seedChooser
     property bool skysunfall: false
+    property alias wallnut: scene.selWallNut
+    property alias cherryBomb: scene.selcherryBomb
+    property alias snowpeashooter: scene.selsnowpeashooter
+
+    property real plantnumber: 0
 //    property alias i: 0
     activeScene: welcome
 

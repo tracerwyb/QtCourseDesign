@@ -66,7 +66,11 @@ RESOURCES += \
 
 DISTFILES += \
     qml/BucketTheadZombie.qml \
+    qml/CherryBomb.qml \
     qml/ConeheadZombie.qml \
     qml/FlagZombie.qml \
-    qml/SunFlower.qml
+    qml/Rp.qml \
+    qml/SnowPeaShooter.qml \
+    qml/SunFlower.qml \
+    qml/WallNut.qml
 

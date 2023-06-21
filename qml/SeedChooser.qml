@@ -7,9 +7,6 @@ import QtQuick.Controls 2.0
 
 MultiResolutionImage{
     property real plantHeight: 85
-//    property bool dragp: false
-   // property alias changedragsunflower: changedragsunflower
-   // property bool changedragsunflower: false
     height: 480
     width: height
 
@@ -32,8 +29,6 @@ MultiResolutionImage{
         color: "transparent"
     }
 
-    MoveToPointHelper{
-    }
     // SeedChoosers' grid background
     GridView{
         id: plantItem
@@ -60,7 +55,6 @@ MultiResolutionImage{
                 }
             }
         }
-
         PeaShooter{
             id:peapea;
             x:sunFlower.x+sunFlower.width+5;
@@ -97,6 +91,45 @@ MultiResolutionImage{
                     if(repeate.visible === false)
                         repeate.visible = true;
                     else repeate.visible = false;
+                }
+            }
+        }
+        WallNut{
+            id:wallNut;
+            x:repeater.x+repeater.width+5;
+            visible: true;
+            height:plantHeight
+            TapHandler{
+                onTapped: {
+                    if(wallnut .visible === false)
+                        wallnut.visible = true;
+                    else wallnut.visible = false;
+                }
+            }
+        }
+        CherryBomb{
+            id:cherrybomb;
+            x:wallNut.x+wallNut.width+5;
+            visible: true;
+            height:plantHeight
+            TapHandler{
+                onTapped: {
+                    if(cherryBomb.visible === false)
+                        cherryBomb.visible = true;
+                    else cherryBomb.visible = false;
+                }
+            }
+        }
+        SnowPeaShooter{
+            id:snowPeaShooter;
+            x:cherrybomb.x+cherrybomb.width+5;
+            visible: true;
+            height:plantHeight
+            TapHandler{
+                onTapped: {
+                    if(snowpeashooter.visible === false)
+                        snowpeashooter.visible = true;
+                    else snowpeashooter.visible = false;
                 }
             }
         }

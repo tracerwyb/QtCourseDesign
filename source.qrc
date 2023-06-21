@@ -10,7 +10,6 @@
         <file>qml/PeaShooter.qml</file>
         <file>qml/Potato.qml</file>
         <file>qml/Repeat.qml</file>
-        <file>qml/Repeater.qml</file>
         <file>qml/Scne.qml</file>
         <file>qml/SeedChooser.qml</file>
         <file>qml/SelectedPlantsList.qml</file>
@@ -118,5 +117,6 @@
         <file>qml/FlagZombie.qml</file>
         <file>qml/NormalZombie.qml</file>
         <file>qml/Wallnuter.qml</file>
+        <file>qml/Rp.qml</file>
     </qresource>
 </RCC>

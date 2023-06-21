@@ -2,6 +2,7 @@ import QtQuick 2.15
 import Felgo 3.0
 //potato in grass
 EntityBase {
+    property bool isStand: false
 
     entityType: "potatoer"
     anchors.fill: parent
@@ -9,7 +10,9 @@ EntityBase {
     visible: true
     width: potatoer.width
     height: potatoer.height
-    //x:pea.x;y:pea.y
+//    x:parent.x;y:parent.y
+
+    Component.onCompleted: {i++;console.log(i)}
 
     AnimatedImage{
         id:potatoer

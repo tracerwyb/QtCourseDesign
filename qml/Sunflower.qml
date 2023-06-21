@@ -2,13 +2,15 @@ import Felgo 3.0
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
-EntityBase{
-   entityType: "sunflower"
+Item{
+   //entityType: "sunflower"
    anchors.fill: parent
    id:scene
    visible: true
    width: sunflower.width
    height: sunflower.height
+  // x:sunflower.x;y:sunflower.y
+
 
 /**
   This is a flower with sun,
@@ -17,8 +19,6 @@ EntityBase{
    AnimatedImage{
        id:sunflower
        width:70;height: 70
-       //x:parent.x;y:parent.y
-//       x:200; y:200
        source: "../assets/SunFlower.gif"
 
        AnimatedImage{
@@ -106,12 +106,12 @@ EntityBase{
               }
            }
        }
-       TapHandler{
-           id:hander
-           onTapped:{
-               console.log(hander.position)
-               console.log(scene.entityId)}
-       }
+//       TapHandler{
+//           id:hander
+//           onTapped:{
+//               console.log(hander.position)
+//               console.log(scene.entityId)}
+//       }
 
    }
 /*

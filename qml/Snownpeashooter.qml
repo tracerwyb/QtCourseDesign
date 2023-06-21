@@ -9,13 +9,10 @@ EntityBase {
     visible: true
     width: snownpeashooter.width
     height: snownpeashooter.height
-    x:snownpeashooter.x;y:snownpeashooter.y
-
+//    x:parent.x;y:parent.y
     AnimatedImage{
         id:snownpeashooter
         width:70;height: 70
-        //x:parent.x;y:parent.y
-        x:200; y:200
         source: "../assets/plants/SnowPeaShooter.gif"
         TapHandler{
             id:hander
@@ -23,10 +20,6 @@ EntityBase {
                 console.log(hander.position)
                 console.log(sno.entityId)}
         }
-    }
-    function changexy(x,y){
-        snownpeashooter.x=x
-        snownpeashooter.y=y
     }
 
 }

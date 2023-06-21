@@ -11,6 +11,10 @@ Rectangle{
     property alias pea: pea
     property alias ptt: ptt
     property alias repeater: repeater
+    property alias wallnut: wallnut
+    property alias cherryBomb: cherryBomb
+    property alias snowpeashooter: snowpeashooter
+
     color: "transparent"                       // background lucency
 
     BackgroundImage{
@@ -100,7 +104,6 @@ Rectangle{
                     anchors.fill: pe
                     drag.target: pe
                     onPressed:{
-                        //createplant="Peashooter.qml"
                         model = peashooter_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/PeaShooter.png"
@@ -129,7 +132,6 @@ Rectangle{
                     anchors.fill: pptid
                     drag.target: pptid
                     onPressed:{
-                        //createplant="Potatoer.qml"
                         model = potato_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
@@ -158,10 +160,93 @@ Rectangle{
                     anchors.fill: rep
                     drag.target: rep
                     onPressed:{
-                        //createplant="Repeater.qml"
                         model = repeater_model
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/Repeater.png"
+                                 })
+                    }
+                }
+            }
+        }
+        Rectangle{
+            id:wallnut
+            visible: false
+            width:listBack.width/7.5;    height:listBack.height-10
+            WallNut{
+                id:wn
+                visible: true
+                anchors.fill: parent
+                Drag.active: dragwallnut.drag.active;
+                Drag.supportedActions: Qt.MoveAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragwallnut
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: wn
+                    drag.target: wn
+                    onPressed:{
+                        model = wallnut_model
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/WallNut.png"
+                                 })
+                    }
+                }
+            }
+        }
+        Rectangle{
+            id:cherryBomb
+            visible: false
+            width:listBack.width/7.5;    height:listBack.height-10
+            CherryBomb{
+                id:cb
+                visible: true
+                anchors.fill: parent
+                Drag.active: dragcherryBomb.drag.active;
+                Drag.supportedActions: Qt.MoveAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragcherryBomb
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: cb
+                    drag.target: cb
+                    onPressed:{
+                        model = cherrybomb_model
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/CherryBomb.png"
+                                 })
+                    }
+                }
+            }
+        }
+        Rectangle{
+            id:snowpeashooter
+            visible: false
+            width:listBack.width/7.5;    height:listBack.height-10
+            SnowPeaShooter{
+                id:sps
+                visible: true
+                anchors.fill: parent
+                Drag.active: dragsnowpeashooter.drag.active;
+                Drag.supportedActions: Qt.MoveAction;
+                Drag.dragType: Drag.Automatic;
+                Drag.mimeData: {"opt": source}
+
+                MouseArea {
+                    id: dragsnowpeashooter
+                    //when play game ,turn enable to true
+                    enabled: dragtf
+                    anchors.fill: sps
+                    drag.target: sps
+                    onPressed:{
+                        model = snownpeashooter_model
+                        parent.grabToImage(function() {
+                                     parent.Drag.imageSource = "../assets/plants/SnowPeaShooter.png"
                                  })
                     }
                 }
