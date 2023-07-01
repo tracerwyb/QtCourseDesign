@@ -21,6 +21,13 @@ Rectangle{
         width: parent.width
         height: parent.height
         source:"../assets/interface/Shop.png"
+        Text {
+            x:49;y:85
+            font.pixelSize: 20
+            color: "black"
+            id: suntext
+            text: totalsun
+        }
     }
 
     GridView{
@@ -70,13 +77,14 @@ Rectangle{
 
                 MouseArea {
                     id: dragsunflower
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 25 ? true:false
                     anchors.fill: ts
                     drag.target: ts
                     onPressed:{
                         //createplant="Sunflower.qml"
                         model = sunflower_model
+                        totalsun-=25
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/SunFlower.png"
                                  })
@@ -99,12 +107,13 @@ Rectangle{
 
                 MouseArea {
                     id: dragpea
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 100? true:false
                     anchors.fill: pe
                     drag.target: pe
                     onPressed:{
                         model = peashooter_model
+                        totalsun-=100
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/PeaShooter.png"
                                  })
@@ -127,12 +136,13 @@ Rectangle{
 
                 MouseArea {
                     id: dragppt
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 25 ? true:false
                     anchors.fill: pptid
                     drag.target: pptid
                     onPressed:{
                         model = potato_model
+                        totalsun-=25
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
                                  })
@@ -155,12 +165,13 @@ Rectangle{
 
                 MouseArea {
                     id: dragrepeater
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 200 ? true:false
                     anchors.fill: rep
                     drag.target: rep
                     onPressed:{
                         model = repeater_model
+                        totalsun-=200
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/Repeater.png"
                                  })
@@ -183,12 +194,13 @@ Rectangle{
 
                 MouseArea {
                     id: dragwallnut
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 50 ? true:false
                     anchors.fill: wn
                     drag.target: wn
                     onPressed:{
                         model = wallnut_model
+                        totalsun-=50
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/WallNut.png"
                                  })
@@ -211,15 +223,18 @@ Rectangle{
 
                 MouseArea {
                     id: dragcherryBomb
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 150 ? true:false
                     anchors.fill: cb
                     drag.target: cb
-                    onPressed:{
+                    onPressed: {
                         model = cherrybomb_model
+                        totalsun-=150
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/CherryBomb.png"
                                  })
+                        target=cb
+
                     }
                 }
             }
@@ -239,12 +254,13 @@ Rectangle{
 
                 MouseArea {
                     id: dragsnowpeashooter
-                    //when play game ,turn enable to true
-                    enabled: dragtf
+                    //when play game ,sun enough enable to true
+                    enabled: totalsun >= 175 ? true:false
                     anchors.fill: sps
                     drag.target: sps
                     onPressed:{
                         model = snownpeashooter_model
+                        totalsun-=175
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/SnowPeaShooter.png"
                                  })

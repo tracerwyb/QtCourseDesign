@@ -164,7 +164,7 @@ MultiResolutionImage{
                 seedChooser.destroy()
                 setCarHVisble()
                 zombie_timer.start()
-                dragtf=true
+                //dragtf=true
                 skysunfall=true
             }
         }

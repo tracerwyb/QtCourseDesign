@@ -5,7 +5,6 @@ import QtQml 2.15
 
 GameWindow{
     id:gameWindow
-
     property alias window: gameWindow
     property alias timer: timer         // timer that let cars animation start
     property alias carAni: carAni       // cars animation
@@ -23,6 +22,7 @@ GameWindow{
     property alias snowpeashooter: scene.selsnowpeashooter
 
     property real plantnumber: 0
+    property real totalsun: 0
 //    property alias i: 0
     activeScene: welcome
 

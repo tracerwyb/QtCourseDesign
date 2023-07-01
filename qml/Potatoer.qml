@@ -1,10 +1,8 @@
 import QtQuick 2.15
 import Felgo 3.0
 //potato in grass
-EntityBase {
+Item{
     property bool isStand: false
-
-    entityType: "potatoer"
     anchors.fill: parent
     id:po
     visible: true

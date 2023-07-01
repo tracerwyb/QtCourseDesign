@@ -1,24 +1,39 @@
 import QtQuick 2.15
 import Felgo 3.0
-
+import QtGraphicalEffects 1.0
 /* normal zombie */
 EntityBase{
     width:100;  height: 130;
     entityType: "zombie_normal"
     property real blood: 12
     id:zombie_normal
-//    property alias zombie_ani: zombie_ani
-    Timer{
-        interval: 10000
-        running:true
-        onTriggered: state="head"
-    }
+    /* Let zombie's head diappear after 2s*/
     Timer{
         id:dishead
         interval: 2000
         onTriggered: head.visible=false
         running: false
     }
+    /* This timer destory zombies*/
+    Timer{
+        id:destoyentity
+        interval: 500
+        running: false
+        onTriggered: removeEntity()
+    }
+    /* This timer let zombie return normal color after highlight*/
+    Timer{
+        id:high_return
+        interval: 100
+        onTriggered: hightlight.visible=false
+    }
+    /*This timer let zombie return normal color after darklight*/
+    Timer{
+        id:dark_return
+        interval: 100
+        onTriggered: darklight.visible=false
+    }
+
     Rectangle{
         color: "#00ffffff"
         width:parent.width;  height: parent.height;
@@ -26,16 +41,33 @@ EntityBase{
         AnimatedImage{
             id: zombie_normal_img
             source: "../assets/Zombies/NormalZombie/NormalZombie.gif"
-            anchors.fill: parent
-            AnimatedImage {
-                width: 100;height: 100
-                visible: false
-                playing: false
-                id: head
-                source: "../assets/NormalZombieHead.gif"
-            }
+            //anchors.fill: parent
+        }
+
+        /* Hightlight let zombie have a effect that was hitted*/
+        GammaAdjust{
+            id:hightlight
+            visible: false
+            anchors.fill: zombie_normal_img
+            source: zombie_normal_img
+            gamma: 2.0
+        }
+        GammaAdjust{
+            id:darklight
+            visible: false
+            anchors.fill: zombie_normal_img
+            source: zombie_normal_img
+            gamma: 0.4
+        }
+        AnimatedImage {
+            id: head
+            width: 150;height: 160
+            visible: false
+            playing: false
+            source: "../assets/Zombies/NormalZombie/NormalZombieHead.gif"
         }
     }
+
 
     /*collider detecting*/
     BoxCollider {
@@ -50,17 +82,35 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1
-
+      //bodyType: body.Static
       fixture.onBeginContact: {
+
           console.log("zombie was crashed")
+
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
-
-          if(otherEntityId.substring(0,4) !== "pea_"){
+          if(otherEntityId.substring(0,4) === "pea_"){
               blood--;
+              hightlight.visible=true
+              high_return.start()
+              console.log(blood)
           }
           if(blood === 0){
-              zombie_normal.destroy()
+
+               zombie_normal.state="die"
+          }
+          if(otherEntityId.substring(0,8) === "potatoer")
+          {
+              blood=0
+              removeEntity()
+          }
+          if(otherEntityId.substring(0,4) !== "pea_")
+          {
+              zombie_normal.state="attack"
+          }
+          if(otherEntityId.substring(0,10)==="cherrybomb")
+          {
+              zombie_normal.state="die_bomb"
           }
 
 //          else if(otherEntityId.substring(0,8) !== "potatoer"){
@@ -69,19 +119,9 @@ EntityBase{
 //                  zombie_normal.destroy()
 //              }
           if(blood === 6 ){
-              state="losehead"
+              zombie_normal.state="losehead"
           }
-              console.log("potatoer")
-//          }
 
-          /*
-             change zombies' action while detecting collider event,
-             if the detected collider entity is a plant, blood reduce one
-          */
-
-          if(otherEntityId.substring(0,7) !== "zombie_"){
-              zombie_normal.state === ''?zombie_normal.state = "attack" : zombie_normal.state = ''
-          }
       }
     }
     states: [
@@ -90,10 +130,20 @@ EntityBase{
             PropertyChanges{target: zombie_normal_img; source: "../assets/Zombies/NormalZombie/NormalZombieAttack.gif"}
         },
         State {
-           name: "head"
-           PropertyChanges {target: zombie_normal_img; width:80;height:80; source:"../assets/NormalZombieLostHead.gif"}
+           name: "losehead"
+           PropertyChanges {target: zombie_normal_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieLostHead.gif"}
            PropertyChanges {target: head; visible:true; playing:true}
            PropertyChanges {target: dishead;running:true}
+            },
+        State {
+           name: "die"
+           PropertyChanges {target: zombie_normal_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieDie.gif"}
+           PropertyChanges {target: destoyentity;running:true}
+            },
+        State {
+           name: "die_bomb"
+           PropertyChanges {target: zombie_normal_img; width:160;height:130;source:"../assets/Zombies/BoomDie1.gif"}
+           PropertyChanges {target: destoyentity;running:true}
             }
         ]
 

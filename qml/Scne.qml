@@ -51,7 +51,8 @@ Scene {
 //    property real flagy3: 1;property real flagy4: 1
 //    property real flagy5: 1
 
-    property bool dragtf: false
+//    property bool dragtf: totalsun > 0 ? true:false
+
 
     /* set cars' visible as true */
     function setCarHVisble(){ carH.visible=true;}
@@ -187,10 +188,10 @@ Scene {
               fixture.restitution: 0.5
               anchors.fill: parent
               categories: Box.Category1
-
+              //bodyType: body.Static
               //collidesWith: Box.Category2
 
-              fixture.onBeginContact: {"sunflowers was crashed"
+              fixture.onBeginContact: {//"sunflowers was crashed"
                     if(number===plantnumber)
                           removeEntity()
               }
@@ -200,7 +201,11 @@ Scene {
     }
     Component{
         id:peashooter_model;
-        EntityBase{ visible: false; Peashooter{  }}
+        EntityBase{
+            entityType: "peashooter"
+            visible: false;
+            Peashooter{  }
+        }
     }
     Component{
         id:repeater_model;
@@ -208,7 +213,32 @@ Scene {
     }
     Component{
         id:potato_model;
-        EntityBase{ visible: false; Potatoer{  }}
+        EntityBase{
+            entityType: "potatoer"
+            visible: false;
+            Potatoer{ }
+            property real number
+            BoxCollider {
+              enabled: true
+              x: 0
+              y: 0
+              density: 0
+              friction: 0.4
+              restitution: 0.4
+              linearDamping: 100
+              fixture.restitution: 0.5
+              anchors.fill: parent
+              categories: Box.Category1
+
+              //collidesWith: Box.Category2
+
+              fixture.onBeginContact: {//"sunflowers was crashed"
+                    if(number===plantnumber)
+                          removeEntity()
+              }
+            }
+            Component.onCompleted: number=plantnumber
+        }
     }
     Component{
         id:wallnut_model;
@@ -220,7 +250,34 @@ Scene {
     }
     Component{
         id:cherrybomb_model;
-        EntityBase{ visible: false; Cherrybomb{  }}
+        EntityBase{
+           entityType: "cherrybomb"
+            visible: false;
+            Cherrybomb{ }
+            property real number
+            BoxCollider {
+              enabled: true
+              x: 0
+              y: 0
+              density: 0
+              friction: 0.4
+              restitution: 0.4
+              linearDamping: 100
+              fixture.restitution: 0.5
+              anchors.fill: parent
+              categories: Box.Category1
+
+              //collidesWith: Box.Category2
+
+              fixture.onBeginContact: {//"sunflowers was crashed"
+                  var collidedEntity = other.getBody().target;
+                  var otherEntityId = collidedEntity.entityId;
+                    if(number===plantnumber)// && otherEntityId.substring(0,6)!=="zombie")
+                          removeEntity()
+              }
+            }
+            Component.onCompleted: number=plantnumber
+        }
     }
 
     DropArea {

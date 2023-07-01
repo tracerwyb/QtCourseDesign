@@ -1,10 +1,10 @@
 import QtQuick 2.15
 import Felgo 3.0
 //peashooter in grass
-EntityBase {
+Item {
     id:peid
 
-    entityType: "peashooter"
+   // entityType: "peashooter"
     anchors.fill: parent
     visible: true
     width: pea.width
@@ -66,7 +66,53 @@ EntityBase {
     Component.onCompleted: {
         newEntityProperty = { x = peid.parent.x,    y = peid.parent.y,     visible = true }
     }
-    Component{ id:pea_model; EntityBase{ visible:false; Pea{} } }
+    Component{
+        id:pea_model;
+        EntityBase{
+            id: pea_bullet
+            entityType: "pea_bullet"
+            visible:false;
+//            Pea{}
+            width:50;  height: 50;
+
+            Rectangle{
+                color: "#00ffffff"
+                anchors.fill: parent
+                Image{
+                    source: "../assets/plants/Pea.gif"
+                    anchors.fill: parent
+                }
+            }
+
+            MovementAnimation{
+                id:move
+                target: pea_bullet
+                property: "x"
+                velocity: 60
+                running: true
+            }
+
+            BoxCollider {
+                id:collider
+
+                enabled: true
+                density: 0
+                friction: 0.4
+                restitution: 0.4
+                linearDamping: 100
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: false
+                categories: Box.Category1
+                collidesWith: Box.Category2
+                body.bullet: true
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    removeEntity()
+                    console.log("zidanpengzhuang")
+                }
+            }
+        }
+    }
 
     Timer{
         repeat: true;

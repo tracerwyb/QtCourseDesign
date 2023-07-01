@@ -100,6 +100,7 @@ Item{
                target: sun
                onTapped: {
                   //huishou.running=true
+                totalsun+=25
                 interval.start()
                 disapper.running=true
                   // console.log(scene.parent)

@@ -1,9 +1,9 @@
 import QtQuick 2.15
 import Felgo 3.0
 
-EntityBase {
+Item {
 
-    entityType: "cherrybomb"
+    //entityType: "cherrybomb"
     anchors.fill: parent
     id:cher
     visible: true
