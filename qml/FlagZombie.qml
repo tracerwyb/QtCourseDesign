@@ -3,13 +3,11 @@ import Felgo 3.0
 
 /* normal zombie */
 EntityBase{
-    id:zombie_cone
+    id:zombie_flag
     width:100;  height: 130;
 
     property real blood: 4
-
-//    property alias zombie_ani: zombie_ani
-
+    entityType: "zombie_flag"
 
     Rectangle{
         color: "#00ffffff"
@@ -18,6 +16,14 @@ EntityBase{
             source: "../assets/Zombies/ConeheadZombie/ConeheadZombie.gif"
             anchors.fill: parent
         }
+    }
+
+    NumberAnimation{
+        id: back
+        target: zombie_flag
+        property: "x"
+        to: zombie_flag.x+1
+        duration: 600
     }
 
     /*collider detecting*/
@@ -38,12 +44,13 @@ EntityBase{
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
 
-          /* debug sentence */
-          console.log("zombie",zombie_bucket.x,zombie_bucket.y)
-          blood--;
+          if(otherEntityId.substring(0,4) === "pea_"){
+              blood--;
+          } else{
+              back.start()
+          }
           if(blood === 0){
-              zombie_cone.destroy()
-              blood = 4
+              zombie_flag.destroy()
           }
 
           /*

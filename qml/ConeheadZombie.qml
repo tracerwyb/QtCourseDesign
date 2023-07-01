@@ -7,8 +7,7 @@ EntityBase{
     width:100;  height: 130;
 
     property real blood: 4
-
-//    property alias zombie_ani: zombie_ani
+    entityType: "zombie_cone"
 
     Rectangle{
         color: "#00ffffff"
@@ -17,6 +16,13 @@ EntityBase{
             source: "../assets/Zombies/ConeheadZombie/ConeheadZombie.gif"
             anchors.fill: parent
         }
+    }
+    NumberAnimation{
+        id: back
+        target: zombie_cone
+        property: "x"
+        to: zombie_cone.x+1
+        duration: 600
     }
 
     /*collider detecting*/
@@ -37,9 +43,11 @@ EntityBase{
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
 
-          /* debug sentence */
-          console.log("zombie",zombie_bucket.x,zombie_bucket.y)
-          blood--;
+          if(otherEntityId.substring(0,4) === "pea_"){
+              blood--;
+          } else{
+              back.start()
+          }
           if(blood === 0){
               zombie_cone.destroy()
               blood = 4
@@ -49,9 +57,10 @@ EntityBase{
              change zombies' action while detecting collider event,
              if the detected collider entity is a plant, blood reduce one
           */
-          if(otherEntityId.substring(0,7) !== "zombie_"){
-              normal_zombie.destroy()
-          }
+//          if(otherEntityId.substring(0,7) === "pea_"){
+//              blood--;
+
+//          }
       }
     }
 

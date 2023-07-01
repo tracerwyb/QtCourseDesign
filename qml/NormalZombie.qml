@@ -3,16 +3,12 @@ import Felgo 3.0
 
 /* normal zombie */
 EntityBase{
+    id:zombie_normal
+
     width:100;  height: 130;
     entityType: "zombie_normal"
-    property real blood: 12
-    id:zombie_normal
-//    property alias zombie_ani: zombie_ani
-    Timer{
-        interval: 10000
-        running:true
-        onTriggered: state="head"
-    }
+    property real blood: 20
+
     Timer{
         id:dishead
         interval: 2000
@@ -37,6 +33,14 @@ EntityBase{
         }
     }
 
+    NumberAnimation{
+        id: back
+        target: zombie_normal
+        property: "x"
+        to: zombie_normal.x+1
+        duration: 600
+    }
+
     /*collider detecting*/
     BoxCollider {
       enabled: true
@@ -50,19 +54,20 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1
-
       fixture.onBeginContact: {
           console.log("zombie was crashed")
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
 
-          if(otherEntityId.substring(0,4) !== "pea_"){
+          if(otherEntityId.substring(0,4) === "pea_"){
               blood--;
+          } else{
+              back.start()
           }
           if(blood === 0){
               zombie_normal.destroy()
           }
-
+//              zombie_ani_0.start()
 //          else if(otherEntityId.substring(0,8) !== "potatoer"){
 //              if(potatoer.isStand === true){
 //                  blood = 0

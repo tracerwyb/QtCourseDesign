@@ -18,7 +18,7 @@ Item{
  **/
    AnimatedImage{
        id:sunflower
-       width:70;height: 70
+       width:80;height: 80
        source: "../assets/SunFlower.gif"
 
        AnimatedImage{
@@ -106,13 +106,6 @@ Item{
               }
            }
        }
-//       TapHandler{
-//           id:hander
-//           onTapped:{
-//               console.log(hander.position)
-//               console.log(scene.entityId)}
-//       }
-
    }
 /*
    BoxCollider{
