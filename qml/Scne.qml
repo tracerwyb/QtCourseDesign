@@ -205,18 +205,26 @@ Scene {
 
             property real number
             visible: false;
-            Sunflower{id:sunf}
+            Sunflower{id:sunf;property real blood: 5; anchors.fill: parent }
             BoxCollider {
-              enabled: true
-              fixture.restitution: 0.5
-              anchors.fill: parent
-              categories: Box.Category1
-              //bodyType: body.Static
-              collidesWith: Box.Category2
-
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                //bodyType: Body.Static
+                categories: Box.Category1
+               // collidesWith: Box.Category2 && Box.Category1
+                anchors.fill: parent
               fixture.onBeginContact: {
                     if(number===plantnumber)
                           removeEntity()
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+                    console.log("was crashed")
+                    if(otherEntityId.substring(0,6) === "zombie"){
+                        sunf.blood--
+                    }
+                    if(sunf.blood===0){ removeEntity() }
               }
             }
             Component.onCompleted: number=plantnumber
@@ -238,7 +246,7 @@ Scene {
                 collisionTestingOnlyMode: true
                 //bodyType: Body.Static
                 categories: Box.Category1
-                collidesWith: Box.Category2
+                //collidesWith: Box.Category2
                 anchors.fill: parent
                 fixture.onBeginContact: {
                     if(number===plantnumber)
@@ -347,7 +355,7 @@ Scene {
                 fixture.restitution: 0.5
                 collisionTestingOnlyMode: true
                 categories: Box.Category1
-                collidesWith: Box.Category2
+                //collidesWith: Box.Category2
 
                 anchors.fill: parent
                 fixture.onBeginContact: {
