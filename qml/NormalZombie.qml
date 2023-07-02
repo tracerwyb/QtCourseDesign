@@ -4,9 +4,11 @@ import QtGraphicalEffects 1.0
 /* normal zombie */
 EntityBase{
     id:zombie_normal
+    entityType: "zombie_normal"
 
     width:100;  height: 130;
-    entityType: "zombie_normal"
+    z:10
+
     property real blood: 12
     /* Let zombie's head diappear after 2s*/
     Timer{
@@ -77,6 +79,12 @@ EntityBase{
         duration: 600
     }
 
+    Timer{
+        id: recover
+        interval: 500
+        onTriggered: zombie_normal.state="normal"
+    }
+
     /*collider detecting*/
     BoxCollider {
       enabled: true
@@ -116,10 +124,7 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_" && zombie_normal.blood <= 12 && zombie_normal.blood>6)
           {
               zombie_normal.state="attack"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_normal.state="normal"
-              }
+              recover.start()
           }
           if(blood === 6 ){
               zombie_normal.state="losehead"
@@ -132,7 +137,7 @@ EntityBase{
                   zombie_bucket.state="losehead"
               }
           }
-          if(otherEntityId.substring(0,10)==="cherrybomb")
+          if(otherEntityId.substring(0,4)==="boom")
           {
                 zombie_normal.state="die_bomb"
           }

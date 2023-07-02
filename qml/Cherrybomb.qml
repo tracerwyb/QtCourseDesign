@@ -3,12 +3,12 @@ import Felgo 3.0
 
 Item {
 
-    //entityType: "cherrybomb"
     anchors.fill: parent
     id:cher
     visible: true
     width: cherrybomb.width
     height: cherrybomb.height
+    z:0
 
     AnimatedImage{
         id:cherrybomb

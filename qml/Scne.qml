@@ -151,38 +151,38 @@ Scene {
 
         /*initial zombies*/
         BucketTheadZombie{
-            id: zombie_bucket_0;  x:1240;     y:100;
+            id: zombie_bucket_0;  x:1240;     y:100;  z:10;
             MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_1;    x: 1300;    y: 190;
+            id: zombie_normal_1;    x: 1300;    y: 190;  z:10;
             MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_0;    x: 1370;    y: 200;
+            id: zombie_normal_0;    x: 1370;    y: 200;  z:10;
             MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
         }
-        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300;
+        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300;  z:10;
             MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
         }
         ConeheadZombie{
-            id: zombie_cone_0;    x:1280;   y:400;
+            id: zombie_cone_0;    x:1280;   y:400;  z:10;
             MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
         }
         FlagZombie{
-            id:zombie_flag_0;   x:1300;     y:420;
+            id:zombie_flag_0;   x:1300;     y:420;  z:10;
             MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
         }
         ConeheadZombie{
-            id: zombie_cone_1;    x:1350;   y:470;
+            id: zombie_cone_1;    x:1350;   y:470;  z:10;
             MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
         }
         FlagZombie{
-            id:zombie_flag_1;   x:1350;     y:480;
+            id:zombie_flag_1;   x:1350;     y:550;  z:10;
             MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
         }
         NormalZombie{
-            id: zombie_normal_2;    x: 1300;    y: 500;
+            id: zombie_normal_2;    x: 1300;    y: 600;  z:10;
             MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
         }
 
@@ -216,8 +216,7 @@ Scene {
                // collidesWith: Box.Category2 && Box.Category1
                 anchors.fill: parent
               fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
+
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
@@ -225,6 +224,8 @@ Scene {
                     if(otherEntityId.substring(0,6) === "zombie"){
                         sunf.blood--
                     }
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
                     if(sunf.blood===0 || otherEntityId.substring(0,6) === "shovel"){ removeEntity() }
               }
             }
@@ -250,12 +251,11 @@ Scene {
                 //collidesWith: Box.Category2
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-                    console.log("was crashed")
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
                     if(otherEntityId.substring(0,6) === "zombie"){
                         ps.blood--
                     }
@@ -282,14 +282,14 @@ Scene {
                 categories: Box.Category1
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
                     if(otherEntityId.substring(0,6) === "zombie"){
                         repeat.blood--
                     }
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
                     if(repeat.blood===0 || otherEntityId.substring(0,6) === "shovel"){ removeEntity() }
                 }
             }
@@ -320,9 +320,8 @@ Scene {
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
 
-                    if(number===plantnumber || otherEntityId.substring(0,6) === "shovel")
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")|| otherEntityId.substring(0,6) === "shovel")
                           removeEntity()
-                    console.log("boom")
                     if(otherEntityId.substring(0,6) === "zombie")
                     {
                         removeEntity()
@@ -362,7 +361,8 @@ Scene {
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-                    if(number===plantnumber || otherEntityId.substring(0,6) === "shovel")
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                            || otherEntityId.substring(0,6) === "shovel")
                           removeEntity()
 
                     console.log(otherEntityId,stt.blood)
@@ -403,7 +403,8 @@ Scene {
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
 
-                    if(number===plantnumber || otherEntityId.substring(0,6) === "shovel")
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                            || otherEntityId.substring(0,6) === "shovel")
                           removeEntity()
                     if(otherEntityId.substring(0,6) === "zombie"){
                         sps.blood--
@@ -428,7 +429,6 @@ Scene {
                     running: true
                     interval: 1000
                     onTriggered: {
-                        removeEntity()
                         entityManager.createEntityFromUrlWithProperties(
                               Qt.resolvedUrl("Boom.qml"), {
                                 "z": 1,
@@ -436,26 +436,25 @@ Scene {
                                 "y": cheryBom.y,
                               }
                         );
-                        cheryBom.width=200
-                        cheryBom.height=200
+                        cheryBom.width = 200
+                        cheryBom.height = 200
+                        removeEntity()
                     }
                 }
             }
             BoxCollider {
                 id:collider
-                enabled: true
+                active: false
                 fixture.restitution: 0.5
-                collisionTestingOnlyMode: true
                 bodyType: Body.Static
+                anchors.fill: parent;
                 categories: Box.Category1
-                anchors.fill: parent
                 fixture.onBeginContact: {
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-                    if(number===plantnumber || otherEntityId.substring(0,6) === "shovel")
+                    if(number===plantnumber)
                           removeEntity()
-
                 }
             }
                  Component.onCompleted: number=plantnumber
@@ -486,13 +485,13 @@ Scene {
         anchors.fill: parent;
         onDropped: {
             if (drop.supportedActions == Qt.MoveAction){
-                //console.log(drop.x)
                 realx=locationx(drop.x)
                 realy=locationy(drop.y)
                 var newEntityProperties = {
                                      x: realx,
                                      y: realy,
-                                     visible: true
+                                     visible: true,
+                                     z: 1
                                  }
                 plantnumber++
                 entityManager.createEntityFromComponentWithProperties(

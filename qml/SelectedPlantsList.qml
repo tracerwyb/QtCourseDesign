@@ -274,7 +274,7 @@ Rectangle{
     Rectangle{
         id:shovel
         visible: false
-        x:rowL.x+rowL.width
+        x:rowL.x+listBack.width
         width:listBack.width/6.5;    height:listBack.height-10
         Shovel{
             id:shv
@@ -290,8 +290,6 @@ Rectangle{
                 anchors.fill: shv
                 drag.target: shv
                 onPressed:{
-                    //createplant="Sunflower.qml"
-                    model = shovel_model
                     parent.grabToImage(function() {
                                  parent.Drag.imageSource = "../assets/interface/Shovel.png"
                              })

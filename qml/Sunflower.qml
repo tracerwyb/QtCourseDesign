@@ -3,13 +3,11 @@ import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
 Item{
-   //entityType: "sunflower"
    anchors.fill: parent
    id:scene
    visible: true
    width: sunflower.width
    height: sunflower.height
-  // x:sunflower.x;y:sunflower.y
 
 
 /**

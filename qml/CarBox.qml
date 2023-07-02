@@ -4,7 +4,7 @@ import Felgo 3.0
 EntityBase{
     id: car
     entityType: "car"
-    width:height;   height:90
+    width:90;   height:70
     visible:false
     Image{
        anchors.fill: parent
@@ -17,14 +17,15 @@ EntityBase{
         fixture.restitution: 0.5
         categories: Box.Category1
         collidesWith: Box.Category2
-        anchors.fill: parent
+        width:90;   height:100
         fixture.onBeginContact: {
             var collidedEntity = other.getBody().target;
             var otherEntityId = collidedEntity.entityId;
             var otherEntityParent = collidedEntity.parent;
-            allZombiesDie.start()
-            destorySingleCar.start()
-            console.log(id)
+            if(otherEntityId.substring(0,6)==="zombie"){
+                allZombiesDie.start()
+                destorySingleCar.start()
+            }
         }
     }
 

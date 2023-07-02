@@ -49,7 +49,7 @@ GameWindow{
         id:welcome
     }
 
-    /* timer that let cars animation start */
+    /* timer that let cars' animation start */
     Timer{
         id:timer
         triggeredOnStart: false
