@@ -3,10 +3,11 @@ import Felgo 3.0
 import QtGraphicalEffects 1.0
 /* normal zombie */
 EntityBase{
+    id:zombie_normal
+
     width:100;  height: 130;
     entityType: "zombie_normal"
     property real blood: 12
-    id:zombie_normal
     /* Let zombie's head diappear after 2s*/
     Timer{
         id:dishead
@@ -17,9 +18,9 @@ EntityBase{
     /* This timer destory zombies*/
     Timer{
         id:destoyentity
-        interval: 500
+        interval: 2000
         running: false
-        onTriggered: removeEntity()
+        onTriggered: {removeEntity()}
     }
     /* This timer let zombie return normal color after highlight*/
     Timer{
@@ -68,6 +69,13 @@ EntityBase{
         }
     }
 
+    NumberAnimation{
+        id: back
+        target: zombie_normal
+        property: "x"
+        to: zombie_normal.x+1
+        duration: 600
+    }
 
     /*collider detecting*/
     BoxCollider {
@@ -82,7 +90,6 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1
-      //bodyType: body.Static
       fixture.onBeginContact: {
 
           console.log("zombie was crashed")
@@ -95,39 +102,54 @@ EntityBase{
               high_return.start()
               console.log(blood)
           }
-          if(blood === 0){
-
-               zombie_normal.state="die"
+          else{
+              back.start()
           }
           if(otherEntityId.substring(0,8) === "potatoer")
           {
-              blood=0
               removeEntity()
           }
-          if(otherEntityId.substring(0,4) !== "pea_")
+          if(blood === 0){
+              zombie_normal.state="die"
+          }
+
+          if(otherEntityId.substring(0,4) !== "pea_" && zombie_normal.blood <= 12 && zombie_normal.blood>6)
           {
               zombie_normal.state="attack"
+              if(otherEntityId.blood === 0)
+              {
+                  zombie_normal.state="normal"
+              }
+          }
+          if(blood === 6 ){
+              zombie_normal.state="losehead"
+          }
+          if(otherEntityId.substring(0,4) !== "pea_"&& zombie_normal.blood < 6)
+          {
+              zombie_normal.state="attack_losehead"
+              if(otherEntityId.blood === 0)
+              {
+                  zombie_bucket.state="losehead"
+              }
           }
           if(otherEntityId.substring(0,10)==="cherrybomb")
           {
               zombie_normal.state="die_bomb"
           }
-
-//          else if(otherEntityId.substring(0,8) !== "potatoer"){
-//              if(potatoer.isStand === true){
-//                  blood = 0
-//                  zombie_normal.destroy()
-//              }
-          if(blood === 6 ){
-              zombie_normal.state="losehead"
-          }
-
       }
     }
     states: [
         State{
+            name: "normal"
+            PropertyChanges{target: zombie_normal_img; source: "../assets/Zombies/NormalZombie/NormalZombie.gif"}
+        },
+        State{
             name: "attack"
             PropertyChanges{target: zombie_normal_img; source: "../assets/Zombies/NormalZombie/NormalZombieAttack.gif"}
+        },
+        State{
+            name: "attack_losehead"
+            PropertyChanges{target: zombie_normal_img; width:160;height:130;source: "../assets/Zombies/NormalZombie/NormalZombieLostHeadAttack.gif"}
         },
         State {
            name: "losehead"

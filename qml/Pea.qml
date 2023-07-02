@@ -3,8 +3,7 @@ import Felgo 3.0
 
 Item{
     id: pea_bullet
-//    entityType: "pea_bullet"
-    width:50;  height: 50;
+    width:30;  height: 20;
 
     Rectangle{
         color: "#00ffffff"
@@ -29,10 +28,6 @@ Item{
         id:collider
 
         enabled: true
-        density: 0
-        friction: 0.4
-        restitution: 0.4
-        linearDamping: 100
         fixture.restitution: 0.5
         collisionTestingOnlyMode: true
         categories: Box.Category1

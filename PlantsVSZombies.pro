@@ -65,10 +65,13 @@ RESOURCES += \
     source.qrc
 
 DISTFILES += \
+    qml/Boom.qml \
     qml/BucketTheadZombie.qml \
     qml/CherryBomb.qml \
     qml/ConeheadZombie.qml \
     qml/FlagZombie.qml \
+    qml/PeaHit.qml \
+    qml/PotatoText.qml \
     qml/Rp.qml \
     qml/SnowPeaShooter.qml \
     qml/SunFlower.qml \

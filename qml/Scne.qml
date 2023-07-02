@@ -43,6 +43,7 @@ Scene {
     //property string createplant        //use create plant to make sure use what kind of .qml to create plant
     property var model
 
+
 //    property real flagx1: 1;property real flagx2: 1
 //    property real flagx3: 1;property real flagx4: 1
 //    property real flagx6: 1;property real flagx7: 1
@@ -53,6 +54,7 @@ Scene {
 
 //    property bool dragtf: totalsun > 0 ? true:false
 
+    property double screnH: screenHeight - 30
 
     /* set cars' visible as true */
     function setCarHVisble(){ carH.visible=true;}
@@ -102,7 +104,6 @@ Scene {
             x: -270
         }
 
-
         ColumnLayout{
             /* this is a List of selected plants on the top of game screen */
             SelectedPlantsList{
@@ -148,50 +149,72 @@ Scene {
         }
 
         /*initial zombies*/
-        BucketTheadZombie{ id: zombie_bucket_0;  x:1240;     y:100; }
-        NormalZombie{ id: zombie_normal_1;    x: 1300;    y: 190; }
-        NormalZombie{ id: zombie_normal_0;    x: 1370;    y: 200; }
-        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300; }
-        ConeheadZombie{ id: zombie_cone_0;    x:1280;   y:400; }
-        FlagZombie{ id:zombie_flag_0;   x:1300;     y:420; }
-        ConeheadZombie{ id: zombie_cone_1;    x:1350;   y:470; }
-        FlagZombie{ id:zombie_flag_1;   x:1350;     y:480; }
-        NormalZombie{ id: zombie_normal_2;    x: 1300;    y: 500; }
+        BucketTheadZombie{
+            id: zombie_bucket_0;  x:1240;     y:100;
+            MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
+        }
+        NormalZombie{
+            id: zombie_normal_1;    x: 1300;    y: 190;
+            MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
+        }
+        NormalZombie{
+            id: zombie_normal_0;    x: 1370;    y: 200;
+            MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
+        }
+        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300;
+            MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
+        }
+        ConeheadZombie{
+            id: zombie_cone_0;    x:1280;   y:400;
+            MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id:zombie_flag_0;   x:1300;     y:420;
+            MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
+        }
+        ConeheadZombie{
+            id: zombie_cone_1;    x:1350;   y:470;
+            MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id:zombie_flag_1;   x:1350;     y:480;
+            MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
+        }
+        NormalZombie{
+            id: zombie_normal_2;    x: 1300;    y: 500;
+            MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
+        }
 
 
         /* move zombies */
-        NumberAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; to:0; duration: 52000; }
-        NumberAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; to:0; duration: 52000; }
+//        MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
+//        MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
     }
 
     Component{
         id:sunflower_model;
-        EntityBase{ entityType: "sunflower";
+        EntityBase{
+            entityType: "sunflower";
+
             property real number
             visible: false;
-            Sunflower{id:sunf  }
+            Sunflower{id:sunf}
             BoxCollider {
               enabled: true
-              x: 0
-              y: 0
-              density: 0
-              friction: 0.4
-              restitution: 0.4
-              linearDamping: 100
               fixture.restitution: 0.5
               anchors.fill: parent
               categories: Box.Category1
               //bodyType: body.Static
-              //collidesWith: Box.Category2
+              collidesWith: Box.Category2
 
-              fixture.onBeginContact: {//"sunflowers was crashed"
+              fixture.onBeginContact: {
                     if(number===plantnumber)
                           removeEntity()
               }
@@ -203,80 +226,230 @@ Scene {
         id:peashooter_model;
         EntityBase{
             entityType: "peashooter"
+            property real number
+
             visible: false;
-            Peashooter{  }
+            Peashooter{id: ps; property real blood: 5; anchors.fill: parent  }
+            BoxCollider {
+                id:collider
+
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                //bodyType: Body.Static
+                categories: Box.Category1
+                collidesWith: Box.Category2
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    if(number===plantnumber)
+                          removeEntity()
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+                    console.log("was crashed")
+                    if(otherEntityId.substring(0,6) === "zombie"){
+                        ps.blood--
+                    }
+                    if(ps.blood===0){ removeEntity() }
+                }
+            }
+            Component.onCompleted: number=plantnumber
         }
     }
     Component{
         id:repeater_model;
-        EntityBase{ visible: false; Rp{  }}
+        EntityBase{
+            visible: false;
+            property real number
+            entityType: "repeater"
+            Rp{id:repeat; property real blood: 5; anchors.fill: parent }
+            BoxCollider {
+                id:collider
+
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                //bodyType: Body.Static
+                categories: Box.Category1
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    if(number===plantnumber)
+                          removeEntity()
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+                    if(otherEntityId.substring(0,6) === "zombie"){
+                        repeat.blood--
+                    }
+                    if(repeat.blood===0){ removeEntity() }
+                }
+            }
+            Component.onCompleted: number=plantnumber
+        }
     }
     Component{
         id:potato_model;
         EntityBase{
+            id:po
             entityType: "potatoer"
             visible: false;
-            Potatoer{ }
+            Potatoer{ id:potata; property real blood: 5; anchors.fill: parent }
             property real number
+
             BoxCollider {
-              enabled: true
-              x: 0
-              y: 0
-              density: 0
-              friction: 0.4
-              restitution: 0.4
-              linearDamping: 100
-              fixture.restitution: 0.5
-              anchors.fill: parent
-              categories: Box.Category1
+                id:collider
 
-              //collidesWith: Box.Category2
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                categories: Box.Category1
+                //collidesWith: Box.Category2
 
-              fixture.onBeginContact: {//"sunflowers was crashed"
+                anchors.fill: parent
+                fixture.onBeginContact: {
                     if(number===plantnumber)
                           removeEntity()
-              }
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+
+                    console.log("boom")
+        //            console.log("Pea",pea_bullet.x, pea_bullet.y )
+                    if(otherEntityId.substring(0,6) === "zombie")
+                    {
+                        removeEntity()
+                     //   po.destroy()
+                     // show a xipu image for a certain amount of time after removing the pea
+                        entityManager.createEntityFromUrlWithProperties(
+                              Qt.resolvedUrl("PotatoText.qml"), {
+                                "z": 1,
+                                "x": po.x,
+                                "y": po.y,
+                              }
+                       );
+                    }
+                }
             }
             Component.onCompleted: number=plantnumber
         }
     }
     Component{
         id:wallnut_model;
-        EntityBase{ visible: false; Wallnuter{  }}
+        EntityBase{
+            id:walNt
+            visible: false;
+            property real number
+            Wallnuter{id: stt; property real blood: 20; anchors.fill: parent}
+            BoxCollider {
+                id:collider
+
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                categories: Box.Category1
+                collidesWith: Box.Category2
+
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    if(number===plantnumber)
+                          removeEntity()
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+
+                    console.log(otherEntityId,stt.blood)
+                    if(otherEntityId.substring(0,6) === "zombie")
+                    {
+                        stt.blood--;
+                    }
+                    if(stt.blood === 12)
+                        stt.wallnuter.source = "../assets/plants/WallNutCracked1.gif"
+                    else if(stt.blood === 6)
+                        stt.wallnuter.source = "../assets/plants/WallNutCracked2.gif"
+                    else if(stt.blood === 0)
+                        removeEntity();
+                }
+            }
+             Component.onCompleted: number=plantnumber
+        }
+
     }
     Component{
         id:snownpeashooter_model;
-        EntityBase{ visible: false; Snownpeashooter{  }}
+        EntityBase{
+            visible: false;
+            entityType: "snowshooter"
+            property real number
+            Snownpeashooter{id: sps; property real blood: 5; anchors.fill: parent  }
+            BoxCollider {
+                id:collider
+
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                categories: Box.Category1
+               // collidesWith:Box.Category2
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    if(number===plantnumber)
+                          removeEntity()
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+                    if(otherEntityId.substring(0,6) === "zombie"){
+                        sps.blood--
+                    }
+                    if(sps.blood===0){ removeEntity() }
+                }
+            }
+            Component.onCompleted: number=plantnumber
+        }
     }
     Component{
         id:cherrybomb_model;
         EntityBase{
-           entityType: "cherrybomb"
+            id: cheryBom
+            entityType:"cherrybomb"
             visible: false;
-            Cherrybomb{ }
             property real number
+            Cherrybomb{
+                Timer{
+                    id: cherryboom
+
+                    running: true
+                    interval: 1000
+                    onTriggered: {
+                        removeEntity()
+                        entityManager.createEntityFromUrlWithProperties(
+                              Qt.resolvedUrl("Boom.qml"), {
+                                "z": 1,
+                                "x": cheryBom.x,
+                                "y": cheryBom.y,
+                              }
+                        );
+                        cheryBom.width=200
+                        cheryBom.height=200
+                    }
+                }
+            }
             BoxCollider {
-              enabled: true
-              x: 0
-              y: 0
-              density: 0
-              friction: 0.4
-              restitution: 0.4
-              linearDamping: 100
-              fixture.restitution: 0.5
-              anchors.fill: parent
-              categories: Box.Category1
-
-              //collidesWith: Box.Category2
-
-              fixture.onBeginContact: {//"sunflowers was crashed"
-                  var collidedEntity = other.getBody().target;
-                  var otherEntityId = collidedEntity.entityId;
+                id:collider
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                bodyType: Body.Static
+                categories: Box.Category1
+                anchors.fill: parent
+                fixture.onBeginContact: {
                     if(number===plantnumber)// && otherEntityId.substring(0,6)!=="zombie")
                           removeEntity()
-              }
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+
+                }
             }
-            Component.onCompleted: number=plantnumber
+                 Component.onCompleted: number=plantnumber
         }
     }
 
@@ -325,15 +498,15 @@ Scene {
     }
     function locationy(y){
         if(screenHeight/10<y && y<screenHeight/3.75)
-            return screenHeight/5.2
+            return screnH/5.2
         if(screenHeight/3.75<y && y<screenHeight/2.3)
-            return screenHeight/2.9
+            return screnH/2.9
         if(screenHeight/2.3<y && y<screenHeight/1.6)
-            return screenHeight/1.95
+            return screnH/1.95
         if(screenHeight/1.6<y && y<screenHeight/1.3)
-            return screenHeight/1.48
+            return screnH/1.48
         if(screenHeight/1.3<y)
-            return screenHeight/1.19
+            return screnH/1.19
 
     }
 

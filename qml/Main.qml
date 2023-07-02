@@ -22,7 +22,7 @@ GameWindow{
     property alias snowpeashooter: scene.selsnowpeashooter
 
     property real plantnumber: 0
-    property real totalsun: 0
+    property real totalsun: 10000
 //    property alias i: 0
     activeScene: welcome
 

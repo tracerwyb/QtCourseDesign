@@ -5,7 +5,9 @@ import QtGraphicalEffects 1.0
 /* bucket zombie */
 EntityBase{
     id:zombie_bucket
+
     width:100;  height: 130;
+    entityType: "zombie_bucket"
 
     property real blood: 18
 
@@ -69,6 +71,13 @@ EntityBase{
             source: "../assets/Zombies/NormalZombie/NormalZombieHead.gif"
         }
     }
+    NumberAnimation{
+        id: back
+        target: zombie_bucket
+        property: "x"
+        to: zombie_bucket.x+1
+        duration: 600
+    }
 
     /*collider detecting*/
     BoxCollider {
@@ -96,12 +105,14 @@ EntityBase{
               high_return.start()
               console.log(blood)
           }
+          else{
+              back.start()
+          }
           if(blood === 0){
                zombie_bucket.state="die"
           }
           if(otherEntityId.substring(0,8) === "potatoer")
           {
-              blood=0
               removeEntity()
           }
           if(blood===12)
@@ -109,22 +120,48 @@ EntityBase{
               zombie_bucket.state="normal"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_")
+          if(otherEntityId.substring(0,4) !== "pea_" && zombie_bucket.blood > 12)
+          {
+              zombie_bucket.state="attack_bucket"
+              if(otherEntityId.blood === 0)
+              {
+                  zombie_bucket.state="normal_bucket"
+              }
+          }
+          if(otherEntityId.substring(0,4) !== "pea_" && zombie_bucket.blood <= 12 && zombie_bucket.blood>6)
           {
               zombie_bucket.state="attack"
+              if(otherEntityId.blood === 0)
+              {
+                  zombie_bucket.state="normal"
+              }
           }
-
-//          else if(otherEntityId.substring(0,8) !== "potatoer"){
-//              if(potatoer.isStand === true){
-//                  blood = 0
-//                  zombie_normal.destroy()
-//              }
           if(blood === 6 ){
               zombie_bucket.state="losehead"
+          }
+          if(otherEntityId.substring(0,4) !== "pea_"&& zombie_bucket.blood < 6)
+          {
+              zombie_bucket.state="attack_losehead"
+              if(otherEntityId.blood === 0)
+              {
+                  zombie_bucket.state="losehead"
+              }
+          }
+          if(otherEntityId.substring(0,10)==="cherrybomb")
+          {
+              zombie_bucket.state="die_bomb"
           }
       }
     }
     states: [
+        State{
+            name:"normal_bucket"
+            PropertyChanges{target:zombie_bucket_img;source:"../assets/Zombies/BucketheadZombie/BucketheadZombie.gif"}
+        },
+        State{
+            name: "attack_bucket"
+            PropertyChanges{target: zombie_bucket_img; source: "../assets/Zombies/BucketheadZombie/BucketheadZombieAttack.gif"}
+        },
         State{
             name:"normal"
             PropertyChanges{target:zombie_bucket_img;source:"../assets/Zombies/NormalZombie/NormalZombie.gif"}
@@ -132,6 +169,10 @@ EntityBase{
         State{
             name: "attack"
             PropertyChanges{target: zombie_bucket_img; source: "../assets/Zombies/NormalZombie/NormalZombieAttack.gif"}
+        },
+        State{
+            name: "attack_losehead"
+            PropertyChanges{target: zombie_bucket_img; width:160;height:130;source: "../assets/Zombies/NormalZombie/NormalZombieLostHeadAttack.gif"}
         },
         State {
            name: "losehead"
@@ -142,6 +183,11 @@ EntityBase{
         State {
            name: "die"
            PropertyChanges {target: zombie_bucket_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieDie.gif"}
+           PropertyChanges {target: destoyentity;running:true}
+            },
+        State {
+           name: "die_bomb"
+           PropertyChanges {target: zombie_bucket_img; width:160;height:130;source:"../assets/Zombies/BoomDie1.gif"}
            PropertyChanges {target: destoyentity;running:true}
             }
         ]

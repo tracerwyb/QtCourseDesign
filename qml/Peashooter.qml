@@ -3,18 +3,15 @@ import Felgo 3.0
 //peashooter in grass
 Item {
     id:peid
-
-   // entityType: "peashooter"
     anchors.fill: parent
     visible: true
     width: pea.width
     height: pea.height
     property real blood: 3
     property var newEntityProperty
-    //x:parent.parent.x;y:parent.parent.y
     AnimatedImage{
         id:pea
-        width:70;height: 70
+        width:80;height: 80
         source: "../assets/PeaShooter.gif"
         TapHandler{
             id:hander
@@ -24,56 +21,15 @@ Item {
         }
     }
 
-    BoxCollider {
-        id:collider
-
-        enabled: true
-        density: 0
-        friction: 0.4
-        restitution: 0.4
-        linearDamping: 100
-        fixture.restitution: 0.5
-        collisionTestingOnlyMode: true
-        bodyType: Body.Static
-
-//        categories: Box.Category1
-//        collidesWith: Box.Category2
-        anchors.fill: parent
-        fixture.onBeginContact: {
-            var collidedEntity = other.getBody().target;
-            var otherEntityId = collidedEntity.entityId;
-            var otherEntityParent = collidedEntity.parent;
-            console.log("was crashed")
-            if(otherEntityId.substring(0,6) === "zombie"){
-                blood--
-            }
-            if(blood===0){
-                removeEntity()
-//                otherEntityParent.onDamageWithBulletType(pea_bullet);
-
-             // show a PeaHit image for a certain amount of time after removing the pea
-//                entityManager.createEntityFromUrlWithProperties(
-//                      Qt.resolvedUrl("PeaHit.qml"), {
-//                        "z": 1,
-//                        "x": peaShooter.x,
-//                        "y": peaShooter.y,
-//                      }
-//               );
-            }
-        }
-    }
-
     Component.onCompleted: {
-        newEntityProperty = { x = peid.parent.x,    y = peid.parent.y,     visible = true }
+        newEntityProperty = { x = peid.parent.x+40,    y = peid.parent.y,     visible = true }
     }
-    Component{
-        id:pea_model;
+    Component{ id:pea_model;
         EntityBase{
-            id: pea_bullet
-            entityType: "pea_bullet"
             visible:false;
-//            Pea{}
-            width:50;  height: 50;
+            id: pea_bullet
+            entityType: "pea"
+            width:46;  height: 40;
 
             Rectangle{
                 color: "#00ffffff"
@@ -88,7 +44,7 @@ Item {
                 id:move
                 target: pea_bullet
                 property: "x"
-                velocity: 60
+                velocity: 140
                 running: true
             }
 
@@ -96,19 +52,32 @@ Item {
                 id:collider
 
                 enabled: true
-                density: 0
-                friction: 0.4
-                restitution: 0.4
-                linearDamping: 100
                 fixture.restitution: 0.5
-                collisionTestingOnlyMode: false
+                collisionTestingOnlyMode: true
                 categories: Box.Category1
                 collidesWith: Box.Category2
-                body.bullet: true
+
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    removeEntity()
-                    console.log("zidanpengzhuang")
+                    var collidedEntity = other.getBody().target;
+                    var otherEntityId = collidedEntity.entityId;
+                    var otherEntityParent = collidedEntity.parent;
+
+                    console.log("boom")
+        //            console.log("Pea",pea_bullet.x, pea_bullet.y )
+                    if(otherEntityId.substring(0,6) === "zombie")
+                    {
+                        pea_bullet.destroy()
+
+                     // show a PeaHit image for a certain amount of time after removing the pea
+                        entityManager.createEntityFromUrlWithProperties(
+                              Qt.resolvedUrl("PeaHit.qml"), {
+                                "z": 1,
+                                "x": pea_bullet.x,
+                                "y": pea_bullet.y,
+                              }
+                       );
+                    }
                 }
             }
         }
@@ -117,7 +86,7 @@ Item {
     Timer{
         repeat: true;
         running: true;
-        interval: 2000
+        interval: 1350
         onTriggered: {
             entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
         }
