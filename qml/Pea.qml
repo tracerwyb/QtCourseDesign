@@ -22,8 +22,6 @@ Item{
         running: true
     }
 
-//    EntityManager{id:entityManage;  entityContainer: scene}
-
     BoxCollider {
         id:collider
 
@@ -40,21 +38,20 @@ Item{
             var otherEntityParent = collidedEntity.parent;
 
             console.log("boom")
-//            console.log("Pea",pea_bullet.x, pea_bullet.y )
             if(otherEntityId.substring(0,6) === "zombie")
             {
                 pea_bullet.destroy()
 
-//                otherEntityParent.onDamageWithBulletType(pea_bullet);
+                otherEntityParent.onDamageWithBulletType(pea_bullet);
 
-//             // show a PeaHit image for a certain amount of time after removing the pea
-//                entityManager.createEntityFromUrlWithProperties(
-//                      Qt.resolvedUrl("PeaHit.qml"), {
-//                        "z": 1,
-//                        "x": peaShooter.x,
-//                        "y": peaShooter.y,
-//                      }
-//               );
+             // show a PeaHit image for a certain amount of time after removing the pea
+                entityManager.createEntityFromUrlWithProperties(
+                      Qt.resolvedUrl("PeaHit.qml"), {
+                        "z": 1,
+                        "x": peaShooter.x+20,
+                        "y": peaShooter.y,
+                      }
+               );
             }
         }
     }

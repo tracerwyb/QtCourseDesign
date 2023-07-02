@@ -162,10 +162,13 @@ MultiResolutionImage{
             onTapped: {
                 scbCol.color = "#8B3626"
                 seedChooser.destroy()
-                setCarHVisble()
+                carHAnim.destroy()
+                carBox.destroy()
+                car0.visible = car1.visible = car2.visible = car3.visible = car4.visible = true
                 zombie_timer.start()
                 //dragtf=true
                 skysunfall=true
+                shovel.visible = true
             }
         }
 

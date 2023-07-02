@@ -4,7 +4,7 @@ import Felgo 3.0
 Item {
     id: peaHit
     AnimatedImage{
-        width:20;   height:20
+        width:30;   height:30
         source: "../assets/plants/PeaHit.gif"
     }
 

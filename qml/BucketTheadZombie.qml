@@ -151,6 +151,9 @@ EntityBase{
           {
               zombie_bucket.state="die_bomb"
           }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
+          }
       }
     }
     states: [

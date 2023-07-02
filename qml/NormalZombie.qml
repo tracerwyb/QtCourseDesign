@@ -134,7 +134,10 @@ EntityBase{
           }
           if(otherEntityId.substring(0,10)==="cherrybomb")
           {
-              zombie_normal.state="die_bomb"
+                zombie_normal.state="die_bomb"
+          }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
           }
       }
     }

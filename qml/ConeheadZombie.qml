@@ -150,6 +150,9 @@ EntityBase{
           {
               zombie_cone.state="die_bomb"
           }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
+          }
       }
     }
     states: [

@@ -20,6 +20,7 @@ GameWindow{
     property alias wallnut: scene.selWallNut
     property alias cherryBomb: scene.selcherryBomb
     property alias snowpeashooter: scene.selsnowpeashooter
+    property alias shovel: scene.selShovel
 
     property real plantnumber: 0
     property real totalsun: 10000

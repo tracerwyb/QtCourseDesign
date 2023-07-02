@@ -73,6 +73,7 @@ DISTFILES += \
     qml/PeaHit.qml \
     qml/PotatoText.qml \
     qml/Rp.qml \
+    qml/Shovel.qml \
     qml/SnowPeaShooter.qml \
     qml/SunFlower.qml \
     qml/WallNut.qml
