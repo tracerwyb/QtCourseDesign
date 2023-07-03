@@ -44,9 +44,9 @@ Scene {
     property var model
 
 
-//    property real flagx1: 1;property real flagx2: 1
-//    property real flagx3: 1;property real flagx4: 1
-//    property real flagx6: 1;property real flagx7: 1
+    property bool flag1: false;property bool flag2: false
+    property bool flag3: false;property bool flag4: false
+    property bool flag5: false;//property real flagx7: 1
 //    property real flagx8: 1;property real flagx9: 1
 //    property real flagy1: 1;property real flagy2: 1
 //    property real flagy3: 1;property real flagy4: 1
@@ -54,7 +54,7 @@ Scene {
 
 //    property bool dragtf: totalsun > 0 ? true:false
 
-    property double screnH: screenHeight - 30
+//    property double screnH: screenHeight - 30
 
     /* set cars' visible as true */
     function setCarHVisble(){ carH.visible=true;}
@@ -150,38 +150,39 @@ Scene {
 
         /*initial zombies*/
         BucketTheadZombie{
-            id: zombie_bucket_0;  x:1240;     y:100;
+            id: zombie_bucket_0;  x:1240;     y:screnH/1.95-40;
             MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_1;    x: 1300;    y: 190;
+            id: zombie_normal_1;    x: 1300;    y: screnH/5.2-40;
             MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_0;    x: 1370;    y: 200;
+            id: zombie_normal_0;    x: 1370;    y: screnH/2.9-40;
             MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
         }
-        BucketTheadZombie{ id: zombie_bucket_1;  x:1240;     y:300;
+        BucketTheadZombie{
+            id: zombie_bucket_1;  x:1240;     y:screnH/1.19-40;
             MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
         }
         ConeheadZombie{
-            id: zombie_cone_0;    x:1280;   y:400;
+            id: zombie_cone_0;    x:2180;   y:screnH/2.9-40;
             MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
         }
         FlagZombie{
-            id:zombie_flag_0;   x:1300;     y:420;
+            id:zombie_flag_0;   x:1800;     y:screnH/2.9-40;
             MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
         }
         ConeheadZombie{
-            id: zombie_cone_1;    x:1350;   y:470;
+            id: zombie_cone_1;    x:1350;   y:screnH/1.48-20;
             MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
         }
         FlagZombie{
-            id:zombie_flag_1;   x:1350;     y:480;
+            id:zombie_flag_1;   x:2550;     y:screnH/1.48-20;
             MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
         }
         NormalZombie{
-            id: zombie_normal_2;    x: 1300;    y: 500;
+            id: zombie_normal_2;    x: 1600;    y: screnH/1.48-20;
             MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
         }
 
@@ -198,6 +199,90 @@ Scene {
 //        MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
     }
 
+     Wall {
+         id:wall1;
+         x:1050;y:0
+         BoxCollider {
+           categories:Box.Category3
+           collidesWith: Box.Category1 |Box.Category2
+           anchors.fill: parent
+           bodyType: Body.Static // the body shouldn't move
+           fixture.onBeginContact: {
+               console.log("this is wall1")
+               var collidedEntity = other.getBody().target;
+               var otherEntityId = collidedEntity.entityId;
+               if(otherEntityId.substring(0,6) === "zombie"){ flag1=true }
+           }
+         }
+     }
+     Wall{
+         id:wall2;
+         x:1050;y:250;
+         height: 100
+         BoxCollider {
+           categories:Box.Category3
+           collidesWith: Box.Category1 |Box.Category2
+           anchors.fill: parent
+           bodyType: Body.Static // the body shouldn't move
+           fixture.onBeginContact: {
+               console.log("this is wall2")
+               var collidedEntity = other.getBody().target;
+               var otherEntityId = collidedEntity.entityId;
+               if(otherEntityId.substring(0,6) === "zombie"){ flag2=true }
+           }
+         }
+     }
+     Wall{
+         id:wall3;
+         x:1050;y:360;
+         height: 120
+         BoxCollider {
+           categories:Box.Category3
+           collidesWith: Box.Category1 |Box.Category2
+           anchors.fill: parent
+           bodyType: Body.Static // the body shouldn't move
+           fixture.onBeginContact: {
+               console.log("this is wall3")
+               var collidedEntity = other.getBody().target;
+               var otherEntityId = collidedEntity.entityId;
+               if(otherEntityId.substring(0,6) === "zombie"){ flag3=true }
+           }
+         }
+     }
+     Wall{
+         id:wall4;
+         x:1050;y:490;
+         height: 100
+         BoxCollider {
+           categories:Box.Category3
+           collidesWith: Box.Category1 |Box.Category2
+           anchors.fill: parent
+           bodyType: Body.Static // the body shouldn't move
+           fixture.onBeginContact: {
+               console.log("this is wall4")
+               var collidedEntity = other.getBody().target;
+               var otherEntityId = collidedEntity.entityId;
+               if(otherEntityId.substring(0,6) === "zombie"){ flag4=true }
+           }
+         }
+     }
+     Wall{
+         id:wall5;
+         x:1050;y:640;
+         height: 150
+         BoxCollider {
+           categories:Box.Category3
+           collidesWith: Box.Category1 |Box.Category2
+           anchors.fill: parent
+           bodyType: Body.Static // the body shouldn't move
+           fixture.onBeginContact: {
+               console.log("this is wall5")
+               var collidedEntity = other.getBody().target;
+               var otherEntityId = collidedEntity.entityId;
+               if(otherEntityId.substring(0,6) === "zombie"){ flag5=true }
+           }
+         }
+     }
     Component{
         id:sunflower_model;
         EntityBase{
@@ -237,7 +322,8 @@ Scene {
             property real number
 
             visible: false;
-            Peashooter{id: ps; property real blood: 5; anchors.fill: parent  }
+            Peashooter{id: ps; property real blood: 5; anchors.fill: parent
+            }
             BoxCollider {
                 id:collider
 
@@ -246,7 +332,7 @@ Scene {
                 collisionTestingOnlyMode: true
                 //bodyType: Body.Static
                 categories: Box.Category1
-                //collidesWith: Box.Category2
+                collidesWith: Box.Category2
                 anchors.fill: parent
                 fixture.onBeginContact: {
                     if(number===plantnumber)
@@ -261,6 +347,16 @@ Scene {
                     if(ps.blood===0){ removeEntity() }
                 }
             }
+//            BoxCollider{
+//                id:collider2
+//                width: 500;height:70
+//                categories: Box.Category1
+//                collidesWith: Box.Category2
+//                fixture.onBeginContact: {
+//                    console.log("big colider was crash")
+//                }
+//            }
+
             Component.onCompleted: number=plantnumber
         }
     }

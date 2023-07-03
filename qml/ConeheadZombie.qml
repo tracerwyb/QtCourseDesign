@@ -88,7 +88,7 @@ EntityBase{
       fixture.restitution: 0.5
       anchors.fill: parent
       categories: Box.Category2
-      collidesWith: Box.Category1
+      collidesWith: Box.Category1|Box.Category3
 
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;
@@ -114,7 +114,7 @@ EntityBase{
               zombie_cone.state="normal"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_cone.blood > 12)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_cone.blood > 12)
           {
               zombie_cone.state="attack_cone"
               if(otherEntityId.blood === 0)
@@ -122,7 +122,7 @@ EntityBase{
                   zombie_cone.state="normal_cone"
               }
           }
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_cone.blood <= 12 && zombie_cone.blood>6)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_cone.blood <= 12 && zombie_cone.blood>6)
           {
               zombie_bucket.state="attack"
               if(otherEntityId.blood === 0)
@@ -138,7 +138,7 @@ EntityBase{
           if(blood === 6 ){
               zombie_cone.state="losehead"
           }
-          if(otherEntityId.substring(0,4) !== "pea_"&& zombie_cone.blood < 6)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_cone.blood < 6)
           {
               zombie_cone.state="attack_losehead"
               if(otherEntityId.blood === 0)
@@ -171,7 +171,7 @@ EntityBase{
         },
         State{
             name: "attack_losehead"
-            PropertyChanges{target: zombie_bucket_img;width:160;height:130; source: "../assets/Zombies/NormalZombie/NormalZombieLostHeadAttack.gif"}
+            PropertyChanges{target: zombie_cone_img;width:160;height:130; source: "../assets/Zombies/NormalZombie/NormalZombieLostHeadAttack.gif"}
         },
         State {
            name: "losehead"

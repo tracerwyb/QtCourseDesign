@@ -91,7 +91,7 @@ EntityBase{
       fixture.restitution: 0.5
       anchors.fill: parent
       categories: Box.Category2
-      collidesWith: Box.Category1
+      collidesWith: Box.Category1 | Box.Category3
 
       fixture.onBeginContact: {
 
@@ -120,7 +120,7 @@ EntityBase{
               zombie_bucket.state="normal"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_bucket.blood > 12)
+          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&&zombie_bucket.blood > 12)
           {
               zombie_bucket.state="attack_bucket"
               if(otherEntityId.blood === 0)
@@ -128,7 +128,7 @@ EntityBase{
                   zombie_bucket.state="normal_bucket"
               }
           }
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_bucket.blood <= 12 && zombie_bucket.blood>6)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_bucket.blood <= 12 && zombie_bucket.blood>6)
           {
               zombie_bucket.state="attack"
               if(otherEntityId.blood === 0)
@@ -139,7 +139,7 @@ EntityBase{
           if(blood === 6 ){
               zombie_bucket.state="losehead"
           }
-          if(otherEntityId.substring(0,4) !== "pea_"&& zombie_bucket.blood < 6)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_bucket.blood < 6)
           {
               zombie_bucket.state="attack_losehead"
               if(otherEntityId.blood === 0)

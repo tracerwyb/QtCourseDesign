@@ -48,15 +48,15 @@ EntityBase{
         GammaAdjust{
             id:hightlight
             visible: false
-            anchors.fill: zombie_bucket_img
-            source: zombie_bucket_img
+            anchors.fill: zombie_flag_img
+            source: zombie_flag_img
             gamma: 2.0
         }
         GammaAdjust{
             id:darklight
             visible: false
-            anchors.fill: zombie_bucket_img
-            source: zombie_bucket_img
+            anchors.fill: zombie_flag_img
+            source: zombie_flag_img
             gamma: 0.4
         }
         AnimatedImage {
@@ -88,7 +88,7 @@ EntityBase{
       fixture.restitution: 0.5
       anchors.fill: parent
       categories: Box.Category2
-      collidesWith: Box.Category1
+      collidesWith: Box.Category1|Box.Category3
 
       fixture.onBeginContact: {
           console.log("flag zombie was crashed")
@@ -116,7 +116,7 @@ EntityBase{
               zombie_flag.state="losehead"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_flag.blood > 8)
+          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_flag.blood > 8)
           {
               zombie_flag.state="attack"
               if(otherEntityId.blood===0)
@@ -124,7 +124,7 @@ EntityBase{
                   zombie_flag.state="normal"
               }
           }
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_flag.blood < 8)
+          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_flag.blood < 8)
           {
               zombie_flag.state="attack_nohead"
               if(otherEntityId.blood===0)

@@ -89,10 +89,10 @@ EntityBase{
       fixture.restitution: 0.5
       anchors.fill: parent
       categories: Box.Category2
-      collidesWith: Box.Category1
+      collidesWith: Box.Category1 |Box.Category3
       fixture.onBeginContact: {
 
-          console.log("zombie was crashed")
+          console.log("zombie was crashed"+zombie_normal.x+zombie_normal.y)
 
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
@@ -113,7 +113,7 @@ EntityBase{
               zombie_normal.state="die"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_" && zombie_normal.blood <= 12 && zombie_normal.blood>6)
+          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood <= 12 && zombie_normal.blood>6)
           {
               zombie_normal.state="attack"
               if(otherEntityId.blood === 0)
@@ -124,7 +124,7 @@ EntityBase{
           if(blood === 6 ){
               zombie_normal.state="losehead"
           }
-          if(otherEntityId.substring(0,4) !== "pea_"&& zombie_normal.blood < 6)
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood < 6)
           {
               zombie_normal.state="attack_losehead"
               if(otherEntityId.blood === 0)

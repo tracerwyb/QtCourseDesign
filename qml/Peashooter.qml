@@ -55,7 +55,7 @@ Item {
                 fixture.restitution: 0.5
                 collisionTestingOnlyMode: true
                 categories: Box.Category1
-                collidesWith: Box.Category2
+                collidesWith: Box.Category2 | Box.Category3
 
                 anchors.fill: parent
                 fixture.onBeginContact: {
@@ -78,17 +78,52 @@ Item {
                               }
                        );
                     }
+                    if(otherEntityId.substring(0,4) === "wall")
+                    {
+                        if(screenHeight/10<pea_bullet.y && pea_bullet.y<screenHeight/3.75)
+                            flag1=false
+                        if(screenHeight/3.75<pea_bullet.y && pea_bullet.y<screenHeight/2.3)
+                            flag2=false
+                        if(screenHeight/2.3<pea_bullet.y && pea_bullet.y<screenHeight/1.6)
+                            flag3=false
+                        if(screenHeight/1.6<pea_bullet.y && pea_bullet.y<screenHeight/1.3)
+                            flag4=false
+                        if(screenHeight/1.3<pea_bullet.y)
+                            flag5=false
+                        pea_bullet.destroy()
+                     // show a PeaHit image for a certain amount of time after removing the pea
+                        entityManager.createEntityFromUrlWithProperties(
+                              Qt.resolvedUrl("PeaHit.qml"), {
+                                "z": 1,
+                                "x": pea_bullet.x,
+                                "y": pea_bullet.y,
+                              }
+                       );
+                    }
                 }
             }
         }
     }
 
     Timer{
+        id:timer_pea
         repeat: true;
         running: true;
         interval: 1350
         onTriggered: {
-            entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+            if(peid.parent.y===screnH/5.2 && flag1===true)
+                entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+            if(peid.parent.y===screnH/2.9 && flag2===true)
+                entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+            if(peid.parent.y===screnH/1.95 && flag3===true)
+                entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+            if(peid.parent.y===screnH/1.48 && flag4===true)
+                entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+            if(peid.parent.y===screnH/1.19 && flag5===true)
+                entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
+
+            //entityManager.createEntityFromComponentWithProperties(pea_model,newEntityProperty)
         }
     }
+
 }

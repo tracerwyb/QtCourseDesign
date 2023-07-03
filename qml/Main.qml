@@ -23,6 +23,9 @@ GameWindow{
 
     property real plantnumber: 0
     property real totalsun: 10000
+    property bool peatf: false
+
+    property double screnH: screenHeight - 30
 //    property alias i: 0
     activeScene: welcome
 
