@@ -21,6 +21,7 @@ Item {
     Component.onCompleted: {
         newEntityProperty_0 = { x = rept.parent.x+40,    y = rept.parent.y,     visible = true }
         newEntityProperty_1 = { x = rept.parent.x+70,    y = rept.parent.y,     visible = true }
+        totalsun-=200
     }
 
     //use this Component to create bullet

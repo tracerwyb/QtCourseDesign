@@ -19,6 +19,7 @@ Item {
     }
 
     Component.onCompleted: {
+        totalsun-=175
         newEntityProperty = { x = sno.parent.x+40,    y = sno.parent.y,     visible = true }
     }
     //bullet was created by this component

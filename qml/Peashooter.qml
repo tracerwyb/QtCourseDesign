@@ -23,6 +23,7 @@ Item {
     }
 
     Component.onCompleted: {
+        totalsun-=100
         newEntityProperty = { x = peid.parent.x+40,    y = peid.parent.y,     visible = true }
     }
     Component{ id:pea_model;

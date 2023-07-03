@@ -10,6 +10,7 @@ Item {
     height: cherrybomb.height
     z:0
 
+    Component.onCompleted: totalsun-=150
     AnimatedImage{
         id:cherrybomb
         width:70;height: 70
