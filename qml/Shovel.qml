@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Felgo 3.0
-
+//this is a shovel
 Item {
     width:60;  height: 60;
 

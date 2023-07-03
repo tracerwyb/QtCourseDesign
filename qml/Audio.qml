@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import Felgo 3.0
 import QtMultimedia 5.14
+
+/*Default playback status, click to stop, double-click to restart */
 Item{
     id:audio
     property alias ao: backaudio

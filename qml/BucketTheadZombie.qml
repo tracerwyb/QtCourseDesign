@@ -27,7 +27,6 @@ EntityBase{
     Timer{
         id:destoyentity
         interval: 1000
-        running: false
         onTriggered: removeentity()
     }
     /* This timer let zombie return normal color after highlight*/
@@ -47,6 +46,16 @@ EntityBase{
         id: recover
         interval: 500
         onTriggered: zombie_bucket.state="normal_bucket"
+    }
+    Timer{
+        id: recover_normal_nohead
+        interval: 500
+        onTriggered:zombie_bucket.state="losehead_go"
+    }
+    Timer{
+        id: recover_normal
+        interval: 500
+        onTriggered:zombie_bucket.state="normal"
     }
 
     Rectangle{
@@ -101,6 +110,11 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1 | Box.Category3
+      Timer{
+          id:remove
+          interval: 500
+          onTriggered: removeentity()
+      }
 
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;
@@ -111,11 +125,8 @@ EntityBase{
               high_return.start()
               console.log(blood)
           }
-          else{
+          else if(otherEntityId.substring(0,4)!=="wall"){
               back.start()
-          }
-          if(blood === 0){
-              zombie_bucket.state="die"
           }
           if(otherEntityId.substring(0,8) === "potatoer")
           {
@@ -134,10 +145,7 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_bucket.blood <= 12 && zombie_bucket.blood>6)
           {
               zombie_bucket.state="attack"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_bucket.state="normal"
-              }
+              recover_normal.start()
           }
           if(blood === 6 ){
               zombie_bucket.state="losehead"
@@ -145,19 +153,24 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_bucket.blood < 6)
           {
               zombie_bucket.state="attack_losehead"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_bucket.state="losehead"
-              }
+              recover2.start()
           }
           if(otherEntityId.substring(0,4)==="boom")
           {
+              blood=-1
               zombie_bucket.state="die_bomb"
+              remove.start()
           }
           if(otherEntityId.substring(0,3)==="car"){
               removeentity()
           }
-          console.log("zombiedie:",zombiedie)
+          if(blood === 0){
+               zombie_bucket.state="die"
+          }
+          if(blood===-1)
+          {
+              destoyentity.start()
+          }
       }
     }
     states: [
@@ -187,6 +200,10 @@ EntityBase{
            PropertyChanges {target: head; visible:true; playing:true}
            PropertyChanges {target: dishead;running:true}
             },
+        State{
+            name: "losehead_go"
+            PropertyChanges{target: zombie_bucket_img;width:160;height:130; source: "../assets/Zombies/NormalZombie/NormalZombieLostHead.gif"}
+        },
         State {
            name: "die"
            PropertyChanges {target: zombie_bucket_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieDie.gif"}

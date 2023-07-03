@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import Felgo 3.0
-
+//this is bullet
 Item{
     id: pea_bullet
     width:30;  height: 20;

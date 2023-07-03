@@ -2,6 +2,8 @@ import QtQuick 2.15
 import Felgo 3.0
 import QtQuick.Layouts 1.0
 
+/*this qml make selection bar can show plants and drag plants*/
+
 Rectangle{
 
     width: 620
@@ -30,7 +32,7 @@ Rectangle{
             text: totalsun
         }
     }
-
+    //this is a gridview make card background grid
     GridView{
         id: listBack
 
@@ -60,10 +62,10 @@ Rectangle{
     }
 
     /*selected plants list*/
-
     RowLayout{
         id:rowL
         x: listBack.x;  y: 15
+        //SunFlower
         Rectangle{
             id:sun
             visible: false
@@ -77,6 +79,7 @@ Rectangle{
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
 
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragsunflower
                     //when play game ,sun enough enable to true
@@ -94,6 +97,7 @@ Rectangle{
                 }
             }
         }
+        //PeaShooter
         Rectangle{
             id:pea
             visible: false
@@ -106,7 +110,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+               /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragpea
                     //when play game ,sun enough enable to true
@@ -123,6 +127,7 @@ Rectangle{
                 }
             }
         }
+        //Potato
         Rectangle{
             id:ptt
             visible: false
@@ -135,7 +140,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragppt
                     //when play game ,sun enough enable to true
@@ -152,6 +157,7 @@ Rectangle{
                 }
             }
         }
+        //Repeater
         Rectangle{
             id:repeater
             visible: false
@@ -164,7 +170,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragrepeater
                     //when play game ,sun enough enable to true
@@ -181,6 +187,7 @@ Rectangle{
                 }
             }
         }
+        //WallNut
         Rectangle{
             id:wallnut
             visible: false
@@ -193,7 +200,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction;
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragwallnut
                     //when play game ,sun enough enable to true
@@ -210,6 +217,7 @@ Rectangle{
                 }
             }
         }
+        //CherryBomb
         Rectangle{
             id:cherryBomb
             visible: false
@@ -222,7 +230,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction;
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragcherryBomb
                     //when play game ,sun enough enable to true
@@ -241,6 +249,7 @@ Rectangle{
                 }
             }
         }
+        //SnowPeaShooter
         Rectangle{
             id:snowpeashooter
             visible: false
@@ -253,7 +262,7 @@ Rectangle{
                 Drag.supportedActions: Qt.MoveAction;
                 Drag.dragType: Drag.Automatic;
                 Drag.mimeData: {"opt": source}
-
+                /*Let plant can drag from Selection Bar with a plant imge*/
                 MouseArea {
                     id: dragsnowpeashooter
                     //when play game ,sun enough enable to true
@@ -271,6 +280,7 @@ Rectangle{
             }
         }
     }
+    //shovel
     Rectangle{
         id:shovel
         visible: false
@@ -284,7 +294,7 @@ Rectangle{
             Drag.supportedActions: Qt.MoveAction
             Drag.dragType: Drag.Automatic;
             Drag.mimeData: {"opt": source}
-
+            /*Let plant can drag from Selection Bar with a plant imge*/
             MouseArea {
                 id: dragShovel
                 anchors.fill: shv

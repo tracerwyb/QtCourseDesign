@@ -15,16 +15,16 @@ GameWindow{
     property alias ptt: scene.selPtt    // selected plant: potato
     property alias repeate: scene.selRepeater   // selected plant: repeate peashooter
     property alias seedChooser: scene.seedChooser
-    property bool skysunfall: false
+    property bool skysunfall: false    //when game begin make it true
     property alias wallnut: scene.selWallNut
     property alias cherryBomb: scene.selcherryBomb
     property alias snowpeashooter: scene.selsnowpeashooter
     property alias shovel: scene.selShovel
 
-    property real plantnumber: 0
-    property real totalsun: 10000
     property real zombiedie: 0      // record the number of zombies that have died
     property bool peatf: false
+    property real plantnumber: 0     //Preventing duplicate planting of plants in the same location
+    property real totalsun: 50    //Counter, used to buy the sun for plants
 
     property double screnH: screenHeight - 30
     activeScene: welcome
@@ -51,6 +51,7 @@ GameWindow{
         color:"black"
     }
 
+    /* the game begin scene */
     Scne{
         id:scene
         anchors.fill: parent
@@ -65,7 +66,7 @@ GameWindow{
             onTriggered: entityManager.createEntityFromUrl(Qt.resolvedUrl("Skysun.qml"));
         }
     }
-
+    /* the start scene*/
     Welcome{
         id:welcome
     }
@@ -189,13 +190,13 @@ GameWindow{
 
     Timer{
         id:stTextDis
-        interval: 2000
+        interval: 5000
         onTriggered: stText.visible = true
     }
 
     Timer{
         id:stTexVDis
-        interval: 1000
+        interval: 3000
         onTriggered: stText.destroy()
     }
 

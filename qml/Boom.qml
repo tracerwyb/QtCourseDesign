@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Felgo 3.0
 
+//CherryBomb'boom when CherryBomb plant in grass,after 1s will create boom
 EntityBase {
     id: boom
     entityType: "boom"

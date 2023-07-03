@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import Felgo 3.0
 
+//this qml is wallnut in selection bar
+
 AnimatedImage {
     id: wallNut
 
@@ -21,7 +23,6 @@ AnimatedImage {
         x: 22
         text: qsTr("50")
     }
-
 
     ChangeBlack{id:blak; anchors.fill: parent}
     TapHandler{

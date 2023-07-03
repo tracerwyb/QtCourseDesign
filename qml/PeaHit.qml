@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Felgo 3.0
 
+//this is bullet image when it hit zombie or wall
 Item {
     id: peaHit
     AnimatedImage{

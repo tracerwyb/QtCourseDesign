@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import Felgo 3.0
 
+//this is cherryBomb in selection bar
 AnimatedImage {
     id: cherryBomb
 

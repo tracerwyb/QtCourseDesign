@@ -118,5 +118,15 @@
         <file>qml/NormalZombie.qml</file>
         <file>qml/Wallnuter.qml</file>
         <file>qml/Rp.qml</file>
+        <file>qml/Boom.qml</file>
+        <file>qml/CarBox.qml</file>
+        <file>qml/CherryBomb.qml</file>
+        <file>qml/PeaHit.qml</file>
+        <file>qml/PotatoText.qml</file>
+        <file>qml/Shovel.qml</file>
+        <file>qml/Skysun.qml</file>
+        <file>qml/SnowPeaShooter.qml</file>
+        <file>qml/Wall.qml</file>
+        <file>qml/WallNut.qml</file>
     </qresource>
 </RCC>

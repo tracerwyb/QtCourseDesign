@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import Felgo 3.0
 
+//repeat in selection bar
 AnimatedImage {
     visible: false
     source: "../assets/interface/Card.png"

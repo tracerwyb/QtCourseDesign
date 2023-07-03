@@ -54,23 +54,15 @@ Scene {
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
-    property real i: 0                 //count entities
     property real realx:0              //fix the plant x when drag it to grass
     property real realy:0              //fix the plant y when drag it to grass
 
     property var model
-
+    //Determine if there are zombies entering the current row, set to true if there are
     property bool flag1: false;property bool flag2: false
     property bool flag3: false;property bool flag4: false
-    property bool flag5: false;//property real flagx7: 1
-//    property real flagx8: 1;property real flagx9: 1
-//    property real flagy1: 1;property real flagy2: 1
-//    property real flagy3: 1;property real flagy4: 1
-//    property real flagy5: 1
+    property bool flag5: false;
 
-//    property bool dragtf: totalsun > 0 ? true:false
-
-//    property double screnH: screenHeight - 30
 
     /* set cars' visible as true */
     function setCarHVisble(){ carH.visible=true;}
@@ -286,6 +278,7 @@ Scene {
             MovementAnimation{ id:zombie_ani_19; target: zombie_flag_5; property: "x"; velocity: -20 }
         }
     }
+    /* five walls in grass right,if zombie collider ,will make flag=true */
      Wall {
          id:wall1;
          x:1050;y:0
@@ -370,11 +363,12 @@ Scene {
            }
          }
      }
+     /* SunFlower entity*/
     Component{
         id:sunflower_model;
         EntityBase{
             entityType: "sunflower";
-
+            width:40;height: 80
             property real number
             visible: false;
             Sunflower{id:sunf;property real blood: 5; anchors.fill: parent }
@@ -403,12 +397,13 @@ Scene {
             Component.onCompleted: number=plantnumber
         }
     }
+    /* PeaShooter entity*/
     Component{
         id:peashooter_model;
         EntityBase{
             entityType: "peashooter"
             property real number
-
+            width:40;height: 80
             visible: false;
             Peashooter{id: ps; property real blood: 5; anchors.fill: parent
             }
@@ -434,25 +429,18 @@ Scene {
                     }
                 }
             }
-//            BoxCollider{
-//                id:collider2
-//                width: 500;height:70
-//                categories: Box.Category1
-//                collidesWith: Box.Category2
-//                fixture.onBeginContact: {
-//                    console.log("big colider was crash")
-//                }
-//            }
 
             Component.onCompleted: number=plantnumber
         }
     }
+    /* repeater entity*/
     Component{
         id:repeater_model;
         EntityBase{
             visible: false;
             property real number
             entityType: "repeater"
+            width:40;height: 80
             Rp{id:repeat; property real blood: 5; anchors.fill: parent }
             BoxCollider {
                 id:collider
@@ -478,12 +466,14 @@ Scene {
             Component.onCompleted: number=plantnumber
         }
     }
+    /* Potato entity*/
     Component{
         id:potato_model;
         EntityBase{
             id:po
             entityType: "potatoer"
             visible: false;
+            width:40;height: 80
             Potatoer{ id:potata; property real blood: 5; anchors.fill: parent }
             property real number
 
@@ -522,12 +512,14 @@ Scene {
             Component.onCompleted: number=plantnumber
         }
     }
+    /* WallNut entity*/
     Component{
         id:wallnut_model;
         EntityBase{
             id:walNt
             visible: false;
             property real number
+            width:30;height: 80
             Wallnuter{id: stt; property real blood: 20; anchors.fill: parent}
             BoxCollider {
                 id:collider
@@ -564,12 +556,14 @@ Scene {
         }
 
     }
+    /* SnowPeaShooter entity*/
     Component{
         id:snownpeashooter_model;
         EntityBase{
             visible: false;
             entityType: "snowshooter"
             property real number
+            width:40;height: 80
             Snownpeashooter{id: sps; property real blood: 5; anchors.fill: parent  }
             BoxCollider {
                 id:collider
@@ -597,6 +591,7 @@ Scene {
             Component.onCompleted: number=plantnumber
         }
     }
+    /* cherryBomb entity*/
     Component{
         id:cherrybomb_model;
         EntityBase{
@@ -642,7 +637,7 @@ Scene {
                  Component.onCompleted: number=plantnumber
         }
     }
-
+/* Shovel entity*/
     Component{
         id:shovel_model;
         EntityBase{
@@ -661,7 +656,7 @@ Scene {
             }
         }
     }
-
+    //create the plants entity when plant was draged in sellection bar
     DropArea {
         id: dropContainer1
         anchors.fill: parent;
@@ -683,7 +678,7 @@ Scene {
         }
     }
 
-    //fix the plants when you drag it into the grass
+    //fix the plants when you drag it into the grass,return x
     function locationx(x){
         console.log(x)
         if(0<x && x<screenWidth/11+20)
@@ -705,6 +700,7 @@ Scene {
         if(screenWidth/11*8<x && x<screenWidth/11*10+20)
             return screenWidth/12*9+70
     }
+    //fix the plants when you drag it into the grass,return y
     function locationy(y){
         if(screenHeight/10<y && y<screenHeight/3.75)
             return screnH/5.2
