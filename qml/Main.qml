@@ -16,15 +16,14 @@ GameWindow{
     property alias ptt: scene.selPtt    // selected plant: potato
     property alias repeate: scene.selRepeater   // selected plant: repeate peashooter
     property alias seedChooser: scene.seedChooser
-    property bool skysunfall: false
+    property bool skysunfall: false    //when game begin make it true
     property alias wallnut: scene.selWallNut
     property alias cherryBomb: scene.selcherryBomb
     property alias snowpeashooter: scene.selsnowpeashooter
     property alias shovel: scene.selShovel
 
-    property real plantnumber: 0
-    property real totalsun: 10000
-    property bool peatf: false
+    property real plantnumber: 0     //Preventing duplicate planting of plants in the same location
+    property real totalsun: 10000    //Counter, used to buy the sun for plants
 
     property double screnH: screenHeight - 30
 //    property alias i: 0
@@ -33,6 +32,7 @@ GameWindow{
     screenWidth: 1180
     screenHeight: 800
 
+    /* the game begin scene */
     Scne{
         id:scene
         anchors.fill: parent
@@ -47,7 +47,7 @@ GameWindow{
             onTriggered: entityManager.createEntityFromUrl(Qt.resolvedUrl("Skysun.qml"));
         }
     }
-
+    /* the start scene*/
     Welcome{
         id:welcome
     }

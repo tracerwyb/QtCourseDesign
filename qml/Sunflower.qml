@@ -2,6 +2,8 @@ import Felgo 3.0
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Window 2.2
+
+/* This is sunflower in grass*/
 Item{
    anchors.fill: parent
    id:scene
@@ -51,7 +53,7 @@ Item{
                    PathCurve { x: 0; y: 25 }
                }
            }
-
+            //15s produce a sun
            Timer{
              id:suntimer
              interval: 15000
@@ -69,6 +71,7 @@ Item{
                }
              }
            }
+           //let sun fly in this path
            ParallelAnimation{
                id:huishou
                running: false
@@ -93,45 +96,17 @@ Item{
                interval: 500
                onTriggered: huishou.running=true
            }
-
+           //tap sun let totalsun increase
            TapHandler{
                target: sun
                onTapped: {
-                  //huishou.running=true
                 totalsun+=25
                 interval.start()
                 disapper.running=true
-                  // console.log(scene.parent)
               }
            }
        }
    }
-/*
-   BoxCollider{
-       enabled: true
-       x: 0; y: 0
-       density: 0
-       friction: 0.4
-       restitution: 0.4
-       linearDamping: 100
-       fixture.restitution: 0.5
-       anchors.fill: parent
-        width: 70;height: 70
-       //bodyType: Body.Static
-
-       // handle the collision
-       fixture.onBeginContact: {
-         var collidedEntity = other.getBody().target;
-        console.log("this is flower was crashed")
-         // check if it hit a player
-         if (collidedEntity.isOfType("repeater")) {
-             console.log("this is if repeater")
-           // call damage method on playerRed or playerBlue
-           collidedEntity.removeEntity()
-         }
-       }
-   }*/
-
 
 }
 

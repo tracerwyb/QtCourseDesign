@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import Felgo 3.0
-
+//This is repeater in grass
 Item {
     id:rept
 
@@ -17,11 +17,13 @@ Item {
         source: "../assets/plants/Repeater.gif"
     }
 
+    //fix the bullte in a right position
     Component.onCompleted: {
         newEntityProperty_0 = { x = rept.parent.x+40,    y = rept.parent.y,     visible = true }
         newEntityProperty_1 = { x = rept.parent.x+70,    y = rept.parent.y,     visible = true }
     }
 
+    //use this Component to create bullet
     Component{
         id:peaRp_model;
         EntityBase{
@@ -61,9 +63,6 @@ Item {
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-
-                    console.log("boom")
-        //            console.log("Pea",pea_bullet.x, pea_bullet.y )
                     if(otherEntityId.substring(0,6) === "zombie")
                     {
                         pea_bullet.destroy()
@@ -103,11 +102,13 @@ Item {
             }
         }
 }
+    //create two bullets 1.35s
     Timer{
         id:timer_pea
         repeat: true;
         running: true;
         interval: 1350
+        //just flag=true to create bullet
         onTriggered: {
             if(rept.parent.y===screnH/5.2 && flag1===true)
             {

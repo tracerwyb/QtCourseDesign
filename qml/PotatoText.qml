@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Felgo 3.0
 
+//potato boom in grass
 Item {
     id: potatoText
 

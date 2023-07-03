@@ -5,6 +5,10 @@ import Qt.labs.folderlistmodel 2.0
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.0
 
+/*
+    This qml show a gridview that you can choose the plants that
+    you will use in game
+*/
 MultiResolutionImage{
     property real plantHeight: 85
     height: 480

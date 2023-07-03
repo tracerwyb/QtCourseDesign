@@ -44,7 +44,16 @@ EntityBase{
         interval: 500
         onTriggered: zombie_cone.state="normal_cone"
     }
-
+    Timer{
+        id: recover_normal_nohead
+        interval: 500
+        onTriggered:zombie_cone.state="losehead_go"
+    }
+    Timer{
+        id: recover_normal
+        interval: 500
+        onTriggered:zombie_cone.state="normal"
+    }
     Rectangle{
         color: "#00ffffff"
         width:parent.width;  height: parent.height;
@@ -97,7 +106,11 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1|Box.Category3
-
+      Timer{
+          id:remove
+          interval: 500
+          onTriggered: removeEntity()
+      }
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
@@ -129,28 +142,22 @@ EntityBase{
           }
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_cone.blood <= 12 && zombie_cone.blood>6)
           {
-              zombie_bucket.state="attack"
-              recover.start()
+              zombie_cone.state="attack"
+              recover_normal.start()
           }
-//          else if(otherEntityId.substring(0,8) !== "potatoer"){
-//              if(potatoer.isStand === true){
-//                  blood = 0
-//                  zombie_normal.destroy()
-//              }
           if(blood === 6 ){
               zombie_cone.state="losehead"
           }
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_cone.blood < 6)
           {
               zombie_cone.state="attack_losehead"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_cone.state="losehead"
-              }
+             recover_normal_nohead.start()
           }
           if(otherEntityId.substring(0,4)==="boom")
           {
+              blood=-1
               zombie_cone.state="die_bomb"
+              remove.start()
           }
           if(otherEntityId.substring(0,3)==="car"){
                 removeEntity()
@@ -184,6 +191,10 @@ EntityBase{
            PropertyChanges {target: head; visible:true; playing:true}
            PropertyChanges {target: dishead;running:true}
             },
+        State{
+            name: "losehead_go"
+            PropertyChanges{target: zombie_cone_img;width:160;height:130; source: "../assets/Zombies/NormalZombie/NormalZombieLostHead.gif"}
+        },
         State {
            name: "die"
            PropertyChanges {target: zombie_cone_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieDie.gif"}

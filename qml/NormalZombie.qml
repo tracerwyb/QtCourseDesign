@@ -24,6 +24,12 @@ EntityBase{
         running: false
         onTriggered: {removeEntity()}
     }
+    Timer{
+        id:destoyentity2
+        interval: 2000
+        running: false
+        onTriggered: {removeEntity()}
+    }
     /* This timer let zombie return normal color after highlight*/
     Timer{
         id:high_return
@@ -78,11 +84,16 @@ EntityBase{
         to: zombie_normal.x+1
         duration: 600
     }
-
+   //Switching states between attack and walk
     Timer{
         id: recover
         interval: 500
         onTriggered: zombie_normal.state="normal"
+    }
+    Timer{
+        id: recover2
+        interval: 500
+        onTriggered:zombie_normal.state="losehead_go"
     }
 
     /*collider detecting*/
@@ -98,6 +109,11 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1 |Box.Category3
+      Timer{
+          id:remove
+          interval: 500
+          onTriggered: removeEntity()
+      }
       fixture.onBeginContact: {
 
           console.log("zombie was crashed"+zombie_normal.x+zombie_normal.y)
@@ -113,6 +129,7 @@ EntityBase{
           else{
               back.start()
           }
+           //collider with potato the zombie die
           if(otherEntityId.substring(0,8) === "potatoer")
           {
               removeEntity()
@@ -132,14 +149,13 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood < 6)
           {
               zombie_normal.state="attack_losehead"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_bucket.state="losehead"
-              }
+              recover2.start()
           }
           if(otherEntityId.substring(0,4)==="boom")
           {
-                zombie_normal.state="die_bomb"
+              blood=-1
+              zombie_normal.state="die_bomb"
+              remove.start()
           }
           if(otherEntityId.substring(0,3)==="car"){
                 removeEntity()
@@ -154,6 +170,10 @@ EntityBase{
         State{
             name: "attack"
             PropertyChanges{target: zombie_normal_img; source: "../assets/Zombies/NormalZombie/NormalZombieAttack.gif"}
+        },
+        State{
+            name: "losehead_go"
+            PropertyChanges{target: zombie_normal_img;width:160;height:130; source: "../assets/Zombies/NormalZombie/NormalZombieLostHead.gif"}
         },
         State{
             name: "attack_losehead"
@@ -173,7 +193,7 @@ EntityBase{
         State {
            name: "die_bomb"
            PropertyChanges {target: zombie_normal_img; width:160;height:130;source:"../assets/Zombies/BoomDie1.gif"}
-           PropertyChanges {target: destoyentity;running:true}
+           PropertyChanges {target: destoyentity2;running:true}
             }
         ]
 

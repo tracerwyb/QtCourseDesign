@@ -44,6 +44,11 @@ EntityBase{
         interval: 500
         onTriggered: zombie_flag.state="normal"
     }
+    Timer{
+        id: recover_losehead
+        interval: 500
+        onTriggered: zombie_flag.state="losehead_go"
+    }
     Rectangle{
         color: "#00ffffff"
         width:parent.width;  height: parent.height;
@@ -96,7 +101,11 @@ EntityBase{
       anchors.fill: parent
       categories: Box.Category2
       collidesWith: Box.Category1|Box.Category3
-
+      Timer{
+          id:remove
+          interval: 500
+          onTriggered: removeEntity()
+      }
       fixture.onBeginContact: {
           console.log("flag zombie was crashed")
 
@@ -131,14 +140,13 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_flag.blood < 8)
           {
               zombie_flag.state="attack_nohead"
-              if(otherEntityId.blood===0)
-              {
-                  zombie_flag.state="losehead"
-              }
+              recover_losehead.start()
           }
           if(otherEntityId.substring(0,4)==="boom")
           {
+              blood=-1
               zombie_flag.state="die_bomb"
+              remove.start()
           }
           if(otherEntityId.substring(0,3)==="car"){
                 removeEntity()
@@ -164,6 +172,10 @@ EntityBase{
            PropertyChanges {target: head; visible:true; playing:true}
            PropertyChanges {target: dishead;running:true}
             },
+        State{
+            name: "losehead_go"
+            PropertyChanges{target: zombie_flag_img;width:160;height:130; source: "../assets/Zombies/FlagZombie/FlagZombieLostHead.gif"}
+        },
         State {
            name: "die"
            PropertyChanges {target: zombie_flag_img; width:160;height:130;source:"../assets/Zombies/NormalZombie/NormalZombieDie.gif"}

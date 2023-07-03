@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import Felgo 3.0
-
+//sunflower in selection bar
 AnimatedImage {
     id: sunFlower
 
