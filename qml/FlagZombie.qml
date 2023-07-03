@@ -5,9 +5,10 @@ import QtGraphicalEffects 1.0
 /* Flag zombie */
 EntityBase{
     id:zombie_flag
+    entityType: "zombie_flag"
 
     width:100;  height: 130;
-    entityType: "zombie_flag"
+    z:10
 
     property real blood: 14
 
@@ -36,6 +37,12 @@ EntityBase{
         id:dark_return
         interval: 100
         onTriggered: darklight.visible=false
+    }
+
+    Timer{
+        id: recover
+        interval: 500
+        onTriggered: zombie_flag.state="normal"
     }
     Rectangle{
         color: "#00ffffff"
@@ -119,10 +126,7 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_flag.blood > 8)
           {
               zombie_flag.state="attack"
-              if(otherEntityId.blood===0)
-              {
-                  zombie_flag.state="normal"
-              }
+              recover.start()
           }
           if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_flag.blood < 8)
           {
@@ -132,9 +136,12 @@ EntityBase{
                   zombie_flag.state="losehead"
               }
           }
-          if(otherEntityId.substring(0,10)==="cherrybomb")
+          if(otherEntityId.substring(0,4)==="boom")
           {
               zombie_flag.state="die_bomb"
+          }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
           }
       }
     }

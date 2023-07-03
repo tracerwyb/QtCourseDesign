@@ -5,14 +5,12 @@ import QtGraphicalEffects 1.0
 /* bucket zombie */
 EntityBase{
     id:zombie_bucket
-
-    width:100;  height: 130;
     entityType: "zombie_bucket"
 
+    width:100;  height: 130;
+    z:10
     property real blood: 18
 
-//    property alias zombie_ani: zombie_ani
-//    Component.onCompleted: i++
     /* Let zombie's head diappear after 2s*/
     Timer{
         id:dishead
@@ -38,6 +36,12 @@ EntityBase{
         id:dark_return
         interval: 100
         onTriggered: darklight.visible=false
+    }
+
+    Timer{
+        id: recover
+        interval: 500
+        onTriggered: zombie_bucket.state="normal_bucket"
     }
 
     Rectangle{
@@ -123,10 +127,7 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&&zombie_bucket.blood > 12)
           {
               zombie_bucket.state="attack_bucket"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_bucket.state="normal_bucket"
-              }
+              recover.start()
           }
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_bucket.blood <= 12 && zombie_bucket.blood>6)
           {
@@ -147,9 +148,12 @@ EntityBase{
                   zombie_bucket.state="losehead"
               }
           }
-          if(otherEntityId.substring(0,10)==="cherrybomb")
+          if(otherEntityId.substring(0,4)==="boom")
           {
               zombie_bucket.state="die_bomb"
+          }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
           }
       }
     }

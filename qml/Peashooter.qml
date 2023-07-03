@@ -9,6 +9,7 @@ Item {
     height: pea.height
     property real blood: 3
     property var newEntityProperty
+
     AnimatedImage{
         id:pea
         width:80;height: 80

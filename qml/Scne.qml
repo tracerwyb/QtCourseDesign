@@ -21,7 +21,7 @@ Scene {
     property alias selWallNut: selectedPlant.wallnut
     property alias selcherryBomb: selectedPlant.cherryBomb
     property alias selsnowpeashooter:selectedPlant.snowpeashooter
-
+    property alias selShovel: selectedPlant.shovel
     property alias seedChooser: seedChooser
 
     property alias zombie_ani_0: zombie_ani_0
@@ -34,15 +34,20 @@ Scene {
     property alias zombie_ani_7: zombie_ani_7
     property alias zombie_ani_8: zombie_ani_8
 
+    property alias car0: car0
+    property alias car1: car1
+    property alias car2: car2
+    property alias car3: car3
+    property alias car4: car4
+
     property int singlePlantWidth: parent.width/14
     property int singlePlantHeight: parent.height/8
 
     property real i: 0                 //count entities
     property real realx:0              //fix the plant x when drag it to grass
     property real realy:0              //fix the plant y when drag it to grass
-    //property string createplant        //use create plant to make sure use what kind of .qml to create plant
-    property var model
 
+    property var model
 
     property bool flag1: false;property bool flag2: false
     property bool flag3: false;property bool flag4: false
@@ -148,6 +153,12 @@ Scene {
             }
         }
 
+        CarBox{id:car0; y:backGround.height*0.15}
+        CarBox{id:car1; y:backGround.height*0.15+130}
+        CarBox{id:car2; y:backGround.height*0.15+260}
+        CarBox{id:car3; y:backGround.height*0.15+390}
+        CarBox{id:car4; y:backGround.height*0.15+520}
+
         /*initial zombies*/
         BucketTheadZombie{
             id: zombie_bucket_0;  x:1240;     y:screnH/1.95-40;
@@ -185,20 +196,7 @@ Scene {
             id: zombie_normal_2;    x: 1600;    y: screnH/1.48-20;
             MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
         }
-
-
-        /* move zombies */
-//        MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
-//        MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
     }
-
      Wall {
          id:wall1;
          x:1050;y:0
@@ -297,11 +295,10 @@ Scene {
                 collisionTestingOnlyMode: true
                 //bodyType: Body.Static
                 categories: Box.Category1
-               // collidesWith: Box.Category2 && Box.Category1
+               // collidesWith: Box.Category2 | Box.Category1
                 anchors.fill: parent
               fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
+
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
@@ -309,7 +306,9 @@ Scene {
                     if(otherEntityId.substring(0,6) === "zombie"){
                         sunf.blood--
                     }
-                    if(sunf.blood===0){ removeEntity() }
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
+                    if(sunf.blood===0 || otherEntityId.substring(0,6) === "shovel"){ removeEntity() }
               }
             }
             Component.onCompleted: number=plantnumber
@@ -332,19 +331,18 @@ Scene {
                 collisionTestingOnlyMode: true
                 //bodyType: Body.Static
                 categories: Box.Category1
-                collidesWith: Box.Category2
+               // collidesWith: Box.Category2
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-                    console.log("was crashed")
+                    if(ps.blood===0 || otherEntityId.substring(0,6) === "shovel"){ removeEntity() }
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
                     if(otherEntityId.substring(0,6) === "zombie"){
                         ps.blood--
                     }
-                    if(ps.blood===0){ removeEntity() }
                 }
             }
 //            BoxCollider{
@@ -377,15 +375,15 @@ Scene {
                 categories: Box.Category1
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
                     if(otherEntityId.substring(0,6) === "zombie"){
                         repeat.blood--
                     }
-                    if(repeat.blood===0){ removeEntity() }
+                    if(number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                          removeEntity()
+                    if(repeat.blood===0 || otherEntityId.substring(0,6) === "shovel"){ removeEntity() }
                 }
             }
             Component.onCompleted: number=plantnumber
@@ -411,14 +409,12 @@ Scene {
 
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
 
-                    console.log("boom")
-        //            console.log("Pea",pea_bullet.x, pea_bullet.y )
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")|| otherEntityId.substring(0,6) === "shovel")
+                          removeEntity()
                     if(otherEntityId.substring(0,6) === "zombie")
                     {
                         removeEntity()
@@ -455,11 +451,12 @@ Scene {
 
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                            || otherEntityId.substring(0,6) === "shovel")
+                          removeEntity()
 
                     console.log(otherEntityId,stt.blood)
                     if(otherEntityId.substring(0,6) === "zombie")
@@ -495,11 +492,13 @@ Scene {
                // collidesWith:Box.Category2
                 anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
+
+                    if((number===plantnumber && otherEntityId.substring(0,6) !== "zombie")
+                            || otherEntityId.substring(0,6) === "shovel")
+                          removeEntity()
                     if(otherEntityId.substring(0,6) === "zombie"){
                         sps.blood--
                     }
@@ -523,7 +522,6 @@ Scene {
                     running: true
                     interval: 1000
                     onTriggered: {
-                        removeEntity()
                         entityManager.createEntityFromUrlWithProperties(
                               Qt.resolvedUrl("Boom.qml"), {
                                 "z": 1,
@@ -531,29 +529,47 @@ Scene {
                                 "y": cheryBom.y,
                               }
                         );
-                        cheryBom.width=200
-                        cheryBom.height=200
+                        cheryBom.width = 200
+                        cheryBom.height = 200
+                        removeEntity()
                     }
                 }
             }
             BoxCollider {
                 id:collider
-                enabled: true
+                active: false
                 fixture.restitution: 0.5
-                collisionTestingOnlyMode: true
                 bodyType: Body.Static
+                anchors.fill: parent;
                 categories: Box.Category1
-                anchors.fill: parent
                 fixture.onBeginContact: {
-                    if(number===plantnumber)// && otherEntityId.substring(0,6)!=="zombie")
-                          removeEntity()
                     var collidedEntity = other.getBody().target;
                     var otherEntityId = collidedEntity.entityId;
                     var otherEntityParent = collidedEntity.parent;
-
+                    if(number===plantnumber)
+                          removeEntity()
                 }
             }
                  Component.onCompleted: number=plantnumber
+        }
+    }
+
+    Component{
+        id:shovel_model;
+        EntityBase{
+            visible: false;
+            entityType: "shovel"
+            Shovel{id: shov; anchors.fill: parent;  }
+            BoxCollider {
+                enabled: true
+                fixture.restitution: 0.5
+                collisionTestingOnlyMode: true
+                collidesWith:Box.Category1
+                anchors.fill: parent
+                fixture.onBeginContact: {
+                    removeEntity();
+                }
+            }
         }
     }
 
@@ -562,13 +578,13 @@ Scene {
         anchors.fill: parent;
         onDropped: {
             if (drop.supportedActions == Qt.MoveAction){
-                //console.log(drop.x)
                 realx=locationx(drop.x)
                 realy=locationy(drop.y)
                 var newEntityProperties = {
                                      x: realx,
                                      y: realy,
-                                     visible: true
+                                     visible: true,
+                                     z: 1
                                  }
                 plantnumber++
                 entityManager.createEntityFromComponentWithProperties(
@@ -613,29 +629,8 @@ Scene {
             return screnH/1.19
 
     }
-
-//    EntityManager{
-//        id:entityManager
-//    }
-
-//    Timer {
-//      interval: 3000;
-
-//      onTriggered: {
-//          // translate from the center of the opponent to a specified direction for the starting point
-//          var startX = 100
-//          var startY = 100
-//          // create the bullet entity with the calculated parameters
-//          entityManager.createEntityFromComponent/*WithProperties*/(
-//                pea_shooter/*, {
-////                  start: Qt.point(startX, startY),
-////                  rotation : angle + 90,
-////                  velocity: Qt.point(xDirection, yDirection)
-//                }*/);
-//        }
-//      }
-
 }
+
 
 
 

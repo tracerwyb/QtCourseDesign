@@ -5,9 +5,11 @@ import QtGraphicalEffects 1.0
 /* conehead zombie */
 EntityBase{
     id:zombie_cone
-    width:100;  height: 130;
-    property real blood: 15
     entityType: "zombie_cone"
+
+    width:100;  height: 130;
+    z:10
+    property real blood: 15
 
 //    property alias zombie_ani: zombie_ani
     /* Let zombie's head diappear after 2s*/
@@ -35,6 +37,12 @@ EntityBase{
         id:dark_return
         interval: 100
         onTriggered: darklight.visible=false
+    }
+
+    Timer{
+        id: recover
+        interval: 500
+        onTriggered: zombie_cone.state="normal_cone"
     }
 
     Rectangle{
@@ -117,18 +125,12 @@ EntityBase{
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_cone.blood > 12)
           {
               zombie_cone.state="attack_cone"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_cone.state="normal_cone"
-              }
+              recover.start()
           }
           if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall" && zombie_cone.blood <= 12 && zombie_cone.blood>6)
           {
               zombie_bucket.state="attack"
-              if(otherEntityId.blood === 0)
-              {
-                  zombie_cone.state="normal"
-              }
+              recover.start()
           }
 //          else if(otherEntityId.substring(0,8) !== "potatoer"){
 //              if(potatoer.isStand === true){
@@ -146,9 +148,12 @@ EntityBase{
                   zombie_cone.state="losehead"
               }
           }
-          if(otherEntityId.substring(0,10)==="cherrybomb")
+          if(otherEntityId.substring(0,4)==="boom")
           {
               zombie_cone.state="die_bomb"
+          }
+          if(otherEntityId.substring(0,3)==="car"){
+                removeEntity()
           }
       }
     }

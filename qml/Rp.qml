@@ -10,6 +10,7 @@ Item {
     visible: true
     width: repeater.width
     height:repeater.height
+
     AnimatedImage{
         id:repeater
         width:80;height: 80

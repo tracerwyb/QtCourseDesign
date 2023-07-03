@@ -45,11 +45,11 @@ Scene{
                     scene.startAnimation.start();
                     timer.start()
                     carAni.start()
+                    timer.destroy()
                     scene.visible = true
                 }
             }
-                
-                   }
+    }
     
     Audio{
         id:audio

@@ -14,6 +14,7 @@ Rectangle{
     property alias wallnut: wallnut
     property alias cherryBomb: cherryBomb
     property alias snowpeashooter: snowpeashooter
+    property alias shovel: shovel
 
     color: "transparent"                       // background lucency
 
@@ -61,6 +62,7 @@ Rectangle{
     /*selected plants list*/
 
     RowLayout{
+        id:rowL
         x: listBack.x;  y: 15
         Rectangle{
             id:sun
@@ -265,6 +267,33 @@ Rectangle{
                                      parent.Drag.imageSource = "../assets/plants/SnowPeaShooter.png"
                                  })
                     }
+                }
+            }
+        }
+    }
+    Rectangle{
+        id:shovel
+        visible: false
+        x:rowL.x+listBack.width
+        width:listBack.width/6.5;    height:listBack.height-10
+        Shovel{
+            id:shv
+            visible: true
+            anchors.fill: parent
+            Drag.active: dragShovel.drag.active;
+            Drag.supportedActions: Qt.MoveAction
+            Drag.dragType: Drag.Automatic;
+            Drag.mimeData: {"opt": source}
+
+            MouseArea {
+                id: dragShovel
+                anchors.fill: shv
+                drag.target: shv
+                onPressed:{
+                    model = shovel_model
+                    parent.grabToImage(function() {
+                                 parent.Drag.imageSource = "../assets/interface/Shovel.png"
+                             })
                 }
             }
         }
