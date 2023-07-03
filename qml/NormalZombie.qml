@@ -10,6 +10,13 @@ EntityBase{
     z:10
 
     property real blood: 12
+
+    function removeentity(){
+        zombiedie++;
+        secondWave();
+        removeEntity();
+    }
+
     /* Let zombie's head diappear after 2s*/
     Timer{
         id:dishead
@@ -22,7 +29,7 @@ EntityBase{
         id:destoyentity
         interval: 2000
         running: false
-        onTriggered: {removeEntity()}
+        onTriggered: {removeentity()}
     }
     /* This timer let zombie return normal color after highlight*/
     Timer{
@@ -100,50 +107,45 @@ EntityBase{
       collidesWith: Box.Category1 |Box.Category3
       fixture.onBeginContact: {
 
-          console.log("zombie was crashed"+zombie_normal.x+zombie_normal.y)
-
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
           if(otherEntityId.substring(0,4) === "pea_"){
               blood--;
               hightlight.visible=true
               high_return.start()
-              console.log(blood)
           }
           else{
               back.start()
           }
-          if(otherEntityId.substring(0,8) === "potatoer")
-          {
-              removeEntity()
+          if(otherEntityId.substring(0,8) === "potatoer"){
+              removeentity()
           }
           if(blood === 0){
               zombie_normal.state="die"
           }
 
-          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood <= 12 && zombie_normal.blood>6)
-          {
+          if(otherEntityId.substring(0,4) !== "pea_" && otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood <= 12 && zombie_normal.blood>6){
               zombie_normal.state="attack"
               recover.start()
           }
           if(blood === 6 ){
               zombie_normal.state="losehead"
           }
-          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood < 6)
-          {
+          if(otherEntityId.substring(0,4) !== "pea_"&& otherEntityId.substring(0,4)!=="wall"&& zombie_normal.blood < 6){
               zombie_normal.state="attack_losehead"
               if(otherEntityId.blood === 0)
               {
+                  zombiedie++;
                   zombie_bucket.state="losehead"
               }
           }
-          if(otherEntityId.substring(0,4)==="boom")
-          {
-                zombie_normal.state="die_bomb"
+          if(otherEntityId.substring(0,4)==="boom"){
+              zombie_normal.state="die_bomb"
           }
           if(otherEntityId.substring(0,3)==="car"){
-                removeEntity()
+              removeentity()
           }
+          console.log("zombiedie",zombiedie)
       }
     }
     states: [

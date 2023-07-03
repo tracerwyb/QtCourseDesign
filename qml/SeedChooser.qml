@@ -169,6 +169,8 @@ MultiResolutionImage{
                 //dragtf=true
                 skysunfall=true
                 shovel.visible = true
+                stTexVDis.start();
+                stTextDis.start();
             }
         }
 

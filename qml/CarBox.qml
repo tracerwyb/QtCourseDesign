@@ -26,6 +26,9 @@ EntityBase{
                 allZombiesDie.start()
                 destorySingleCar.start()
             }
+            if(otherEntityId.substring(0,7)==="wall_19"){
+                removeentity()
+            }
         }
     }
 

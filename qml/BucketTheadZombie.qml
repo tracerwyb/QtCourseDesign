@@ -11,6 +11,11 @@ EntityBase{
     z:10
     property real blood: 18
 
+    function removeentity(){
+        zombiedie++;
+        secondWave();
+        removeEntity();
+    }
     /* Let zombie's head diappear after 2s*/
     Timer{
         id:dishead
@@ -23,7 +28,7 @@ EntityBase{
         id:destoyentity
         interval: 1000
         running: false
-        onTriggered: removeEntity()
+        onTriggered: removeentity()
     }
     /* This timer let zombie return normal color after highlight*/
     Timer{
@@ -98,9 +103,6 @@ EntityBase{
       collidesWith: Box.Category1 | Box.Category3
 
       fixture.onBeginContact: {
-
-          console.log("zombie was crashed")
-
           var collidedEntity = other.getBody().target;
           var otherEntityId = collidedEntity.entityId;
           if(otherEntityId.substring(0,4) === "pea_"){
@@ -113,11 +115,11 @@ EntityBase{
               back.start()
           }
           if(blood === 0){
-               zombie_bucket.state="die"
+              zombie_bucket.state="die"
           }
           if(otherEntityId.substring(0,8) === "potatoer")
           {
-              removeEntity()
+              removeentity()
           }
           if(blood===12)
           {
@@ -153,8 +155,9 @@ EntityBase{
               zombie_bucket.state="die_bomb"
           }
           if(otherEntityId.substring(0,3)==="car"){
-                removeEntity()
+              removeentity()
           }
+          console.log("zombiedie:",zombiedie)
       }
     }
     states: [
