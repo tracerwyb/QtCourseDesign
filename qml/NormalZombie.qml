@@ -31,12 +31,6 @@ EntityBase{
         running: false
         onTriggered: {removeentity()}
     }
-    Timer{
-        id:destoyentity2
-        interval: 2000
-        running: false
-        onTriggered: {removeEntity()}
-    }
     /* This timer let zombie return normal color after highlight*/
     Timer{
         id:high_return
@@ -196,7 +190,7 @@ EntityBase{
         State {
            name: "die_bomb"
            PropertyChanges {target: zombie_normal_img; width:160;height:130;source:"../assets/Zombies/BoomDie1.gif"}
-           PropertyChanges {target: destoyentity2;running:true}
+           PropertyChanges {target: destoyentity;running:true}
             }
         ]
 

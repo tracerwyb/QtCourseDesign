@@ -58,7 +58,7 @@ EntityBase {
           id:destroysun
           running: false
           interval: 1000
-          onTriggered: removeentity()
+          onTriggered: removeEntity()
       }
 
      TapHandler{

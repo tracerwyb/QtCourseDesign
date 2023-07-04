@@ -135,6 +135,7 @@ Scene {
             x: 1200
             BoxCollider {
               categories:Box.Category2
+              collidesWith: Box.Category1
               anchors.fill: parent
               bodyType: Body.Static // the body shouldn't move
               fixture.onBeginContact: {

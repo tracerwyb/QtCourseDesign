@@ -17,8 +17,7 @@ EntityBase{
         enabled: true
         fixture.restitution: 0.5
         categories: Box.Category1
-        collidesWith: Box.Category2
-        width:90;   height:100
+        width:90;   height:80
         fixture.onBeginContact: {
             var collidedEntity = other.getBody().target;
             var otherEntityId = collidedEntity.entityId;
@@ -27,8 +26,8 @@ EntityBase{
                 allZombiesDie.start()
                 destorySingleCar.start()
             }
-            if(otherEntityId.substring(0,7)==="wall_19"){
-                removeentity()
+            if(otherEntityId.substring(0,7)==="wall_30"){
+                removeEntity()
             }
         }
     }

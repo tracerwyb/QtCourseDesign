@@ -76,7 +76,7 @@ Item {
                               Qt.resolvedUrl("PeaHit.qml"), {
                                 "z": 1,
                                 "x": pea_bullet.x,
-                                "y": pea_bullet.y,
+                                "y":pea_bullet.y,
                               }
                        );
                     }
