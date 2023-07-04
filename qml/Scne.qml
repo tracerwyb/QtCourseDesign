@@ -33,6 +33,17 @@ Scene {
     property alias zombie_ani_6: zombie_ani_6
     property alias zombie_ani_7: zombie_ani_7
     property alias zombie_ani_8: zombie_ani_8
+    property alias zombie_ani_9: zombie_ani_9
+    property alias zombie_ani_10: zombie_ani_10
+    property alias zombie_ani_11: zombie_ani_11
+    property alias zombie_ani_12: zombie_ani_12
+    property alias zombie_ani_13: zombie_ani_13
+    property alias zombie_ani_14: zombie_ani_14
+    property alias zombie_ani_15: zombie_ani_15
+    property alias zombie_ani_16: zombie_ani_16
+    property alias zombie_ani_17: zombie_ani_17
+    property alias zombie_ani_18: zombie_ani_18
+    property alias zombie_ani_19: zombie_ani_19
 
     property alias car0: car0
     property alias car1: car1
@@ -101,6 +112,36 @@ Scene {
             x: -270
         }
 
+        Wall {
+            width:1; height:1000
+            x:-20
+            BoxCollider {
+              categories:Box.Category3
+              collidesWith: Box.Category1 |Box.Category2
+              anchors.fill: parent
+              bodyType: Body.Static // the body shouldn't move
+              fixture.onBeginContact: {
+                  console.log("this is wall1")
+                  var collidedEntity = other.getBody().target;
+                  var otherEntityId = collidedEntity.entityId;
+                  if(otherEntityId.substring(0,6) === "zombie"){ gameFial.visible=true }
+              }
+            }
+        }
+
+        Wall {
+            id:wall6
+            width:1; height:900
+            x: 1200
+            BoxCollider {
+              categories:Box.Category2
+              anchors.fill: parent
+              bodyType: Body.Static // the body shouldn't move
+              fixture.onBeginContact: {
+                  console.log("wall: ",wall6.entityId)
+              }
+            }
+        }
         ColumnLayout{
             /* this is a List of selected plants on the top of game screen */
             SelectedPlantsList{
@@ -153,40 +194,88 @@ Scene {
 
         /*initial zombies*/
         BucketTheadZombie{
-            id: zombie_bucket_0;  x:1240;     y:screnH/1.95-40;
-            MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_0; property: "x"; velocity: -20 }
+            id: zombie_bucket_0;  x:1240;     y:screnH/1.95-50;
+            MovementAnimation{ id:zombie_ani_0; target: zombie_bucket_0; property: "x"; velocity: -20 }
         }
+        BucketTheadZombie{
+            id: zombie_bucket_2;  x:1460;     y:screnH/1.95-46;
+            MovementAnimation{ id:zombie_ani_5; target: zombie_bucket_2; property: "x"; velocity: -20 }
+        }
+        NormalZombie{
+            id: zombie_normal_3;  x:1348;     y:screnH/1.95-49;
+            MovementAnimation{ id:zombie_ani_10; target: zombie_normal_3; property: "x"; velocity: -20 }
+        }
+        BucketTheadZombie{
+            id: zombie_flag_2;  x:1352;     y:screnH/1.95-42;
+            MovementAnimation{ id:zombie_ani_15; target: zombie_flag_2; property: "x"; velocity: -20 }
+        }
+
         NormalZombie{
             id: zombie_normal_1;    x: 1300;    y: screnH/5.2-40;
             MovementAnimation{ id:zombie_ani_1; target: zombie_normal_1; property: "x"; velocity: -20 }
         }
-        NormalZombie{
-            id: zombie_normal_0;    x: 1370;    y: screnH/2.9-40;
-            MovementAnimation{ id:zombie_ani_0; target: zombie_normal_0; property: "x"; velocity: -20 }
+        ConeheadZombie{
+            id: zombie_cone_2;    x: 1230;    y: screnH/5.2-38;
+            MovementAnimation{ id:zombie_ani_6; target: zombie_cone_2; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id: zombie_flag_3;    x: 1420;    y: screnH/5.2-50;
+            MovementAnimation{ id:zombie_ani_11; target: zombie_flag_3; property: "x"; velocity: -20 }
         }
         BucketTheadZombie{
-            id: zombie_bucket_1;  x:1240;     y:screnH/1.19-40;
-            MovementAnimation{ id:zombie_ani_4; target: zombie_bucket_1; property: "x"; velocity: -20 }
+            id: zombie_bucket_1;    x: 1280;    y: screnH/5.2-40;
+            MovementAnimation{ id:zombie_ani_16; target: zombie_bucket_1; property: "x"; velocity: -20 }
+        }
+
+        NormalZombie{
+            id: zombie_normal_0;    x: 1370;    y: screnH/2.9-50;
+            MovementAnimation{ id:zombie_ani_2; target: zombie_normal_0; property: "x"; velocity: -20 }
         }
         ConeheadZombie{
-            id: zombie_cone_0;    x:2180;   y:screnH/2.9-40;
-            MovementAnimation{ id:zombie_ani_5; target: zombie_cone_0; property: "x"; velocity: -20 }
+            id: zombie_cone_0;    x:1380;   y:screnH/2.9-45;
+            MovementAnimation{ id:zombie_ani_7; target: zombie_cone_0; property: "x"; velocity: -20 }
         }
         FlagZombie{
-            id:zombie_flag_0;   x:1800;     y:screnH/2.9-40;
-            MovementAnimation{ id:zombie_ani_7; target: zombie_flag_0; property: "x"; velocity: -20 }
-        }
-        ConeheadZombie{
-            id: zombie_cone_1;    x:1350;   y:screnH/1.48-20;
-            MovementAnimation{ id:zombie_ani_6; target: zombie_cone_1; property: "x"; velocity: -20 }
-        }
-        FlagZombie{
-            id:zombie_flag_1;   x:2550;     y:screnH/1.48-20;
-            MovementAnimation{ id:zombie_ani_8; target: zombie_flag_1; property: "x"; velocity: -20; }
+            id:zombie_flag_0;   x:1300;     y:screnH/2.9-44;
+            MovementAnimation{ id:zombie_ani_12; target: zombie_flag_0; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_2;    x: 1600;    y: screnH/1.48-20;
-            MovementAnimation{ id:zombie_ani_2; target: zombie_normal_2; property: "x"; velocity: -20 }
+            id:zombie_normal_4;   x:1580;     y:screnH/2.9-48;
+            MovementAnimation{ id:zombie_ani_17; target: zombie_normal_4; property: "x"; velocity: -20 }
+        }
+
+        BucketTheadZombie{
+            id: zombie_bucket_3;  x:1240;     y:screnH/1.19-40;
+            MovementAnimation{ id:zombie_ani_3; target: zombie_bucket_3; property: "x"; velocity: -20 }
+        }
+        NormalZombie{
+            id: zombie_normal_5;  x:1340;     y:screnH/1.19-42;
+            MovementAnimation{ id:zombie_ani_8; target: zombie_normal_5; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id: zombie_flag_4;  x:1270;     y:screnH/1.19-38;
+            MovementAnimation{ id:zombie_ani_13; target: zombie_flag_4; property: "x"; velocity: -20 }
+        }
+        ConeheadZombie{
+            id: zombie_cone_3;  x:1540;     y:screnH/1.19-50;
+            MovementAnimation{ id:zombie_ani_18; target: zombie_cone_3; property: "x"; velocity: -20 }
+        }
+
+        ConeheadZombie{
+            id: zombie_cone_1;    x:1350;   y:screnH/1.48-20;
+            MovementAnimation{ id:zombie_ani_4; target: zombie_cone_1; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id:zombie_flag_1;   x:1550;     y:screnH/1.48-35;
+            MovementAnimation{ id:zombie_ani_9; target: zombie_flag_1; property: "x"; velocity: -20; }
+        }
+        NormalZombie{
+            id: zombie_normal_2;    x: 1300;    y: screnH/1.48-30;
+            MovementAnimation{ id:zombie_ani_14; target: zombie_normal_2; property: "x"; velocity: -20 }
+        }
+        FlagZombie{
+            id: zombie_flag_5;    x: 1280;    y: screnH/1.48-23;
+            MovementAnimation{ id:zombie_ani_19; target: zombie_flag_5; property: "x"; velocity: -20 }
         }
     }
     /* five walls in grass right,if zombie collider ,will make flag=true */

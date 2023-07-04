@@ -16,6 +16,7 @@ Item{
   This is a flower with sun,
   you can tap sun to collect it
  **/
+   Component.onCompleted: totalsun-=25
    AnimatedImage{
        id:sunflower
        width:80;height: 80
@@ -27,7 +28,7 @@ Item{
            opacity: 0
            x:12;y:2
            source: "../assets/Sun.gif"
-          width:60;height: 60
+           width:60;height: 60
            OpacityAnimator{
                id:disapper
                target: sun

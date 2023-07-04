@@ -89,7 +89,6 @@ Rectangle{
                     onPressed:{
                         //createplant="Sunflower.qml"
                         model = sunflower_model
-                        totalsun-=25
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/SunFlower.png"
                                  })
@@ -119,7 +118,6 @@ Rectangle{
                     drag.target: pe
                     onPressed:{
                         model = peashooter_model
-                        totalsun-=100
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/PeaShooter.png"
                                  })
@@ -149,7 +147,6 @@ Rectangle{
                     drag.target: pptid
                     onPressed:{
                         model = potato_model
-                        totalsun-=25
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/PotatoMine.png"
                                  })
@@ -179,7 +176,6 @@ Rectangle{
                     drag.target: rep
                     onPressed:{
                         model = repeater_model
-                        totalsun-=200
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/Repeater.png"
                                  })
@@ -209,7 +205,6 @@ Rectangle{
                     drag.target: wn
                     onPressed:{
                         model = wallnut_model
-                        totalsun-=50
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/WallNut.png"
                                  })
@@ -239,7 +234,6 @@ Rectangle{
                     drag.target: cb
                     onPressed: {
                         model = cherrybomb_model
-                        totalsun-=150
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/CherryBomb.png"
                                  })
@@ -271,7 +265,6 @@ Rectangle{
                     drag.target: sps
                     onPressed:{
                         model = snownpeashooter_model
-                        totalsun-=175
                         parent.grabToImage(function() {
                                      parent.Drag.imageSource = "../assets/plants/SnowPeaShooter.png"
                                  })

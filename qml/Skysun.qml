@@ -58,18 +58,19 @@ EntityBase {
           id:destroysun
           running: false
           interval: 1000
-          onTriggered: removeEntity()
+          onTriggered: removeentity()
       }
 
      TapHandler{
+         id:tapp
          target: skysun
          onTapped: {
-         totalsun+=25
-         console.log(totalsun)
-         disshow.running=true;
-         skyhuishou.running=true
-         destroysun.start()
-//         console.log(entity.parent.objectName)
+             totalsun+=25
+             console.log(totalsun)
+             disshow.running=true;
+             skyhuishou.running=true
+             destroysun.start()
+             tapp.destroy()
          }
      }
     Component.onCompleted: {

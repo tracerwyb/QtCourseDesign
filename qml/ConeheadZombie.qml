@@ -24,7 +24,7 @@ EntityBase{
         id:destoyentity
         interval: 1000
         running: false
-        onTriggered: removeEntity()
+        onTriggered: removeentity()
     }
     /* This timer let zombie return normal color after highlight*/
     Timer{
@@ -92,7 +92,11 @@ EntityBase{
         to: zombie_cone.x+1
         duration: 600
     }
-
+    function removeentity(){
+        zombiedie++;
+        secondWave();
+        removeEntity();
+    }
     /*collider detecting*/
     BoxCollider {
       enabled: true
@@ -109,7 +113,7 @@ EntityBase{
       Timer{
           id:remove
           interval: 500
-          onTriggered: removeEntity()
+          onTriggered: removeentity()
       }
       fixture.onBeginContact: {
           var collidedEntity = other.getBody().target;
@@ -118,20 +122,17 @@ EntityBase{
               blood--;
               hightlight.visible=true
               high_return.start()
-              console.log(blood)
         }
-         else{
+         else if(otherEntityId.substring(0,4)!=="wall"){
              back.start()
           }
           if(blood === 0){
-               zombie_cone.state="die"
+              zombie_cone.state="die"
           }
-          if(otherEntityId.substring(0,8) === "potatoer")
-          {
-              removeEntity()
+          if(otherEntityId.substring(0,8) === "potatoer"){
+              removeentity()
           }
-          if(blood===12)
-          {
+          if(blood===12){
               zombie_cone.state="normal"
           }
 
@@ -160,8 +161,9 @@ EntityBase{
               remove.start()
           }
           if(otherEntityId.substring(0,3)==="car"){
-                removeEntity()
+              removeentity()
           }
+          console.log("zokmbiedie",zombiedie)
       }
     }
     states: [

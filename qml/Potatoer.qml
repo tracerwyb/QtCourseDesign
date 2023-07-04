@@ -9,6 +9,7 @@ Item {
     width: potatoer.width
     height: potatoer.height
 
+    Component.onCompleted: totalsun-=25
     AnimatedImage{
         id:potatoer
         width:70;height: 70

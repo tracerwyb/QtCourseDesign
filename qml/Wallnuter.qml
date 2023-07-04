@@ -13,6 +13,7 @@ Item {
     width: wallnuter.width
     height: wallnuter.height
 
+    Component.onCompleted: totalsun-=50
     Rectangle{
         color: "#00ffffff"
         width:70;  height: 70;
