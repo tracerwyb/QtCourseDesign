@@ -195,15 +195,15 @@ Scene {
 
         /*initial zombies*/
         BucketTheadZombie{
-            id: zombie_bucket_0;  x:1240;     y:screnH/1.95-50;
+            id: zombie_bucket_0;  x:1340;     y:screnH/1.95-43;
             MovementAnimation{ id:zombie_ani_0; target: zombie_bucket_0; property: "x"; velocity: -20 }
         }
         BucketTheadZombie{
-            id: zombie_bucket_2;  x:1460;     y:screnH/1.95-46;
+            id: zombie_bucket_2;  x:1460;     y:screnH/1.95-40;
             MovementAnimation{ id:zombie_ani_5; target: zombie_bucket_2; property: "x"; velocity: -20 }
         }
         NormalZombie{
-            id: zombie_normal_3;  x:1348;     y:screnH/1.95-49;
+            id: zombie_normal_3;  x:1348;     y:screnH/1.95-35;
             MovementAnimation{ id:zombie_ani_10; target: zombie_normal_3; property: "x"; velocity: -20 }
         }
         BucketTheadZombie{

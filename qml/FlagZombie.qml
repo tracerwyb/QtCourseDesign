@@ -85,7 +85,7 @@ EntityBase{
         target: zombie_flag
         property: "x"
         to: zombie_flag.x+1
-        duration: 600
+        duration: 2000
     }
 
     function removeentity(){

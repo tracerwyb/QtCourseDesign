@@ -7,7 +7,7 @@ EntityBase{
     id:zombie_bucket
     entityType: "zombie_bucket"
 
-    width:100;  height: 130;
+    width:100;  height: 70;
     z:10
     property real blood: 18
 
@@ -94,7 +94,7 @@ EntityBase{
         target: zombie_bucket
         property: "x"
         to: zombie_bucket.x+1
-        duration: 600
+        duration: 2000
     }
 
     /*collider detecting*/

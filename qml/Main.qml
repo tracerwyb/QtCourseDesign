@@ -97,7 +97,7 @@ GameWindow{
     /* zombies start attack */
     Timer{
         id: zombie_timer
-        interval:2000
+        interval:8000
         triggeredOnStart: false
         onTriggered:{
             scene.zombie_ani_3.start()

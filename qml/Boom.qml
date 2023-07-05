@@ -16,7 +16,7 @@ EntityBase {
         active: true
         fixture.restitution: 0.5
         bodyType: Body.Static
-        width : 100;   height : 100;
+        width : 150;   height : 150;
         categories: Box.Category1
         collidesWith: Box.Category2
         fixture.onBeginContact: {}

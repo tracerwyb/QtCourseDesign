@@ -90,7 +90,7 @@ EntityBase{
         target: zombie_cone
         property: "x"
         to: zombie_cone.x+1
-        duration: 600
+        duration: 2000
     }
     function removeentity(){
         zombiedie++;

@@ -83,7 +83,7 @@ EntityBase{
         target: zombie_normal
         property: "x"
         to: zombie_normal.x+1
-        duration: 600
+        duration: 2000
     }
    //Switching states between attack and walk
     Timer{
